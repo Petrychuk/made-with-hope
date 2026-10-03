@@ -4,7 +4,7 @@ import { useRef, useState, type FormEvent } from "react";
 import { pick, type Locale } from "@/i18n/config";
 import type { Dict } from "@/i18n/dictionaries";
 import type { Product } from "@/content/types";
-import { formatMoney } from "@/lib/format";
+import { formatMoney, statusLabel } from "@/lib/format";
 import { useFocusTrap } from "@/lib/useFocusTrap";
 import { Icon } from "../Icon";
 import { Placeholder } from "../Placeholder";
@@ -51,7 +51,7 @@ export function OrderModal({
       const res = await fetch("/api/order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...v, productId: product.id, locale, consent: true }),
+        body: JSON.stringify({ ...v, productId: product.slug, locale, consent: true }),
       });
       if (res.status === 429) { setStatus({ kind: "error", text: d["e.rate"] }); return; }
       if (!res.ok) throw new Error(String(res.status));
@@ -79,12 +79,12 @@ export function OrderModal({
           <div>
             <h2 id="order-title">{d["o.title"]}</h2>
             <div className="modal__item">
-              <Placeholder tone={product.tone} image={product.image} decorative sizes="64px" />
+              <Placeholder tone={product.tone} image={product.images[0]} decorative sizes="64px" />
               <div>
                 <strong>{name}</strong>
                 <span>
                   {product.price != null && <>{formatMoney(product.price, locale, d)} · </>}
-                  {product.available ? d["hm.avail"] : d["hm.made"]}
+                  {statusLabel(d, product.status)}
                 </span>
               </div>
             </div>

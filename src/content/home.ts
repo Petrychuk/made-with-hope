@@ -1,9 +1,9 @@
 import type { FaqItem, KindMessage, Update } from "./types";
 
-export const updates: Update[] = [
-  { tone: "blue", date: "2026-09-25", title: { uk: "Медичні засоби", en: "Medical supplies" } },
-  { tone: "sage", date: "2026-09-10", title: { uk: "Реабілітація", en: "Rehabilitation" } },
-  { tone: "sand", date: "2026-08-30", title: { uk: "Побутові потреби", en: "Household needs" } },
+export const localUpdates: Update[] = [
+  { id: "u1", tone: "blue", date: "2026-09-25", title: { uk: "Медичні засоби", en: "Medical supplies" } },
+  { id: "u2", tone: "sage", date: "2026-09-10", title: { uk: "Реабілітація", en: "Rehabilitation" } },
+  { id: "u3", tone: "sand", date: "2026-08-30", title: { uk: "Побутові потреби", en: "Household needs" } },
 ];
 
 /** Only first names / initials — no full names without permission. */

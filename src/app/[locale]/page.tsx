@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { pageMeta } from "@/lib/seo";
+import { getPosts, getProducts, getSupport, getUpdates } from "@/lib/content";
 import {
   FaqContacts, Handmade, Hero, JournalPreview, KindWords, Pillars,
   Story, Support, Transparency,
@@ -22,16 +23,17 @@ export default async function HomePage({ params }: Props) {
   if (!isLocale(locale)) notFound();
   const d = getDictionary(locale);
   const p = { locale, d };
+  const [products, posts, updates, support] = await Promise.all([getProducts(), getPosts(), getUpdates(), getSupport()]);
 
   return (
     <>
       <Hero {...p} />
       <Pillars {...p} />
-      <Handmade {...p} />
-      <JournalPreview {...p} />
+      <Handmade {...p} products={products} />
+      <JournalPreview {...p} posts={posts} />
       <Story {...p} />
-      <Support {...p} />
-      <Transparency {...p} />
+      <Support {...p} support={support} />
+      <Transparency {...p} updates={updates} />
       <KindWords {...p} />
       <FaqContacts {...p} />
     </>

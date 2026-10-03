@@ -1,6 +1,6 @@
 import type { Locale } from "@/i18n/config";
 import type { Dict, DictKey } from "@/i18n/dictionaries";
-import type { PostCategory } from "@/content/types";
+import type { PostCategory, ProductStatus } from "@/content/types";
 
 export function formatNumber(n: number, locale: Locale) {
   // Ukrainian style uses a regular space as thousands separator: 37 450
@@ -26,4 +26,8 @@ export function formatDate(iso: string, locale: Locale) {
 
 export function categoryLabel(d: Dict, c: PostCategory | "all") {
   return d[`cat.${c}` as DictKey];
+}
+
+export function statusLabel(d: Dict, status: ProductStatus) {
+  return status === "sold" ? d["hm.sold"] : status === "made_to_order" ? d["hm.made"] : d["hm.avail"];
 }

@@ -14,9 +14,14 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@sanity/locale-uk-ua": "^1.0.0",
+    "@sanity/vision": "^4.0.0",
     "next": "^15.5.0",
+    "next-sanity": "^10.0.0",
     "react": "^19.1.0",
-    "react-dom": "^19.1.0"
+    "react-dom": "^19.1.0",
+    "sanity": "^4.0.0",
+    "styled-components": "^6.1.0"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
@@ -26,6 +31,6 @@
     "sharp": "^0.34.0"
   },
   "engines": {
-    "node": ">=18.18"
+    "node": ">=20.19"
   }
 }

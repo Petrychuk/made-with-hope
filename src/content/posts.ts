@@ -2,9 +2,10 @@ import type { Post, PostCategory } from "./types";
 
 export const categories: PostCategory[] = ["poetry", "thoughts", "life", "craft", "news"];
 
-export const posts: Post[] = [
+/** Demo content — used only while Sanity is not connected (see README). */
+export const localPosts: Post[] = [
   {
-    slug: "osinniy-ranok", category: "poetry", date: "2026-10-03", tone: "sun", published: true,
+    slug: "osinniy-ranok", category: "poetry", date: "2026-10-03", tone: "sun",
     title: { uk: "Осінній ранок", en: "Autumn Morning" },
     excerpt: { uk: "Сьогодні осінь тихо постукала у вікно…", en: "Today autumn quietly knocked on my window…" },
     body: {
@@ -29,7 +30,7 @@ I know we have tomorrow, and I have me.`,
     },
   },
   {
-    slug: "mala-peremoha", category: "life", date: "2026-09-28", tone: "sage", published: true,
+    slug: "mala-peremoha", category: "life", date: "2026-09-28", tone: "sage",
     title: { uk: "Маленька перемога", en: "A Small Victory" },
     excerpt: { uk: "Іноді щастя — у простих моментах…", en: "Sometimes happiness is in simple moments…" },
     body: {
@@ -38,7 +39,7 @@ I know we have tomorrow, and I have me.`,
     },
   },
   {
-    slug: "nova-robota", category: "craft", date: "2026-09-20", tone: "pink", published: true,
+    slug: "nova-robota", category: "craft", date: "2026-09-20", tone: "pink",
     title: { uk: "Нова робота", en: "New Creation" },
     excerpt: { uk: "Нова іграшка готова, зроблена з любов'ю…", en: "A new toy is ready, made with love…" },
     body: {
@@ -47,7 +48,7 @@ I know we have tomorrow, and I have me.`,
     },
   },
   {
-    slug: "vdyachnist", category: "thoughts", date: "2026-09-15", tone: "peach", published: true,
+    slug: "vdyachnist", category: "thoughts", date: "2026-09-15", tone: "peach",
     title: { uk: "Вдячність", en: "Gratitude" },
     excerpt: { uk: "Дякую вам за підтримку і добрі слова…", en: "Thank you for your support and kind words…" },
     body: {
@@ -56,8 +57,3 @@ I know we have tomorrow, and I have me.`,
     },
   },
 ];
-
-export const publishedPosts = () =>
-  posts.filter((p) => p.published).sort((a, b) => b.date.localeCompare(a.date));
-
-export const findPost = (slug: string) => posts.find((p) => p.slug === slug && p.published);

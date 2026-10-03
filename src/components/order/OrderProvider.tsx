@@ -24,7 +24,7 @@ export function OrderProvider({
   const openOrder = useCallback(
     (id: string, el?: HTMLElement | null) => {
       setTrigger(el ?? null);
-      setProduct(products.find((p) => p.id === id) ?? null);
+      setProduct(products.find((p) => p.slug === id && p.status !== "sold") ?? null);
     },
     [products],
   );
@@ -34,7 +34,7 @@ export function OrderProvider({
       {children}
       {product && (
         <OrderModal
-          key={product.id}
+          key={product.slug}
           product={product}
           locale={locale}
           d={d}

@@ -2,9 +2,8 @@ import Link from "next/link";
 import { pick, type Locale } from "@/i18n/config";
 import type { Dict } from "@/i18n/dictionaries";
 import { site } from "@/content/site";
-import { publishedProducts } from "@/content/products";
-import { publishedPosts } from "@/content/posts";
-import { faq, kindMessages, updates } from "@/content/home";
+import { faq, kindMessages } from "@/content/home";
+import type { Post, Product, Support as SupportData, Update } from "@/content/types";
 import { formatDate, formatMoney } from "@/lib/format";
 import { Icon } from "../Icon";
 import { Heart } from "../Heart";
@@ -85,8 +84,8 @@ export function Pillars({ d }: P) {
 }
 
 /* ---------------- HANDMADE ---------------- */
-export function Handmade({ locale, d }: P) {
-  const items = publishedProducts().filter((p) => p.featured).slice(0, 4);
+export function Handmade({ locale, d, products }: P & { products: Product[] }) {
+  const items = products.filter((p) => p.featured && p.status !== "sold").slice(0, 4);
   return (
     <section className="section" id="handmade" aria-labelledby="hm-title">
       <div className="wrap handmade__grid">
@@ -99,13 +98,17 @@ export function Handmade({ locale, d }: P) {
               </h2>
               <p className="sec-lead">{d["hm.lead"]}</p>
             </div>
-            <Link className="link-more" href={`/${locale}#handmade`}>
+            <Link className="link-more" href={`/${locale}/handmade`}>
               <span>{d["hm.all"]}</span><Icon name="arrow" size={18} />
             </Link>
           </div>
-          <ul className="cards">
-            {items.map((p) => <ProductCard key={p.id} p={p} locale={locale} d={d} />)}
-          </ul>
+          {items.length ? (
+            <ul className="cards">
+              {items.map((p) => <ProductCard key={p.slug} p={p} locale={locale} d={d} />)}
+            </ul>
+          ) : (
+            <p className="empty">{d["hm.empty"]}</p>
+          )}
         </div>
         <div className="handmade__aside" aria-hidden="true">
           <Placeholder tone="sand" label={d["ph.craft"]} decorative />
@@ -117,8 +120,8 @@ export function Handmade({ locale, d }: P) {
 }
 
 /* ---------------- JOURNAL PREVIEW ---------------- */
-export function JournalPreview({ locale, d }: P) {
-  const items = publishedPosts().slice(0, 4);
+export function JournalPreview({ locale, d, posts }: P & { posts: Post[] }) {
+  const items = posts.slice(0, 4);
   return (
     <section className="section journal" id="journal" aria-labelledby="j-title" style={{ paddingTop: 16 }}>
       <div className="wrap journal__grid">
@@ -178,8 +181,8 @@ export function Story({ locale, d }: P) {
 }
 
 /* ---------------- SUPPORT ---------------- */
-export function Support({ locale, d }: P) {
-  const { raised, goal, updated } = site.fundraising;
+export function Support({ locale, d, support }: P & { support: SupportData }) {
+  const { raised, goal, updated, monobankUrl } = support;
   const pct = Math.min(100, Math.round((raised / goal) * 100));
   const helps = [
     { icon: "med", t: d["hp.1"], s: d["hp.1s"] },
@@ -217,7 +220,7 @@ export function Support({ locale, d }: P) {
             </div>
             <p className="progress__upd">{d["sp.updated"]} {formatDate(updated, locale)}</p>
           </div>
-          <a className="btn btn--primary" href={site.monobankUrl} target="_blank" rel="noopener noreferrer">
+          <a className="btn btn--primary" href={monobankUrl} target="_blank" rel="noopener noreferrer">
             <span>{d["sp.mono"]}</span><Icon name="ext" />
             <span className="sr-only">{d.newTab}</span>
           </a>
@@ -253,10 +256,10 @@ export function Support({ locale, d }: P) {
 }
 
 /* ---------------- TRANSPARENCY + UPDATES ---------------- */
-export function Transparency({ locale, d }: P) {
+export function Transparency({ locale, d, updates }: P & { updates: Update[] }) {
   const actions = [
-    { icon: "doc", t: d["tr.a1"], href: `/${locale}#transparency` },
-    { icon: "receipt", t: d["tr.a2"], href: `/${locale}#transparency` },
+    { icon: "doc", t: d["tr.a1"], href: `/${locale}/transparency#documents` },
+    { icon: "receipt", t: d["tr.a2"], href: `/${locale}/transparency#reports` },
     { icon: "news", t: d["tr.a3"], href: `/${locale}/journal?cat=news` },
   ] as const;
   return (
@@ -279,8 +282,8 @@ export function Transparency({ locale, d }: P) {
             <h3>{d["up.title"]} <Heart variant="tilt" size={26} className="heart-ico heart--sage" /></h3>
             <ul className="u-list">
               {updates.map((u) => (
-                <li className="u-card" key={u.date}>
-                  <Placeholder tone={u.tone} image={u.image} label={d["ph.photo"]} decorative />
+                <li className="u-card" key={u.id}>
+                  <Placeholder tone={u.tone} image={u.image} label={d["ph.photo"]} decorative sizes="(max-width: 767px) 72vw, 200px" />
                   <div>
                     <strong>{pick(u.title, locale)}</strong>
                     <time dateTime={u.date}>{formatDate(u.date, locale)}</time>

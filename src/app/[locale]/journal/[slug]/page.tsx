@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { isLocale, locales, pick } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
-import { findPost, publishedPosts } from "@/content/posts";
+import { getPost, getPosts } from "@/lib/content";
 import { categoryLabel, formatDate } from "@/lib/format";
 import { pageMeta } from "@/lib/seo";
 import { JournalCard } from "@/components/JournalCard";
@@ -12,13 +12,14 @@ import { Heart } from "@/components/Heart";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
-export function generateStaticParams() {
-  return locales.flatMap((locale) => publishedPosts().map((p) => ({ locale, slug: p.slug })));
+export async function generateStaticParams() {
+  const posts = await getPosts();
+  return locales.flatMap((locale) => posts.map((p) => ({ locale, slug: p.slug })));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
-  const post = findPost(slug);
+  const post = await getPost(slug);
   if (!isLocale(locale) || !post) return {};
   return pageMeta(locale, `/journal/${slug}`, `${pick(post.title, locale)} | Home Made Galyna`, pick(post.excerpt, locale));
 }
@@ -26,14 +27,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function PostPage({ params }: Props) {
   const { locale, slug } = await params;
   if (!isLocale(locale)) notFound();
-  const post = findPost(slug);
+  const post = await getPost(slug);
   if (!post) notFound();
   const d = getDictionary(locale);
 
   const isPoem = post.category === "poetry";
   const hasTranslation = Boolean(post.body.en);
   const showTranslation = locale === "en" && hasTranslation;
-  const others = publishedPosts().filter((p) => p.slug !== slug).slice(0, 3);
+  const others = (await getPosts()).filter((p) => p.slug !== slug).slice(0, 3);
 
   return (
     <>
@@ -48,7 +49,7 @@ export default async function PostPage({ params }: Props) {
             <time dateTime={post.date}>{formatDate(post.date, locale)}</time>
           </p>
 
-          <Placeholder tone={post.tone} image={post.image} label={d["ph.photo"]} className="post__cover" decorative={!post.image} priority />
+          <Placeholder tone={post.tone} image={post.image} label={d["ph.photo"]} className="post__cover" decorative={!post.image} priority sizes="(max-width: 767px) 100vw, 760px" />
 
           {locale === "en" && !hasTranslation && <p className="post__notice">{d["j.noTranslation"]}</p>}
 

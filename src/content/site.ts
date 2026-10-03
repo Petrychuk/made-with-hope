@@ -1,4 +1,4 @@
-/** Values Galyna / admin changes by hand until they come from the CMS. */
+/** Fallback values — with Sanity connected, Galyna edits fundraising in Studio → «Підтримка». */
 export const site = {
   monobankUrl: "https://send.monobank.ua/", // TODO: real jar link
   fundraising: {

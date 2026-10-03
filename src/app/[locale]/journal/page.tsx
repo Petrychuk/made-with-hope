@@ -3,7 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
-import { categories, publishedPosts } from "@/content/posts";
+import { categories } from "@/content/posts";
+import { getPosts } from "@/lib/content";
 import type { PostCategory } from "@/content/types";
 import { categoryLabel } from "@/lib/format";
 import { pageMeta } from "@/lib/seo";
@@ -28,7 +29,7 @@ export default async function JournalPage({ params, searchParams }: Props) {
   const d = getDictionary(locale);
   const { cat } = await searchParams;
   const active = (categories as string[]).includes(cat ?? "") ? (cat as PostCategory) : "all";
-  const posts = publishedPosts().filter((p) => active === "all" || p.category === active);
+  const posts = (await getPosts()).filter((p) => active === "all" || p.category === active);
 
   return (
     <section className="section page-journal" aria-labelledby="jp-title">

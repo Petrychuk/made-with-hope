@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
-import { findProduct } from "@/content/products";
+import { getProduct } from "@/lib/content";
+import { siteUrl } from "@/lib/seo";
 
 /**
  * Order request -> Telegram message to Galyna.
@@ -46,9 +47,9 @@ export async function POST(req: Request) {
   const delivery = DELIVERY[clean(body.delivery, 10)] ?? DELIVERY.other;
   const branch = clean(body.branch, 160);
   const comment = clean(body.comment, 800);
-  const product = findProduct(clean(body.productId, 60)); // price is taken from the server, not from the client
+  const product = await getProduct(clean(body.productId, 80)); // price is taken from the server, not from the client
 
-  if (!product || !name || phone.replace(/\D/g, "").length < 9 || body.consent !== true) {
+  if (!product || product.status === "sold" || !name || phone.replace(/\D/g, "").length < 9 || body.consent !== true) {
     return NextResponse.json({ ok: false, error: "validation" }, { status: 422 });
   }
 
@@ -60,6 +61,8 @@ export async function POST(req: Request) {
     "",
     `Виріб: ${esc(product.name.uk)}`,
     product.price != null ? `Ціна: ${product.price} грн` : null,
+    product.status === "made_to_order" ? "Статус: на замовлення" : null,
+    `🔗 ${siteUrl}/uk/handmade/${product.slug}`,
     "",
     `👤 ${esc(name)}`,
     `📞 ${esc(phone)}`,
