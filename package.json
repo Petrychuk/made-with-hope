@@ -4,10 +4,10 @@
   "private": true,
   "description": "Home Made Galyna — bilingual family support, handmade & journal website",
   "scripts": {
-    "images": "node scripts/optimize-images.mjs",
-    "predev": "node scripts/optimize-images.mjs",
+    "images": "node --disable-warning=ExperimentalWarning scripts/optimize-images.mjs",
+    "predev": "node --disable-warning=ExperimentalWarning scripts/optimize-images.mjs",
     "dev": "next dev",
-    "prebuild": "node scripts/optimize-images.mjs",
+    "prebuild": "node --disable-warning=ExperimentalWarning scripts/optimize-images.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
