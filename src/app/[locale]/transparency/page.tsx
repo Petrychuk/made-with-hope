@@ -14,7 +14,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   if (!isLocale(locale)) return {};
   const d = getDictionary(locale);
-  return pageMeta(locale, "/transparency", `${d["tr.pageTitle"]} | Home Made Galyna`, d["tr.lead"]);
+  // medical documents: keep this page out of search engines
+  return {
+    ...pageMeta(locale, "/transparency", `${d["tr.pageTitle"]} | Home Made Galyna`, d["tr.lead"]),
+    robots: { index: false, follow: false, nocache: true, googleBot: { index: false, follow: false } },
+  };
 }
 
 function List({ id, title, items, locale, d }: { id: string; title: string; items: TransparencyItem[]; locale: Locale; d: Dict }) {
@@ -30,8 +34,8 @@ function List({ id, title, items, locale, d }: { id: string; title: string; item
                 {pick(it.title, locale)}
                 <time dateTime={it.date}>{formatDate(it.date, locale)}</time>
               </span>
-              {it.fileUrl && (
-                <a className="link-more" href={it.fileUrl} target="_blank" rel="noopener noreferrer">
+              {it.hasFile && (
+                <a className="link-more" href={`/api/doc/${it.id}`} target="_blank" rel="noopener noreferrer nofollow">
                   {d["tr.open"]} <Icon name="ext" size={16} />
                   <span className="sr-only">{d.newTab}</span>
                 </a>

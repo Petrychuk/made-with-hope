@@ -50,7 +50,8 @@ export type TransparencyItem = {
   kind: TransparencyKind;
   title: Localized;
   date: string;
-  fileUrl?: string;
+  /** the file opens via /api/doc/[id] (noindex), never by a direct CDN link */
+  hasFile: boolean;
 };
 
 export type KindMessage = { text: Localized; by: string };

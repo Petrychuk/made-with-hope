@@ -21,5 +21,5 @@ export const updatesQuery = `*[_type == "update"] | order(date desc)[0...6]{ "id
 export const supportQuery = `*[_type == "support" && _id == "support"][0]{ raised, goal, updated, monobankUrl }`;
 
 export const transparencyQuery = `*[_type == "transparencyDoc"] | order(date desc){
-  "id": _id, kind, title, date, "fileUrl": coalesce(file.asset->url, image.asset->url)
+  "id": _id, kind, title, date, "hasFile": defined(coalesce(file.asset, image.asset))
 }`;

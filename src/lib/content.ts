@@ -114,5 +114,5 @@ export const getSupport = cache(async (): Promise<Support> => {
 export const getTransparency = cache(async (): Promise<TransparencyItem[]> => {
   if (!sanityEnabled) return [];
   const rows = await sanityFetch<(Omit<TransparencyItem, "title"> & { title?: Localized })[]>(transparencyQuery);
-  return rows.map((r) => ({ ...r, title: loc(r.title), fileUrl: r.fileUrl ?? undefined }));
+  return rows.map((r) => ({ ...r, title: loc(r.title), hasFile: Boolean(r.hasFile) }));
 });
