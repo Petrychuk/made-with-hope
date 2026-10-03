@@ -1,4 +1,7 @@
 import Link from "next/link";
+import { getImageProps } from "next/image";
+import meadowWide from "@/assets/footer/meadow-wide.webp";
+import meadowTall from "@/assets/footer/meadow-tall.webp";
 import type { Locale } from "@/i18n/config";
 import type { Dict } from "@/i18n/dictionaries";
 import { site } from "@/content/site";
@@ -10,6 +13,7 @@ export function Footer({ locale, d }: { locale: Locale; d: Dict }) {
   const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
   return (
     <footer className="footer">
+      <FooterBackground />
       <div className="wrap">
         <div className="footer__top">
           <Link className="logo" href={base}>
@@ -50,19 +54,24 @@ export function Footer({ locale, d }: { locale: Locale; d: Dict }) {
           </div>
         </div>
       </div>
-      <svg className="landscape" viewBox="0 0 1440 170" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M0 80C160 40 300 70 430 55s260-40 400-10 290 30 410 10 160-10 200 0V170H0Z" fill="#E9DCC7" />
-        <path d="M0 110c180-30 330-10 480-25s300-35 470-5 330 20 490-5V170H0Z" fill="#D9C7A6" />
-        <path d="M0 135c200-20 380 5 560-10s360-15 520 5 260 0 360-10V170H0Z" fill="#B9C49E" />
-        <g fill="#F2B27A">
-          {[[60,140,4],[140,150,3],[260,138,4],[390,152,3],[520,142,4],[700,150,3],[860,140,4],[1010,152,3],[1160,141,4],[1300,150,3],[1400,140,4]].map(([cx,cy,r]) => (
-            <circle key={`${cx}`} cx={cx} cy={cy} r={r} />
-          ))}
-        </g>
-        <g fill="#fff">
-          {[100,330,610,930,1220].map((cx) => <circle key={cx} cx={cx} cy={156} r={3} />)}
-        </g>
-      </svg>
     </footer>
+  );
+}
+
+/**
+ * Art-directed background: wide meadow on tablet/desktop, tall meadow on phones.
+ * next/image resizes it for each screen and serves AVIF/WebP; it loads lazily (footer is below the fold).
+ */
+function FooterBackground() {
+  const common = { alt: "", sizes: "100vw", quality: 75 };
+  const { props: { srcSet: wide } } = getImageProps({ ...common, src: meadowWide });
+  const { props: { srcSet: tall, ...img } } = getImageProps({ ...common, src: meadowTall });
+  return (
+    <picture className="footer__bg" aria-hidden="true">
+      <source media="(min-width: 768px)" srcSet={wide} />
+      <source media="(max-width: 767px)" srcSet={tall} />
+      {/* eslint-disable-next-line jsx-a11y/alt-text */}
+      <img {...img} loading="lazy" decoding="async" />
+    </picture>
   );
 }

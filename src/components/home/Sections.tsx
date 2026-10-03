@@ -10,7 +10,6 @@ import { Icon } from "../Icon";
 import { Placeholder } from "../Placeholder";
 import { ProductCard } from "../ProductCard";
 import { JournalCard } from "../JournalCard";
-import { Subscribe } from "../Subscribe";
 import { KindWordsCarousel } from "./KindWords";
 
 type P = { locale: Locale; d: Dict };
@@ -348,22 +347,6 @@ export function FaqContacts({ locale, d }: P) {
             </ul>
           </div>
         </div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------------- STAY IN TOUCH ---------------- */
-export function StayInTouch({ d }: P) {
-  return (
-    <section className="touch" aria-labelledby="tc-title">
-      <div className="wrap touch__in">
-        <Icon name="branch" className="leaf" />
-        <div>
-          <h2 id="tc-title">{d["tc.title"]}</h2>
-          <p>{d["tc.lead"]}</p>
-        </div>
-        <Subscribe d={d} />
       </div>
     </section>
   );

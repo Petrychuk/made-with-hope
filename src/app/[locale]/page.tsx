@@ -5,7 +5,7 @@ import { getDictionary } from "@/i18n/dictionaries";
 import { pageMeta } from "@/lib/seo";
 import {
   FaqContacts, Handmade, Hero, JournalPreview, KindWords, Pillars,
-  StayInTouch, Story, Support, Transparency,
+  Story, Support, Transparency,
 } from "@/components/home/Sections";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -34,7 +34,6 @@ export default async function HomePage({ params }: Props) {
       <Transparency {...p} />
       <KindWords {...p} />
       <FaqContacts {...p} />
-      <StayInTouch {...p} />
     </>
   );
 }

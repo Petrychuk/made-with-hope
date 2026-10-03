@@ -53,7 +53,19 @@ prototype/index.html     статичний прототип-еталон диз
 - Вироби — `src/content/products.ts`
 - Записи щоденника — `src/content/posts.ts` (оригінал `uk` завжди зберігається, `en` — окремий переклад)
 - Сума збору, посилання Monobank, контакти — `src/content/site.ts`
-- Фото: покладіть файл у `public/images/...` і вкажіть `image: "/images/..."` — заглушка зміниться на фото автоматично.
+- Фото: див. розділ «Фотографії» нижче.
+
+## Фотографії (автоматична оптимізація)
+
+1. Покладіть оригінал у `images-src/`, наприклад `images-src/handmade/bunny.jpg` (будь-який розмір, jpg/png/heic).
+2. Запустіть `npm run dev` (або `npm run images`) — з'явиться `public/images/handmade/bunny.webp`:
+   до 2000 px по довшій стороні, WebP, без EXIF/GPS. Зазвичай 3–5 МБ → 150–300 КБ.
+3. У контенті вкажіть `image: "/images/handmade/bunny.webp"` — заглушка зміниться на фото.
+
+Далі `next/image` сам віддає кожному пристрою потрібний розмір в AVIF/WebP і вантажить фото нижче екрана ліниво.
+Оригінали з `images-src/` у Git не потрапляють.
+
+Фон футера — `src/assets/footer/meadow-wide.webp` (desktop/tablet) і `meadow-tall.webp` (mobile).
 
 ## Далі
 
@@ -61,5 +73,4 @@ prototype/index.html     статичний прототип-еталон диз
 - [ ] Реальні посилання Monobank / Telegram / Instagram
 - [ ] CMS для Галини (Decap CMS або Sanity) — щоденник і вироби з телефона
 - [ ] OG-зображення `public/og.jpg`
-- [ ] Бекенд для підписки на новини (або сховати блок)
 - [ ] Деплой на Vercel + змінні середовища
