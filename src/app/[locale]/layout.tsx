@@ -17,7 +17,14 @@ const caveat = Caveat({ subsets: ["latin", "cyrillic"], weight: ["500", "600"], 
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  icons: { icon: "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧶</text></svg>" },
+  // green hand-drawn heart from the sticker set (public/)
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "16x16 32x32 48x48" },
+    ],
+    apple: { url: "/apple-touch-icon.png", sizes: "180x180" },
+  },
 };
 
 export const viewport: Viewport = {
