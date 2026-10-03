@@ -336,7 +336,7 @@ p{margin:0}
   .footer__top{display:grid;grid-template-columns:240px minmax(0,1fr) auto;column-gap:20px}
   .footer__nav{margin-left:0;justify-content:flex-end;flex-wrap:nowrap}
   .footer__nav a{padding:10px 6px;white-space:nowrap}
-  .footer__mid{display:grid;grid-template-columns:320px minmax(0,1fr) 400px;align-items:start}
+  .footer__mid{display:grid;grid-template-columns:320px minmax(0,1fr) 400px;align-items:start;margin-top:36px}
   .footer__hand{justify-self:center;min-height:2.3em;display:flex;align-items:center}
   .footer__legal{justify-self:end;justify-content:flex-end;flex-wrap:nowrap;white-space:nowrap}
 }
