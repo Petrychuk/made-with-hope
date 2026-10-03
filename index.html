@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Home Made Galyna | Ручна робота, поезія та надія</title>
+<meta name="description" content="Home Made Galyna — ручна робота з любов'ю, вірші Галини та історія родини з надією. Підтримайте родину або замовте виріб.">
+<meta property="og:title" content="Home Made Galyna | Handmade, Poetry & Hope">
+<meta property="og:description" content="Handmade with love. Words from the heart. A family story of hope.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600&family=Lora:wght@500;600;700&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* =========================================================
+   TOKENS
+   ========================================================= */
+:root{
+  --cream:#FDFBF7;
+  --cream-2:#FBF3EA;
+  --paper:#FFFDF9;
+  --peach:#F8E3D3;
+  --peach-2:#FCEEE3;
+  --sand:#F1E3CF;
+  --sage-soft:#EEF1E5;
+  --sage-soft-2:#E3E9D8;
+  --sage:#4A7C59;
+  --sage-dark:#3B6648;
+  --terracotta:#D9745B;      /* accents, hearts, icons */
+  --terracotta-cta:#BF5737;  /* button bg — AA contrast with white */
+  --terracotta-cta-h:#A94A2D;
+  --lavender:#F1EDF6;
+  --pink:#F6E1E0;
+  --text:#3A2E2B;
+  --text-2:#6B5A54;
+  --line:#EADCCD;
+  --shadow:0 6px 20px rgba(120,78,48,.09);
+  --shadow-lg:0 14px 40px rgba(120,78,48,.14);
+  --r-sm:8px; --r:14px; --r-lg:22px;
+  --f-serif:"Lora", Georgia, "Times New Roman", serif;
+  --f-sans:"Nunito", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --f-hand:"Caveat", "Segoe Script", "Comic Sans MS", cursive;
+  --wrap:1200px;
+  --header-h:76px;
+}
+*,*::before,*::after{box-sizing:border-box}
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--header-h) + env(safe-area-inset-top,0px))}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--cream);color:var(--text);font-family:var(--f-sans);font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font:inherit;cursor:pointer}
+h1,h2,h3{font-family:var(--f-serif);font-weight:600;line-height:1.15;margin:0;color:var(--text)}
+p{margin:0}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+:focus-visible{outline:3px solid var(--sage);outline-offset:3px;border-radius:6px}
+.skip{position:absolute;left:12px;top:-60px;z-index:200;background:var(--text);color:#fff;padding:10px 16px;border-radius:8px;text-decoration:none}
+.skip:focus{top:12px}
+
+/* ---------- helpers ---------- */
+.hand{font-family:var(--f-hand);font-weight:500;line-height:1.15}
+.heart-ico{color:var(--terracotta);flex:none}
+.leaf{color:var(--sage);opacity:.8;pointer-events:none}
+.section{padding:64px 0}
+.sec-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:24px}
+.sec-title{font-size:clamp(28px,3.2vw,36px);display:inline-flex;align-items:center;gap:12px;position:relative;z-index:0}
+.sec-title .brush{position:absolute;inset:-6px -22px -4px -14px;z-index:-1;border-radius:46% 54% 42% 58% / 60% 40% 60% 40%;transform:rotate(-1.2deg)}
+.brush--peach{background:var(--peach)}
+.brush--sage{background:var(--sage-soft-2)}
+.sec-lead{color:var(--text-2);max-width:46ch;margin-top:12px}
+.link-more{color:var(--terracotta-cta);font-weight:700;text-decoration:none;font-size:15px;white-space:nowrap;display:inline-flex;gap:6px;align-items:center;min-height:44px}
+.link-more:hover{text-decoration:underline;text-underline-offset:3px}
+
+/* ---------- buttons ---------- */
+.btn{white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:48px;padding:12px 24px;border-radius:10px;border:2px solid transparent;font-weight:700;font-size:16px;text-decoration:none;transition:background .2s,border-color .2s,transform .15s;line-height:1.2;text-align:center}
+.btn:active{transform:translateY(1px)}
+.btn--primary{background:var(--terracotta-cta);color:#fff;box-shadow:0 6px 16px rgba(191,87,55,.25)}
+.btn--primary:hover{background:var(--terracotta-cta-h)}
+.btn--ghost{background:var(--paper);color:var(--text);border-color:#D8C3B4}
+.btn--ghost:hover{border-color:var(--terracotta);}
+.btn--sage{background:var(--sage);color:#fff}
+.btn--sage:hover{background:var(--sage-dark)}
+.btn--sm{min-height:44px;padding:10px 18px;font-size:15px}
+.btn svg{width:20px;height:20px;flex:none}
+
+/* ---------- photo placeholders ---------- */
+.ph{position:relative;overflow:hidden;background:var(--sand);display:flex;align-items:center;justify-content:center;isolation:isolate}
+.ph::before{content:"";position:absolute;inset:0;z-index:-1;background:
+  radial-gradient(60% 50% at 25% 30%,rgba(255,255,255,.55),transparent 70%),
+  radial-gradient(45% 40% at 80% 75%,rgba(255,255,255,.35),transparent 70%)}
+.ph--peach{background:linear-gradient(140deg,#F6D9C4,#EDC0A2 60%,#E7B08E)}
+.ph--sand{background:linear-gradient(140deg,#F3E6D2,#E6D1B2 60%,#D9BF99)}
+.ph--sage{background:linear-gradient(140deg,#E2E9D6,#C9D6B9 60%,#B4C6A1)}
+.ph--pink{background:linear-gradient(140deg,#F7E2DE,#EEC7C0 60%,#E3B0A8)}
+.ph--sun{background:linear-gradient(160deg,#F8DDB8,#F0B98A 55%,#C9876A)}
+.ph--blue{background:linear-gradient(140deg,#E3ECF1,#C9DAE3 60%,#B6CAD6)}
+.ph__cap{display:flex;flex-direction:column;align-items:center;gap:6px;color:rgba(58,46,43,.62);font-size:13px;font-weight:700;text-align:center;padding:12px;max-width:90%}
+.ph__cap svg{width:30px;height:30px;opacity:.6}
+
+/* ---------- sticky handwritten notes ---------- */
+.note{position:absolute;background:#FBF1E4;padding:18px 20px 16px;box-shadow:0 10px 24px rgba(90,60,40,.18);font-family:var(--f-hand);font-size:22px;line-height:1.2;color:#4C3A33;border-radius:3px;z-index:3}
+.note::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 27px,rgba(180,140,110,.08) 27px 28px);pointer-events:none}
+.note .heart-ico{display:inline-block;vertical-align:-3px}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+.header{position:sticky;top:0;z-index:50;background:rgba(253,251,247,.94);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);padding-top:env(safe-area-inset-top,0px);transition:box-shadow .2s}
+.header.is-scrolled{box-shadow:0 2px 18px rgba(90,60,40,.08)}
+.header__in{height:var(--header-h);display:flex;align-items:center;gap:24px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);min-height:44px}
+.logo svg{width:38px;height:38px}
+.logo__name{font-family:var(--f-serif);font-weight:600;font-size:21px;line-height:1.05;display:block;white-space:nowrap}
+.logo__tag{display:block;white-space:nowrap;font-size:12.5px;color:var(--text-2);margin-top:3px;letter-spacing:.01em}
+.nav{margin-left:auto;display:flex;align-items:center;gap:2px}
+.nav a{white-space:nowrap;text-decoration:none;font-size:15px;font-weight:600;padding:10px 10px;border-radius:8px;min-height:44px;display:inline-flex;align-items:center}
+.nav a:hover{color:var(--terracotta-cta)}
+.nav a[aria-current="page"]{color:var(--terracotta-cta)}
+.lang{display:inline-flex;align-items:center;font-size:14px;font-weight:700;color:var(--text-2)}
+.lang button{background:none;border:0;padding:10px 7px;min-height:44px;min-width:36px;color:var(--text-2);border-radius:6px;font-weight:700}
+.lang button[aria-pressed="true"]{color:var(--terracotta-cta);text-decoration:underline;text-underline-offset:4px}
+.lang span{opacity:.5}
+.header .btn{margin-left:8px}
+.burger{display:none;margin-left:auto;background:none;border:0;width:48px;height:48px;align-items:center;justify-content:center;border-radius:10px;color:var(--text)}
+.burger svg{width:28px;height:28px}
+
+.drawer{position:fixed;inset:0;z-index:90;display:none}
+.drawer.is-open{display:block}
+.drawer__bg{position:absolute;inset:0;background:rgba(58,46,43,.35)}
+.drawer__panel{position:absolute;top:0;right:0;bottom:0;width:min(86vw,360px);background:var(--cream);padding:calc(16px + env(safe-area-inset-top,0px)) 22px calc(24px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:8px;box-shadow:-10px 0 30px rgba(0,0,0,.12);overflow-y:auto}
+.drawer__top{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
+.drawer__close{background:none;border:0;width:48px;height:48px;border-radius:10px;color:var(--text)}
+.drawer nav{display:flex;flex-direction:column}
+.drawer nav a{font-family:var(--f-serif);font-size:22px;text-decoration:none;padding:12px 4px;border-bottom:1px solid var(--line)}
+.drawer .lang{margin:16px 0}
+.drawer .btn{width:100%}
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero{position:relative;overflow:hidden;background:linear-gradient(180deg,var(--cream) 0%,var(--cream-2) 100%)}
+.hero__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:center;min-height:540px}
+.hero__text{position:relative;z-index:2;padding:56px 0 64px}
+.hero h1{font-size:clamp(46px,5.8vw,74px);font-weight:700;line-height:1;letter-spacing:-.01em;display:flex;flex-wrap:wrap;align-items:flex-end;gap:0 16px}
+.hero h1 .heart-ico{width:.72em;height:.72em;margin-bottom:.06em}
+.hero__sub{font-family:var(--f-serif);font-size:clamp(20px,2vw,25px);font-weight:600;line-height:1.3;margin-top:22px}
+.hero__sub span{display:block}
+.hero__desc{color:var(--text-2);margin-top:16px;max-width:42ch;font-size:16.5px}
+.hero__cta{display:flex;flex-wrap:wrap;gap:16px;margin-top:28px}
+.hero__media{position:absolute;top:0;right:0;bottom:0;width:57%}
+.hero__media .ph{position:absolute;inset:0;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 18%);mask-image:linear-gradient(90deg,transparent 0,#000 18%)}
+.hero__note{top:44px;right:40px;width:180px;transform:rotate(5deg)}
+.hero__leaf{position:absolute;left:47%;bottom:24px;width:90px;height:110px;z-index:2}
+
+/* =========================================================
+   PILLARS
+   ========================================================= */
+.pillars{position:relative;background:var(--sage-soft);border-radius:50% 50% 48% 52% / 26px 30px 26px 30px;margin:-18px 0 0;z-index:3}
+.pillars__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;padding:36px 0 40px;max-width:820px;margin:0 auto;list-style:none}
+.pillar{text-align:center;font-weight:600;font-size:15px;line-height:1.35}
+.pillar__ico{width:68px;height:68px;border-radius:50%;background:var(--peach);display:grid;place-items:center;margin:0 auto 12px;color:var(--terracotta-cta)}
+.pillar__ico svg{width:36px;height:36px}
+.pillar small{display:block;font-weight:400;color:var(--text-2);font-size:14px}
+.pillars .leaf{position:absolute;width:70px;height:90px;top:50%;transform:translateY(-50%)}
+.pillars .leaf--l{left:3%}
+.pillars .leaf--r{right:3%;transform:translateY(-50%) scaleX(-1)}
+
+/* =========================================================
+   HANDMADE
+   ========================================================= */
+.handmade__grid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:32px;align-items:start}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;list-style:none;padding:0;margin:0}
+.p-card{background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
+.p-card .ph{aspect-ratio:1/1}
+.p-card__body{padding:12px 14px 14px;display:flex;flex-direction:column;gap:4px;flex:1}
+.p-card__name{font-weight:700;font-size:15px;line-height:1.3}
+.p-card__avail{font-size:12.5px;color:var(--sage-dark);font-weight:600}
+.p-card__avail.is-made{color:var(--text-2)}
+.p-card__row{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:6px}
+.p-card__price{font-weight:700;font-size:15px}
+.cart-btn{width:44px;height:44px;border-radius:8px;background:var(--terracotta-cta);color:#fff;border:0;display:grid;place-items:center}
+.cart-btn:hover{background:var(--terracotta-cta-h)}
+.cart-btn svg{width:22px;height:22px}
+.handmade__aside{position:relative;height:100%;min-height:330px}
+.handmade__aside .ph{position:absolute;inset:-20px -60px 0 0;border-radius:var(--r-lg) 0 0 var(--r-lg)}
+.handmade__aside .note{right:20px;bottom:-10px;width:170px;transform:rotate(-3deg)}
+
+/* =========================================================
+   JOURNAL
+   ========================================================= */
+.journal{position:relative}
+.journal__grid{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:24px;align-items:start}
+.j-card{background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;text-decoration:none;color:inherit}
+.j-card .ph{aspect-ratio:3/2}
+.j-card__body{padding:0 16px 16px;display:flex;flex-direction:column;flex:1}
+.tag{align-self:flex-start;display:inline-block;font-size:12.5px;font-weight:700;padding:3px 10px;border-radius:0 0 6px 6px;margin-bottom:10px}
+.tag--poetry{background:#FBE1D8;color:#A2452A}
+.tag--life{background:#F4ECD8;color:#7A5A1E}
+.tag--craft{background:var(--pink);color:#93413E}
+.tag--thoughts{background:var(--lavender);color:#5E4A7A}
+.tag--news{background:var(--sage-soft-2);color:var(--sage-dark)}
+.j-card h3{font-size:18px}
+.j-card time{font-size:13px;color:var(--text-2);margin-top:4px}
+.j-card p{font-size:14.5px;color:var(--text-2);margin-top:8px;line-height:1.5}
+.j-card .read{margin-top:auto;padding-top:12px;font-weight:700;color:var(--terracotta-cta);font-size:14.5px}
+.j-card:hover h3{color:var(--terracotta-cta)}
+.journal__aside{position:relative;min-height:280px}
+.journal__aside .note{position:relative;top:40px;transform:rotate(3deg);font-size:21px}
+.journal .mobile-only{margin-top:24px}
+
+/* =========================================================
+   FAMILY STORY
+   ========================================================= */
+.story{background:linear-gradient(180deg,var(--cream) 0%,var(--peach-2) 100%);padding:56px 0}
+.story__grid{display:grid;grid-template-columns:300px minmax(0,1fr) 230px;gap:40px;align-items:center}
+.story__photo{aspect-ratio:4/5;border-radius:var(--r-lg)}
+.story__text p{color:var(--text-2);margin-top:16px;max-width:52ch;font-size:16.5px}
+.story__text .btn{margin-top:24px}
+.polaroid{background:#fff;padding:12px 12px 52px;box-shadow:var(--shadow-lg);transform:rotate(4deg);position:relative;border-radius:2px}
+.polaroid .ph{aspect-ratio:1/1}
+.polaroid figcaption{position:absolute;left:16px;right:12px;bottom:10px;font-family:var(--f-hand);font-size:22px;line-height:1.1;color:#4C3A33}
+
+/* =========================================================
+   SUPPORT
+   ========================================================= */
+.support__grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.9fr) 260px;gap:32px;align-items:start}
+.support__lead{color:var(--text-2);margin-top:12px;max-width:44ch}
+.progress{background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);padding:20px 22px;margin-top:24px}
+.progress__top{display:flex;align-items:center;gap:16px}
+.progress__ico{width:60px;height:60px;border-radius:50%;background:var(--peach);display:grid;place-items:center;color:var(--terracotta-cta);flex:none}
+.progress__ico svg{width:34px;height:34px}
+.progress__sum{font-family:var(--f-sans);font-size:28px;font-weight:700;line-height:1.1}
+.progress__of{font-size:14px;color:var(--text-2)}
+.progress__pct{margin-left:auto;font-weight:700;align-self:flex-end}
+.bar{height:10px;background:#F1E4D8;border-radius:10px;margin-top:14px;overflow:hidden}
+.bar span{display:block;height:100%;background:var(--terracotta-cta);border-radius:10px}
+.progress__upd{font-size:12.5px;color:var(--text-2);margin-top:8px}
+.support .btn--primary{width:100%;margin-top:16px}
+.support__note{font-size:14px;color:var(--text-2);margin-top:12px;display:flex;gap:8px}
+.checks{list-style:none;padding:0;margin:18px 0 0;display:grid;gap:8px}
+.checks li{display:flex;gap:10px;align-items:center;font-size:15px}
+.checks svg{width:22px;height:22px;color:var(--terracotta-cta);flex:none}
+.helps{background:var(--paper);border-radius:var(--r);box-shadow:var(--shadow);padding:24px}
+.helps h3{font-size:20px;margin-bottom:12px}
+.helps ul{list-style:none;padding:0;margin:0;display:grid;gap:4px}
+.helps li{display:flex;gap:14px;align-items:flex-start;padding:10px 0}
+.helps li+li{border-top:1px dashed var(--line)}
+.helps .h-ico{width:40px;height:40px;border-radius:50%;background:var(--peach-2);display:grid;place-items:center;color:var(--terracotta-cta);flex:none}
+.helps .h-ico svg{width:22px;height:22px}
+.helps strong{display:block;font-size:15px}
+.helps small{display:block;color:var(--text-2);font-size:13.5px;line-height:1.4}
+.support__photo{position:relative;height:100%;min-height:320px}
+.support__photo .ph{position:absolute;inset:-24px -60px 0 0;border-radius:var(--r-lg) 0 0 var(--r-lg)}
+.support__photo .note{left:-20px;bottom:24px;width:180px;transform:rotate(-4deg)}
+
+/* =========================================================
+   TRANSPARENCY + UPDATES
+   ========================================================= */
+.transp{background:var(--sage-soft);border-radius:var(--r-lg);padding:36px;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:36px;align-items:start}
+.transp__actions{display:grid;gap:10px;margin-top:20px}
+.t-act{display:flex;align-items:center;gap:14px;padding:14px 16px;background:var(--paper);border-radius:var(--r-sm);text-decoration:none;font-weight:700;min-height:56px;border:1px solid transparent}
+.t-act:hover{border-color:var(--sage)}
+.t-act svg{width:24px;height:24px;color:var(--sage);flex:none}
+.t-act span:last-child{margin-left:auto;color:var(--sage)}
+.transp__privacy{font-size:13.5px;color:var(--text-2);margin-top:14px}
+.updates h3{font-size:22px;display:flex;align-items:center;gap:10px}
+.u-list{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;list-style:none;padding:0;margin:16px 0 0}
+.u-card{background:var(--paper);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow)}
+.u-card .ph{aspect-ratio:4/3}
+.u-card div{padding:10px 12px 12px}
+.u-card strong{font-size:14.5px;display:block;line-height:1.3}
+.u-card time{font-size:12.5px;color:var(--text-2)}
+
+/* =========================================================
+   KIND WORDS
+   ========================================================= */
+.kind__grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:0;align-items:stretch}
+.kind__photo{position:relative;min-height:330px}
+.kind__photo .ph{position:absolute;inset:0;border-radius:var(--r-lg) 0 0 var(--r-lg)}
+.kind__photo .note{right:24px;top:50%;transform:translateY(-50%) rotate(-2deg);width:230px;font-size:21px}
+.quote-mark{font-family:var(--f-serif);color:var(--terracotta);font-size:48px;line-height:.6;display:block;margin-bottom:6px}
+.kind__panel{background:var(--sage-soft-2);border-radius:0 var(--r-lg) var(--r-lg) 0;padding:40px 44px;position:relative;overflow:hidden}
+.kind__panel p.lead{color:var(--text-2);margin-top:12px;max-width:36ch}
+.msgs{margin-top:20px;background:var(--paper);border-radius:var(--r);padding:18px 20px;min-height:128px;position:relative}
+.msg{display:none;font-size:15.5px}
+.msg.is-active{display:block}
+.msg footer{font-size:13.5px;color:var(--text-2);margin-top:8px}
+.dots{display:flex;gap:4px;margin-top:10px}
+.dots button{width:44px;height:28px;border:0;background:none;display:grid;place-items:center;padding:0}
+.dots button::after{content:"";width:9px;height:9px;border-radius:50%;background:#C9BEB4}
+.dots button[aria-current="true"]::after{background:var(--terracotta-cta)}
+.kind__panel .btn{margin-top:16px}
+.kind__panel .leaf{position:absolute;right:20px;bottom:10px;width:80px;height:110px}
+
+/* =========================================================
+   FAQ + QUOTE + CONTACTS
+   ========================================================= */
+.faq__grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:40px;align-items:start}
+.faq details{background:var(--paper);border-radius:var(--r-sm);box-shadow:0 2px 10px rgba(120,78,48,.06);margin-bottom:10px}
+.faq summary{list-style:none;cursor:pointer;padding:14px 18px;min-height:52px;display:flex;align-items:center;justify-content:space-between;gap:12px;font-weight:600}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:24px;font-weight:400;color:var(--text-2);line-height:1}
+.faq details[open] summary::after{content:"−"}
+.faq details p{padding:0 18px 16px;color:var(--text-2);font-size:15px}
+.gquote{background:var(--peach-2);border-radius:var(--r-lg);padding:36px 32px;position:relative}
+.gquote blockquote{margin:0;font-family:var(--f-hand);font-size:clamp(26px,2.6vw,32px);line-height:1.2;color:#4C3A33}
+.gquote cite{display:block;font-style:normal;font-weight:700;margin-top:14px}
+.contacts{margin-top:32px}
+.contacts h3{font-size:26px}
+.contacts p{color:var(--text-2);margin-top:8px}
+.contacts ul{list-style:none;padding:0;margin:16px 0 0;display:grid;gap:8px}
+.contacts a{display:inline-flex;align-items:center;gap:12px;min-height:44px;font-weight:600;text-underline-offset:3px}
+.c-ico{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;color:#fff;flex:none}
+.c-ico svg{width:20px;height:20px}
+.c-ico--tg{background:#2AA3DD}
+.c-ico--ig{background:linear-gradient(135deg,#F9A13A,#E1306C 55%,#8A3AB9)}
+.c-ico--mail{background:var(--terracotta-cta)}
+
+/* =========================================================
+   STAY IN TOUCH
+   ========================================================= */
+.touch{padding:44px 0}
+.touch__in{display:grid;grid-template-columns:auto minmax(0,1fr) minmax(0,420px);gap:24px;align-items:center}
+.touch__in .leaf{width:70px;height:80px}
+.touch h2{font-size:26px}
+.touch p{color:var(--text-2);margin-top:4px}
+.sub-form{display:flex;background:var(--paper);border-radius:10px;box-shadow:var(--shadow);overflow:hidden}
+.sub-form input{flex:1;min-width:0;border:0;background:transparent;padding:0 16px;font:inherit;font-size:15px;min-height:52px;color:var(--text)}
+.sub-form input:focus{outline:none}
+.sub-form:focus-within{outline:3px solid var(--sage);outline-offset:2px}
+.sub-form .btn{border-radius:0;min-height:52px}
+.sub-msg{font-size:14px;margin-top:8px;min-height:22px}
+.sub-msg.err{color:#A3341C}
+.sub-msg.ok{color:var(--sage-dark)}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.footer{position:relative;padding-top:36px;background:var(--cream)}
+.footer__top{display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.footer__nav{margin-left:auto;display:flex;flex-wrap:wrap;gap:2px 4px;align-items:center}
+.footer__nav a{text-decoration:none;font-size:14px;font-weight:600;padding:10px 8px;min-height:44px;display:inline-flex;align-items:center}
+.footer__nav a:hover{color:var(--terracotta-cta)}
+.socials{display:flex;gap:4px}
+.socials a{width:44px;height:44px;display:grid;place-items:center;border-radius:50%;color:var(--text)}
+.socials a:hover{color:var(--terracotta-cta)}
+.socials svg{width:22px;height:22px}
+.footer__mid{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-top:18px;font-size:13.5px;color:var(--text-2)}
+.footer__made{font-size:13.5px}
+.footer__legal{display:flex;gap:4px;flex-wrap:wrap}
+.footer__legal a{padding:10px 6px;text-decoration:none}
+.footer__legal a:hover{text-decoration:underline}
+.footer__hand{font-family:var(--f-hand);font-size:26px;color:var(--terracotta);transform:rotate(-6deg);line-height:1.1;text-align:center}
+.landscape{display:block;width:100%;height:auto;margin-top:12px}
+
+/* =========================================================
+   MODAL (order request)
+   ========================================================= */
+.modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:16px}
+.modal.is-open{display:flex}
+.modal__bg{position:absolute;inset:0;background:rgba(58,46,43,.45)}
+.modal__box{position:relative;background:var(--cream);border-radius:var(--r-lg);width:min(620px,100%);max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);overflow-y:auto;box-shadow:var(--shadow-lg);padding:28px}
+.modal__close{position:absolute;top:12px;right:12px;width:44px;height:44px;border-radius:10px;border:0;background:var(--paper);color:var(--text)}
+.modal h2{font-size:26px;padding-right:40px}
+.modal__item{display:flex;gap:14px;align-items:center;background:var(--paper);border-radius:var(--r);padding:10px;margin:16px 0 8px;box-shadow:var(--shadow)}
+.modal__item .ph{width:64px;height:64px;border-radius:10px;flex:none}
+.modal__item .ph__cap{display:none}
+.modal__item strong{display:block}
+.modal__item span{color:var(--text-2);font-size:14px}
+.modal__hint{font-size:14px;color:var(--text-2);margin-bottom:16px}
+.form{display:grid;grid-template-columns:1fr 1fr;gap:14px 16px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field--full{grid-column:1/-1}
+.field label,.field legend{font-weight:700;font-size:14.5px}
+.req{color:var(--terracotta-cta)}
+.field input,.field select,.field textarea{font:inherit;font-size:16px;color:var(--text);background:var(--paper);border:1.5px solid #DCC9BA;border-radius:10px;padding:11px 14px;min-height:48px;width:100%}
+.field textarea{min-height:90px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--sage);box-shadow:0 0 0 3px rgba(74,124,89,.22)}
+.field [aria-invalid="true"]{border-color:#B23B1E}
+.field .err{font-size:13.5px;color:#A3341C;min-height:0}
+.field .err:empty{display:none}
+.consent{grid-column:1/-1;display:flex;gap:12px;align-items:flex-start;font-size:14.5px}
+.consent input{width:22px;height:22px;margin-top:2px;accent-color:var(--sage);flex:none}
+.form__actions{grid-column:1/-1;display:flex;flex-direction:column;gap:10px;margin-top:4px}
+.form__actions .btn{width:100%}
+.form__status{font-size:14.5px;min-height:20px}
+.form__status.err{color:#A3341C}
+.success{text-align:center;padding:16px 4px 4px}
+.success svg{width:56px;height:56px;color:var(--terracotta);margin:0 auto 12px}
+.success p{color:var(--text-2);max-width:40ch;margin:10px auto 20px;font-size:16.5px}
+
+.mobile-only{display:none}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+.header .btn--primary.desktop-cta{white-space:nowrap}
+@media (max-width:1279px){.nav a{padding:10px 7px;font-size:14.5px}.logo__tag{display:none}}
+@media (max-width:1199px){
+  .nav,.header .btn--primary.desktop-cta{display:none}
+  .burger{display:inline-flex}
+  .hero__grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .hero__media{width:55%}
+  .hero__leaf{display:none}
+  .handmade__grid{grid-template-columns:1fr}
+  .handmade__aside{display:none}
+  .journal__grid{grid-template-columns:1fr}
+  .journal__aside{display:none}
+  .cards{grid-template-columns:repeat(4,1fr)}
+  .story__grid{grid-template-columns:240px minmax(0,1fr)}
+  .story .polaroid{display:none}
+  .support__grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .support__photo{display:none}
+  .transp{grid-template-columns:1fr}
+  .touch__in{grid-template-columns:minmax(0,1fr) minmax(0,380px)}
+  .touch__in .leaf{display:none}
+}
+@media (max-width:900px){
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .faq__grid{grid-template-columns:1fr}
+}
+@media (max-width:767px){
+  :root{--header-h:64px}
+  .wrap{padding:0 18px}
+  .btn{white-space:normal}
+  .section{padding:44px 0}
+  .logo svg{width:34px;height:34px}
+  .logo__name{font-size:19px}
+  .logo__tag{display:none}
+  .hero__grid{grid-template-columns:1fr;min-height:0}
+  .hero{display:flex;flex-direction:column}
+  .hero__media{position:relative;width:100%;height:300px;order:-1}
+  .hero__media .ph{-webkit-mask-image:linear-gradient(180deg,#000 75%,transparent);mask-image:linear-gradient(180deg,#000 75%,transparent)}
+  .hero__note{top:22px;right:14px;width:130px;font-size:17px;padding:12px 14px}
+  .hero__text{padding:4px 0 36px;order:2}
+  .hero__cta{flex-direction:column;gap:12px}
+  .hero__cta .btn{width:100%}
+  .pillars{margin:0;border-radius:24px}
+  .pillars__grid{grid-template-columns:repeat(2,1fr);gap:22px 12px;padding:28px 8px}
+  .pillars .leaf{display:none}
+  .sec-head{flex-direction:column;align-items:flex-start;gap:4px}
+  .sec-head .link-more{align-self:flex-end}
+  .j-list{grid-template-columns:1fr!important}
+  .j-card{flex-direction:row;align-items:stretch}
+  .j-card .ph{aspect-ratio:auto;width:42%;min-height:150px;flex:none}
+  .j-card__body{padding:0 14px 14px}
+  .j-card .read{display:none}
+  .journal .mobile-only{display:inline-flex}
+  .story__grid{grid-template-columns:1fr;gap:20px}
+  .story__photo{aspect-ratio:4/3;order:2}
+  .support__grid{grid-template-columns:1fr}
+  .helps{order:-1}
+  .transp{padding:24px 18px}
+  .u-list{grid-template-columns:repeat(3,72%);overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:8px}
+  .u-card{scroll-snap-align:start}
+  .kind__grid{grid-template-columns:1fr}
+  .kind__photo{min-height:280px}
+  .kind__photo .ph{border-radius:var(--r-lg) var(--r-lg) 0 0}
+  .kind__photo .note{right:16px;width:180px;font-size:18px}
+  .kind__panel{border-radius:0 0 var(--r-lg) var(--r-lg);padding:28px 20px}
+  .touch__in{grid-template-columns:minmax(0,1fr)}
+  .footer__top{flex-direction:column;align-items:flex-start}
+  .footer__nav{margin-left:-8px}
+  .form{grid-template-columns:1fr}
+  .modal{padding:0;align-items:flex-end}
+  .modal__box{border-radius:var(--r-lg) var(--r-lg) 0 0;max-height:94vh;max-height:94dvh;padding:24px 18px calc(24px + env(safe-area-inset-bottom,0px))}
+  .mobile-only{display:inline-flex}
+}
+@media (max-width:420px){
+  .cards{gap:12px}
+  .p-card__body{padding:10px}
+  .p-card__name{font-size:14px}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">Перейти до змісту</a>
+
+<!-- ============ SVG SPRITE ============ -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-heart" viewBox="0 0 48 48"><path d="M24 41C18 36 6 28.5 5.2 18.4 4.6 11 10 6.6 15.6 7.2c4 .4 6.7 3.1 8.3 6.4 1.7-3.6 4.6-6.3 8.9-6.6 6-.4 10.8 4.6 9.9 11.6C41.4 28.8 30 36 24 41Z" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-heart-fill" viewBox="0 0 24 24"><path d="M12 20.5C9 18 3 14.3 2.6 9.2 2.3 5.5 5 3.3 7.8 3.6c2 .2 3.3 1.5 4.1 3.2.9-1.8 2.3-3.1 4.5-3.3 3-.2 5.4 2.3 5 5.8-.6 5.4-6.3 9-9.4 11.2Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-branch" viewBox="0 0 80 110"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M14 106C30 78 44 48 70 6"/><path d="M28 80c-12-2-20-9-22-18 10-1 19 5 22 18Z"/><path d="M35 66c12-1 22-7 26-16-10-2-21 4-26 16Z"/><path d="M42 52c-11-4-17-12-17-21 10 2 17 9 17 21Z"/><path d="M50 38c10-3 17-10 19-19-10 0-17 7-19 19Z"/><path d="M58 24c-7-5-10-12-9-19 8 3 11 10 9 19Z"/></g></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M4 7.5h3.2L8.8 5h6.4l1.6 2.5H20a1 1 0 0 1 1 1V18a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V8.5a1 1 0 0 1 1-1Z"/><circle cx="12" cy="13" r="3.6"/></g></symbol>
+  <symbol id="i-yarn" viewBox="0 0 40 40"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="20" cy="20" r="13"/><path d="M9 14c8 1 15 6 19 16M8 21c7 0 13 4 16 11M14 8.5c7 3 12 9 14 17M22 7.3c5 4 8 10 9 15M33 21c-5-1-12 1-18 9"/></g></symbol>
+  <symbol id="i-book" viewBox="0 0 40 40"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"><path d="M20 11c-3-2.5-8-3.5-14-3v22c6-.5 11 .5 14 3 3-2.5 8-3.5 14-3V8c-6-.5-11 .5-14 3Z"/><path d="M20 11v22M10 14h6M10 19h6M10 24h6M24 14h6M24 19h6M24 24h6"/></g></symbol>
+  <symbol id="i-family" viewBox="0 0 40 40"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="11" r="4"/><circle cx="27" cy="11" r="4"/><circle cx="20" cy="20" r="3.4"/><path d="M5 29c0-5 3.6-9 8-9 1.4 0 2.6.3 3.6 1M35 29c0-5-3.6-9-8-9-1.4 0-2.6.3-3.6 1M12 33c0-4 3.6-7 8-7s8 3 8 7Z"/></g></symbol>
+  <symbol id="i-cart" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4h2.2l2.2 10.2a1.5 1.5 0 0 0 1.5 1.2h8.3a1.5 1.5 0 0 0 1.4-1.1L20.5 8H6.3"/><circle cx="9.5" cy="19.5" r="1.3"/><circle cx="17" cy="19.5" r="1.3"/></g></symbol>
+  <symbol id="i-med" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="6.5" width="17" height="13" rx="2"/><path d="M9 6.5V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v1.5M12 10v6M9 13h6"/></g></symbol>
+  <symbol id="i-rehab" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2.2"/><path d="M6 10.5l6 1 6-1M12 11.5V16M12 16l-3.5 5M12 16l3.5 5"/></g></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11 12 4l8 7v8.5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1Z"/><path d="M12 17.5c-1.6-1.2-3-2.3-3-3.6 0-1 .8-1.7 1.6-1.7.6 0 1.1.4 1.4.9.3-.5.8-.9 1.4-.9.8 0 1.6.7 1.6 1.7 0 1.3-1.4 2.4-3 3.6Z"/></g></symbol>
+  <symbol id="i-sun" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 18h16M7 18a5 5 0 0 1 10 0M12 7V4.5M6.3 9.8 4.6 8.1M17.7 9.8l1.7-1.7M3 14h1.5M19.5 14H21"/></g></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m8 12.3 2.7 2.7L16.3 9.4"/></g></symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M7 3h7l4 4v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1Z"/><path d="M14 3v4h4M9 12h6M9 16h6"/></g></symbol>
+  <symbol id="i-receipt" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M6 3h12v18l-2-1.4-2 1.4-2-1.4-2 1.4-2-1.4L6 21Z"/><path d="M9 8h6M9 12h6M9 16h3"/></g></symbol>
+  <symbol id="i-news" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"><path d="M4 5h13v14H6a2 2 0 0 1-2-2Z"/><path d="M17 9h3v8a2 2 0 0 1-2 2h-1M7.5 9h6M7.5 12.5h6M7.5 16h4"/></g></symbol>
+  <symbol id="i-tg" viewBox="0 0 24 24"><path fill="currentColor" d="M20.7 4.2 3.3 10.9c-1.2.5-1.2 1.2-.2 1.5l4.5 1.4 1.7 5.3c.2.6.1.8.7.8.5 0 .7-.2 1-.5l2.2-2.1 4.6 3.4c.8.5 1.4.2 1.6-.8l3-14c.3-1.2-.5-1.8-1.3-1.4ZM8.6 13.5l9.6-6.1c.5-.3.9-.1.5.2l-8.2 7.4-.3 3.4Z"/></symbol>
+  <symbol id="i-ig" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3.5" y="3.5" width="17" height="17" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".9" fill="currentColor" stroke="none"/></g></symbol>
+  <symbol id="i-fb" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M13.2 21v-7.5h2.4l.4-2.8h-2.8V9c0-.8.3-1.4 1.4-1.4h1.5V5.1c-.3 0-1.2-.1-2.2-.1-2.2 0-3.6 1.3-3.6 3.7v2H8v2.8h2.3V21"/></g></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="m3.5 6.5 8.5 6.5 8.5-6.5"/></g></symbol>
+  <symbol id="i-leafbtn" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 19c0-8 5-13 14-14-1 9-6 14-14 14Z"/><path d="M5 19 13 11"/></g></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h13M13 6.5 18.5 12 13 17.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-ext" viewBox="0 0 24 24"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+  <symbol id="i-burger" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+</svg>
+
+<!-- ============ HEADER ============ -->
+<header class="header" id="header">
+  <div class="wrap header__in">
+    <a class="logo" href="#top" aria-label="Home Made Galyna">
+      <svg class="heart-ico" aria-hidden="true"><use href="#i-heart"/></svg>
+      <span><span class="logo__name">Home Made Galyna</span><span class="logo__tag" data-i18n="tagline">Ручна робота • Поезія • Надія</span></span>
+    </a>
+    <nav class="nav" aria-label="Main" data-i18n-attr="aria-label:navLabel">
+      <a href="#top" aria-current="page" data-i18n="nav.home">Головна</a>
+      <a href="#story" data-i18n="nav.story">Наша історія</a>
+      <a href="#handmade" data-i18n="nav.handmade">Ручна робота</a>
+      <a href="#journal" data-i18n="nav.journal">Щоденник</a>
+      <a href="#support" data-i18n="nav.support">Підтримати</a>
+      <div class="lang" role="group" aria-label="Language">
+        <button type="button" data-lang="uk" aria-pressed="true">UA</button><span>|</span><button type="button" data-lang="en" aria-pressed="false">EN</button>
+      </div>
+    </nav>
+    <a class="btn btn--primary btn--sm desktop-cta" href="#support"><svg aria-hidden="true"><use href="#i-heart-fill"/></svg><span data-i18n="cta.support">Підтримати родину</span></a>
+    <button class="burger" type="button" aria-expanded="false" aria-controls="drawer" data-i18n-attr="aria-label:menuOpen" aria-label="Відкрити меню"><svg aria-hidden="true"><use href="#i-burger"/></svg></button>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" aria-hidden="true">
+  <div class="drawer__bg" data-close-drawer></div>
+  <div class="drawer__panel" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="drawer__top">
+      <span class="logo"><svg class="heart-ico" aria-hidden="true"><use href="#i-heart"/></svg><span class="logo__name">Home Made Galyna</span></span>
+      <button class="drawer__close" type="button" data-close-drawer data-i18n-attr="aria-label:close" aria-label="Закрити"><svg width="24" height="24" aria-hidden="true"><use href="#i-close"/></svg></button>
+    </div>
+    <nav aria-label="Mobile">
+      <a href="#top" data-i18n="nav.home">Головна</a>
+      <a href="#story" data-i18n="nav.story">Наша історія</a>
+      <a href="#handmade" data-i18n="nav.handmade">Ручна робота</a>
+      <a href="#journal" data-i18n="nav.journal">Щоденник</a>
+      <a href="#support" data-i18n="nav.support">Підтримати</a>
+      <a href="#transparency" data-i18n="nav.transparency">Прозорість</a>
+      <a href="#contacts" data-i18n="nav.contacts">Контакти</a>
+    </nav>
+    <div class="lang" role="group" aria-label="Language">
+      <button type="button" data-lang="uk" aria-pressed="true">UA</button><span>|</span><button type="button" data-lang="en" aria-pressed="false">EN</button>
+    </div>
+    <a class="btn btn--primary" href="#support" data-close-drawer><svg aria-hidden="true"><use href="#i-heart-fill"/></svg><span data-i18n="cta.support">Підтримати родину</span></a>
+  </div>
+</div>
+
+<main id="main">
+<span id="top"></span>
+
+<!-- ============ HERO ============ -->
+<section class="hero" aria-labelledby="hero-title">
+  <div class="wrap hero__grid">
+    <div class="hero__text">
+      <h1 id="hero-title">Home Made <span style="white-space:nowrap;display:inline-flex;align-items:flex-end;gap:14px">Galyna <svg class="heart-ico" aria-hidden="true"><use href="#i-heart"/></svg></span></h1>
+      <p class="hero__sub"><span data-i18n="hero.l1">Ручна робота з любов'ю.</span><span data-i18n="hero.l2">Слова від серця.</span><span data-i18n="hero.l3">Історія родини з надією.</span></p>
+      <p class="hero__desc" data-i18n="hero.desc">Вироби ручної роботи, вірші та історія сили. Ваша підтримка допомагає нашій родині й дає надію на світле завтра.</p>
+      <div class="hero__cta">
+        <a class="btn btn--primary" href="#support"><svg aria-hidden="true"><use href="#i-heart-fill"/></svg><span data-i18n="cta.support">Підтримати родину</span></a>
+        <a class="btn btn--ghost" href="#story"><svg aria-hidden="true" style="color:var(--sage)"><use href="#i-leafbtn"/></svg><span data-i18n="cta.readStory">Читати історію</span></a>
+      </div>
+    </div>
+    <svg class="leaf hero__leaf" aria-hidden="true"><use href="#i-branch"/></svg>
+  </div>
+  <div class="hero__media">
+    <div class="ph ph--sun" role="img" data-i18n-attr="aria-label:ph.hero" aria-label="Фото: Галина з сином">
+      <span class="ph__cap"><svg aria-hidden="true"><use href="#i-camera"/></svg><span data-i18n="ph.hero">Фото: Галина з сином</span></span>
+    </div>
+    <p class="note hero__note"><span data-i18n="note.hero">Маленькі речі. Великий зміст. Дякуємо, що ви частина нашої історії</span> <svg class="heart-ico" width="18" height="18" aria-hidden="true"><use href="#i-heart-fill"/></svg></p>
+  </div>
+</section>
+
+<!-- ============ PILLARS ============ -->
+<section class="pillars" aria-label="Про проєкт" data-i18n-attr="aria-label:pillarsLabel">
+  <svg class="leaf leaf--l" aria-hidden="true"><use href="#i-branch"/></svg>
+  <ul class="wrap pillars__grid">
+    <li class="pillar"><span class="pillar__ico"><svg aria-hidden="true"><use href="#i-yarn"/></svg></span><span data-i18n="pil.1">Ручна робота</span><small data-i18n="pil.1s">створена з любов'ю</small></li>
+    <li class="pillar"><span class="pillar__ico"><svg aria-hidden="true"><use href="#i-book"/></svg></span><span data-i18n="pil.2">Поезія</span><small data-i18n="pil.2s">слова та думки Галини</small></li>
+    <li class="pillar"><span class="pillar__ico"><svg aria-hidden="true"><use href="#i-family"/></svg></span><span data-i18n="pil.3">Справжня історія</span><small data-i18n="pil.3s">нашої родини</small></li>
+    <li class="pillar"><span class="pillar__ico"><svg aria-hidden="true"><use href="#i-heart"/></svg></span><span data-i18n="pil.4">Ваша підтримка</span><small data-i18n="pil.4s">дарує надію</small></li>
+  </ul>
+  <svg class="leaf leaf--r" aria-hidden="true"><use href="#i-branch"/></svg>
+</section>
+
+<!-- ============ HANDMADE ============ -->
+<section class="section" id="handmade" aria-labelledby="hm-title">
+  <div class="wrap handmade__grid">
+    <div>
+      <div class="sec-head">
+        <div>
+          <h2 class="sec-title" id="hm-title"><span class="brush brush--peach" aria-hidden="true"></span><span data-i18n="hm.title">Вироби ручної роботи</span> <svg class="heart-ico" width="30" height="30" aria-hidden="true"><use href="#i-heart"/></svg></h2>
+          <p class="sec-lead" data-i18n="hm.lead">Унікальні речі, створені з любов'ю. Кожна має свою маленьку історію і дарує тепло у повсякденному житті.</p>
+        </div>
+        <a class="link-more" href="#handmade"><span data-i18n="hm.all">Дивитись усі</span><svg width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+      <ul class="cards" id="product-list"></ul>
+    </div>
+    <div class="handmade__aside" aria-hidden="true">
+      <div class="ph ph--sand"><span class="ph__cap"><svg><use href="#i-camera"/></svg><span data-i18n="ph.craft">Фото: в'язання на столі</span></span></div>
+      <p class="note"><span data-i18n="note.hm">Зроблено з любов'ю для світлого завтра</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ JOURNAL ============ -->
+<section class="section journal" id="journal" aria-labelledby="j-title" style="padding-top:16px">
+  <div class="wrap journal__grid">
+    <div>
+      <div class="sec-head">
+        <div>
+          <h2 class="sec-title" id="j-title"><span class="brush brush--sage" aria-hidden="true"></span><span data-i18n="j.title">Щоденник Галини</span> <svg class="leaf" width="34" height="40" aria-hidden="true"><use href="#i-branch"/></svg></h2>
+          <p class="sec-lead" data-i18n="j.lead">Вірші, думки та маленькі моменти з повсякденного життя. Особистий щоденник про родину, силу і надію.</p>
+        </div>
+        <a class="link-more" href="#journal"><span data-i18n="j.all">Усі записи</span><svg width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      </div>
+      <ul class="cards j-list" id="journal-list"></ul>
+      <a class="btn btn--primary mobile-only" href="#journal"><span data-i18n="j.read">Читати щоденник</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
+    <div class="journal__aside" aria-hidden="true">
+      <p class="note"><span data-i18n="note.j">Слова, що лікують. Моменти, що мають значення</span> <svg class="heart-ico" width="16" height="16"><use href="#i-heart-fill"/></svg></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAMILY STORY ============ -->
+<section class="story" id="story" aria-labelledby="st-title">
+  <div class="wrap story__grid">
+    <div class="ph ph--peach story__photo" role="img" data-i18n-attr="aria-label:ph.galyna" aria-label="Фото: Галина за рукоділлям">
+      <span class="ph__cap"><svg aria-hidden="true"><use href="#i-camera"/></svg><span data-i18n="ph.galyna">Фото: Галина за рукоділлям</span></span>
+    </div>
+    <div class="story__text">
+      <h2 class="sec-title" id="st-title"><span data-i18n="st.title">Наша історія</span> <svg class="heart-ico" width="30" height="30" aria-hidden="true"><use href="#i-heart"/></svg></h2>
+      <p data-i18n="st.p1">Ми — звичайна родина, яка проходить складний, але важливий шлях. Галина створює унікальні вироби і пише вірші, які допомагають нам залишатися сильними й вірити у світле майбутнє.</p>
+      <p data-i18n="st.p2">Щодня Галина піклується про сина, а у вільні хвилини в'яже, шиє та записує думки. Ваша підтримка дуже багато для нас значить.</p>
+      <a class="btn btn--primary" href="#story"><span data-i18n="st.cta">Читати нашу історію</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+    </div>
+    <figure class="polaroid" style="margin:0">
+      <div class="ph ph--pink" role="img" data-i18n-attr="aria-label:ph.together" aria-label="Фото: мама і син разом"><span class="ph__cap"><svg aria-hidden="true"><use href="#i-camera"/></svg><span data-i18n="ph.together">Фото: мама і син разом</span></span></div>
+      <figcaption><span data-i18n="note.story">Разом ми сильніші</span> <svg class="heart-ico" width="16" height="16" aria-hidden="true"><use href="#i-heart-fill"/></svg></figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ SUPPORT ============ -->
+<section class="section support" id="support" aria-labelledby="sp-title">
+  <div class="wrap support__grid">
+    <div>
+      <h2 class="sec-title" id="sp-title"><span data-i18n="sp.title">Підтримати родину</span> <svg class="heart-ico" width="30" height="30" aria-hidden="true"><use href="#i-heart"/></svg></h2>
+      <p class="support__lead" data-i18n="sp.lead">Ваша добра підтримка допомагає покривати щоденні потреби, лікування, реабілітацію та створює більше можливостей для майбутнього.</p>
+      <div class="progress">
+        <div class="progress__top">
+          <span class="progress__ico"><svg aria-hidden="true"><use href="#i-family"/></svg></span>
+          <div>
+            <div class="progress__sum" id="raised">37 450 грн</div>
+            <div class="progress__of" id="goal">з 130 000 грн</div>
+          </div>
+          <span class="progress__pct" id="pct">29%</span>
+        </div>
+        <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="29" id="bar" data-i18n-attr="aria-label:sp.progress" aria-label="Зібрано коштів"><span style="width:29%"></span></div>
+        <p class="progress__upd" id="updated">Оновлено 1 жовтня 2026</p>
+      </div>
+      <a class="btn btn--primary" id="mono-link" href="https://send.monobank.ua/" target="_blank" rel="noopener noreferrer"><span data-i18n="sp.mono">Підтримати родину через Monobank</span><svg aria-hidden="true"><use href="#i-ext"/></svg><span class="sr-only" data-i18n="newTab">(відкриється в новій вкладці)</span></a>
+      <p class="support__note"><svg class="heart-ico" width="18" height="18" aria-hidden="true" style="margin-top:2px"><use href="#i-heart-fill"/></svg><span data-i18n="sp.note">Це добровільна допомога родині без купівлі виробу. Сайт не збирає і не зберігає банківських даних.</span></p>
+      <ul class="checks">
+        <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="sp.c1">Прозорість та звіти</span></li>
+        <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="sp.c2">Реальна допомога родині</span></li>
+        <li><svg aria-hidden="true"><use href="#i-check"/></svg><span data-i18n="sp.c3">Кожен внесок має значення</span></li>
+      </ul>
+    </div>
+    <div class="helps">
+      <h3 data-i18n="hp.title">Як ваша підтримка допомагає</h3>
+      <ul>
+        <li><span class="h-ico"><svg aria-hidden="true"><use href="#i-med"/></svg></span><span><strong data-i18n="hp.1">Медичні потреби</strong><small data-i18n="hp.1s">Лікування та необхідні медичні засоби</small></span></li>
+        <li><span class="h-ico"><svg aria-hidden="true"><use href="#i-rehab"/></svg></span><span><strong data-i18n="hp.2">Реабілітація</strong><small data-i18n="hp.2s">Заняття, обладнання та розвиток</small></span></li>
+        <li><span class="h-ico"><svg aria-hidden="true"><use href="#i-home"/></svg></span><span><strong data-i18n="hp.3">Щоденний догляд і побут</strong><small data-i18n="hp.3s">Підтримка щоденного життя родини</small></span></li>
+        <li><span class="h-ico"><svg aria-hidden="true"><use href="#i-sun"/></svg></span><span><strong data-i18n="hp.4">Більше можливостей</strong><small data-i18n="hp.4s">Ваш внесок дає більше можливостей і надії</small></span></li>
+      </ul>
+    </div>
+    <div class="support__photo" aria-hidden="true">
+      <div class="ph ph--pink"><span class="ph__cap"><svg><use href="#i-camera"/></svg><span data-i18n="ph.flowers">Фото: квіти на столі</span></span></div>
+      <p class="note"><span data-i18n="note.sp">Дякуємо, що ви тут</span> <svg class="heart-ico" width="16" height="16"><use href="#i-heart-fill"/></svg></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRANSPARENCY + UPDATES ============ -->
+<section class="section" id="transparency" aria-labelledby="tr-title" style="padding-top:8px">
+  <div class="wrap">
+    <div class="transp">
+      <div>
+        <h2 class="sec-title" id="tr-title" style="font-size:30px"><span data-i18n="tr.title">Прозорість</span></h2>
+        <p class="sec-lead" data-i18n="tr.lead">Ми хочемо, щоб кожен, хто підтримує нашу родину, знав, куди йдуть кошти.</p>
+        <div class="transp__actions">
+          <a class="t-act" href="#transparency"><svg aria-hidden="true"><use href="#i-doc"/></svg><span data-i18n="tr.a1">Медичні документи</span><span aria-hidden="true">→</span></a>
+          <a class="t-act" href="#transparency"><svg aria-hidden="true"><use href="#i-receipt"/></svg><span data-i18n="tr.a2">Звіти про витрати</span><span aria-hidden="true">→</span></a>
+          <a class="t-act" href="#updates"><svg aria-hidden="true"><use href="#i-news"/></svg><span data-i18n="tr.a3">Оновлення</span><span aria-hidden="true">→</span></a>
+        </div>
+        <p class="transp__privacy" data-i18n="tr.privacy">Особисті дані в документах приховані перед публікацією.</p>
+      </div>
+      <div class="updates" id="updates">
+        <h3><span data-i18n="up.title">Приклади ваших добрих справ</span> <svg class="heart-ico" width="24" height="24" aria-hidden="true"><use href="#i-heart"/></svg></h3>
+        <ul class="u-list" id="updates-list"></ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KIND WORDS ============ -->
+<section class="section" id="kind" aria-labelledby="kw-title" style="padding-top:8px">
+  <div class="wrap kind__grid">
+    <div class="kind__photo">
+      <div class="ph ph--sun" role="img" data-i18n-attr="aria-label:ph.son" aria-label="Фото: усміхнений син"><span class="ph__cap"><svg aria-hidden="true"><use href="#i-camera"/></svg><span data-i18n="ph.son">Фото: усміхнений син</span></span></div>
+      <p class="note"><span class="quote-mark" aria-hidden="true">“</span><span class="hand" data-i18n="note.kw">Сонячний день і нова енергія. Дякуємо за вашу підтримку</span> <svg class="heart-ico" width="16" height="16" aria-hidden="true"><use href="#i-heart-fill"/></svg></p>
+    </div>
+    <div class="kind__panel">
+      <h2 class="sec-title" id="kw-title" data-i18n="kw.title">Добрі слова</h2>
+      <p class="lead" data-i18n="kw.lead">Ваші повідомлення, підтримка й підбадьорення дають нам сили. Дякуємо, що ви частина нашого шляху.</p>
+      <div class="msgs" aria-live="polite" id="msgs"></div>
+      <div class="dots" id="dots" role="group" data-i18n-attr="aria-label:kw.nav" aria-label="Повідомлення"></div>
+      <a class="btn btn--sage btn--sm" href="#kind"><span data-i18n="kw.cta">Читати повідомлення</span><svg aria-hidden="true"><use href="#i-arrow"/></svg></a>
+      <svg class="leaf" aria-hidden="true"><use href="#i-branch"/></svg>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ / QUOTE / CONTACTS ============ -->
+<section class="section faq" id="faq" aria-labelledby="faq-title" style="padding-top:8px">
+  <div class="wrap faq__grid">
+    <div>
+      <h2 class="sec-title" id="faq-title" style="margin-bottom:20px"><span data-i18n="faq.title">Часті питання</span> <svg class="leaf" width="30" height="36" aria-hidden="true"><use href="#i-branch"/></svg></h2>
+      <div id="faq-list"></div>
+    </div>
+    <div>
+      <figure class="gquote" style="margin:0">
+        <span class="quote-mark" aria-hidden="true">“</span>
+        <blockquote data-i18n="quote.text">Коли серце наповнене добротою, народжуються справжні дива.</blockquote>
+        <figcaption><cite data-i18n="quote.by">— Галина</cite></figcaption>
+      </figure>
+      <div class="contacts" id="contacts">
+        <h3 data-i18n="ct.title">Контакти</h3>
+        <p data-i18n="ct.lead">З радістю відповімо на ваші питання та повідомлення.</p>
+        <ul>
+          <li><a href="https://t.me/" target="_blank" rel="noopener noreferrer"><span class="c-ico c-ico--tg"><svg aria-hidden="true"><use href="#i-tg"/></svg></span><span data-i18n="ct.tg">Написати в Telegram</span></a></li>
+          <li><a href="https://instagram.com/" target="_blank" rel="noopener noreferrer"><span class="c-ico c-ico--ig"><svg aria-hidden="true"><use href="#i-ig"/></svg></span><span data-i18n="ct.ig">Наш Instagram</span></a></li>
+          <li><a href="mailto:home.made.galyna@gmail.com"><span class="c-ico c-ico--mail"><svg aria-hidden="true"><use href="#i-mail"/></svg></span>home.made.galyna@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STAY IN TOUCH ============ -->
+<section class="touch" aria-labelledby="tc-title" style="background:var(--sage-soft)">
+  <div class="wrap touch__in">
+    <svg class="leaf" aria-hidden="true"><use href="#i-branch"/></svg>
+    <div>
+      <h2 id="tc-title" data-i18n="tc.title">Залишайтеся на зв'язку</h2>
+      <p data-i18n="tc.lead">Отримуйте нові вірші, роботи та новини від Галини.</p>
+    </div>
+    <form id="sub-form" novalidate>
+      <div class="sub-form">
+        <label for="sub-email" class="sr-only" data-i18n="tc.label">Ваш email</label>
+        <input id="sub-email" type="email" autocomplete="email" data-i18n-attr="placeholder:tc.ph" placeholder="Ваш email" aria-describedby="sub-msg">
+        <button class="btn btn--sage" type="submit" data-i18n="tc.btn">Підписатися</button>
+      </div>
+      <p class="sub-msg" id="sub-msg" role="status"></p>
+    </form>
+  </div>
+</section>
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__top">
+      <a class="logo" href="#top"><svg class="heart-ico" aria-hidden="true"><use href="#i-heart"/></svg><span><span class="logo__name">Home Made Galyna</span><span class="logo__tag" style="display:block" data-i18n="tagline">Ручна робота • Поезія • Надія</span></span></a>
+      <nav class="footer__nav" aria-label="Footer">
+        <a href="#top" data-i18n="nav.home">Головна</a>
+        <a href="#story" data-i18n="nav.story">Наша історія</a>
+        <a href="#handmade" data-i18n="nav.handmade">Ручна робота</a>
+        <a href="#journal" data-i18n="nav.journal">Щоденник</a>
+        <a href="#support" data-i18n="nav.support">Підтримати</a>
+        <a href="#transparency" data-i18n="nav.transparency">Прозорість</a>
+        <div class="lang" role="group" aria-label="Language"><button type="button" data-lang="uk" aria-pressed="true">UA</button><span>|</span><button type="button" data-lang="en" aria-pressed="false">EN</button></div>
+      </nav>
+      <div class="socials">
+        <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg aria-hidden="true"><use href="#i-ig"/></svg></a>
+        <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg aria-hidden="true"><use href="#i-fb"/></svg></a>
+        <a href="mailto:home.made.galyna@gmail.com" aria-label="Email"><svg aria-hidden="true"><use href="#i-mail"/></svg></a>
+        <a href="https://t.me/" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><svg aria-hidden="true"><use href="#i-tg"/></svg></a>
+      </div>
+    </div>
+    <div class="footer__mid">
+      <div>
+        <p>© 2026 Home Made Galyna. <span data-i18n="ft.rights">Усі права захищено.</span></p>
+        <p class="footer__made" data-i18n="ft.made">Зроблено з ♡ для родини Галини в Україні</p>
+      </div>
+      <p class="footer__hand" aria-hidden="true" data-i18n="ft.hand">Маленькі речі. Великий зміст. Дякуємо, що ви тут ♡</p>
+      <div class="footer__legal">
+        <a href="#privacy" data-i18n="ft.privacy">Політика конфіденційності</a><span aria-hidden="true">|</span>
+        <a href="#terms" data-i18n="ft.terms">Умови підтримки</a><span aria-hidden="true">|</span>
+        <a href="#contacts" data-i18n="ft.contact">Контакти</a>
+      </div>
+    </div>
+  </div>
+  <svg class="landscape" viewBox="0 0 1440 170" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 80C160 40 300 70 430 55s260-40 400-10 290 30 410 10 160-10 200 0V170H0Z" fill="#E9DCC7"/>
+    <path d="M0 110c180-30 330-10 480-25s300-35 470-5 330 20 490-5V170H0Z" fill="#D9C7A6"/>
+    <path d="M0 135c200-20 380 5 560-10s360-15 520 5 260 0 360-10V170H0Z" fill="#B9C49E"/>
+    <g fill="#F2B27A"><circle cx="60" cy="140" r="4"/><circle cx="140" cy="150" r="3"/><circle cx="260" cy="138" r="4"/><circle cx="390" cy="152" r="3"/><circle cx="520" cy="142" r="4"/><circle cx="700" cy="150" r="3"/><circle cx="860" cy="140" r="4"/><circle cx="1010" cy="152" r="3"/><circle cx="1160" cy="141" r="4"/><circle cx="1300" cy="150" r="3"/><circle cx="1400" cy="140" r="4"/></g>
+    <g fill="#fff"><circle cx="100" cy="155" r="3"/><circle cx="330" cy="158" r="3"/><circle cx="610" cy="156" r="3"/><circle cx="930" cy="158" r="3"/><circle cx="1220" cy="157" r="3"/></g>
+  </svg>
+</footer>
+
+<!-- ============ ORDER MODAL ============ -->
+<div class="modal" id="order" aria-hidden="true">
+  <div class="modal__bg" data-close-modal></div>
+  <div class="modal__box" role="dialog" aria-modal="true" aria-labelledby="order-title">
+    <button class="modal__close" type="button" data-close-modal data-i18n-attr="aria-label:close" aria-label="Закрити"><svg width="22" height="22" aria-hidden="true"><use href="#i-close"/></svg></button>
+    <div id="order-form-wrap">
+      <h2 id="order-title" data-i18n="o.title">Запит на замовлення</h2>
+      <div class="modal__item" id="order-item"></div>
+      <p class="modal__hint" data-i18n="o.hint">Це запит, а не оплата. Галина зв'яжеться з вами, щоб підтвердити замовлення, оплату та доставку.</p>
+      <form class="form" id="order-form" novalidate>
+        <div class="field"><label for="o-name"><span data-i18n="o.name">Ім'я</span> <span class="req" aria-hidden="true">*</span></label><input id="o-name" name="name" autocomplete="name" required aria-describedby="e-name"><span class="err" id="e-name"></span></div>
+        <div class="field"><label for="o-phone"><span data-i18n="o.phone">Телефон</span> <span class="req" aria-hidden="true">*</span></label><input id="o-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="+380" required aria-describedby="e-phone"><span class="err" id="e-phone"></span></div>
+        <div class="field"><label for="o-email">Email</label><input id="o-email" name="email" type="email" autocomplete="email" aria-describedby="e-email"><span class="err" id="e-email"></span></div>
+        <div class="field"><label for="o-city" data-i18n="o.city">Місто</label><input id="o-city" name="city" autocomplete="address-level2"></div>
+        <div class="field"><label for="o-delivery" data-i18n="o.delivery">Спосіб доставки</label>
+          <select id="o-delivery" name="delivery">
+            <option value="nova" data-i18n="o.d1">Нова пошта</option>
+            <option value="ukr" data-i18n="o.d2">Укрпошта</option>
+            <option value="other" data-i18n="o.d3">Інше — обговорю з Галиною</option>
+          </select></div>
+        <div class="field"><label for="o-branch" data-i18n="o.branch">Відділення / адреса</label><input id="o-branch" name="branch"></div>
+        <div class="field field--full"><label for="o-comment" data-i18n="o.comment">Коментар</label><textarea id="o-comment" name="comment" data-i18n-attr="placeholder:o.commentPh" placeholder="Наприклад, бажаний колір або розмір"></textarea></div>
+        <input type="text" name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+        <label class="consent"><input type="checkbox" id="o-consent" aria-describedby="e-consent"><span><span data-i18n="o.consent">Я погоджуюсь на обробку моїх даних для виконання замовлення.</span> <span class="req" aria-hidden="true">*</span><span class="err" id="e-consent" style="display:block;font-size:13.5px;color:#A3341C"></span></span></label>
+        <div class="form__actions">
+          <button class="btn btn--primary" type="submit" id="o-submit"><span data-i18n="o.submit">Надіслати запит</span></button>
+          <p class="form__status" id="o-status" role="status"></p>
+        </div>
+      </form>
+    </div>
+    <div class="success" id="order-success" hidden tabindex="-1">
+      <svg aria-hidden="true"><use href="#i-heart"/></svg>
+      <h2 data-i18n="o.okTitle">Дякуємо!</h2>
+      <p data-i18n="o.ok">Ваш запит надіслано Галині. Вона зв'яжеться з вами для підтвердження замовлення, оплати та доставки. ♡</p>
+      <button class="btn btn--sage" type="button" data-close-modal data-i18n="o.done">Повернутися на сайт</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   CONTENT (later comes from CMS)
+   ========================================================= */
+const SITE = {
+  monobankUrl: "https://send.monobank.ua/", // TODO: real jar link
+  fundraising: { raised: 37450, goal: 130000, updated: "2026-10-01" }
+};
+
+const PRODUCTS = [
+  { id:"bunny",  tone:"pink",  price:450, available:true,
+    name:{uk:"В'язаний зайчик", en:"Knitted bunny"} },
+  { id:"bag",    tone:"sand",  price:550, available:true,
+    name:{uk:"Сумочка ручної роботи", en:"Handmade bag"} },
+  { id:"heart",  tone:"sage",  price:300, available:true,
+    name:{uk:"Декоративне серце", en:"Decorative heart"} },
+  { id:"basket", tone:"peach", price:480, available:false,
+    name:{uk:"В'язаний кошик", en:"Knitted basket"} }
+];
+
+const POSTS = [
+  { slug:"osinniy-ranok", cat:"poetry", tone:"sun", date:"2026-10-03",
+    title:{uk:"Осінній ранок", en:"Autumn Morning"},
+    excerpt:{uk:"Сьогодні осінь тихо постукала у вікно…", en:"Today autumn quietly knocked on my window…"} },
+  { slug:"mala-peremoha", cat:"life", tone:"sage", date:"2026-09-28",
+    title:{uk:"Маленька перемога", en:"A Small Victory"},
+    excerpt:{uk:"Іноді щастя — у простих моментах…", en:"Sometimes happiness is in simple moments…"} },
+  { slug:"nova-robota", cat:"craft", tone:"pink", date:"2026-09-20",
+    title:{uk:"Нова робота", en:"New Creation"},
+    excerpt:{uk:"Нова іграшка готова, зроблена з любов'ю…", en:"A new toy is ready, made with love…"} },
+  { slug:"vdyachnist", cat:"thoughts", tone:"peach", date:"2026-09-15",
+    title:{uk:"Вдячність", en:"Gratitude"},
+    excerpt:{uk:"Дякую вам за підтримку і добрі слова…", en:"Thank you for your support and kind words…"} }
+];
+
+const UPDATES = [
+  { tone:"blue", date:"2026-09-25", title:{uk:"Медичні засоби", en:"Medical supplies"} },
+  { tone:"sage", date:"2026-09-10", title:{uk:"Реабілітація", en:"Rehabilitation"} },
+  { tone:"sand", date:"2026-08-30", title:{uk:"Побутові потреби", en:"Household needs"} }
+];
+
+const MESSAGES = [
+  { uk:"Ваша історія дуже торкнулася нашої родини. Бажаємо вам сил і світлих днів. ♡", en:"Your story touched our family deeply. We wish you strength and bright days. ♡", by:"Олена, Київ" },
+  { uk:"Купила зайчика для доньки — вона з ним не розлучається. Дякую, Галино!", en:"I bought the bunny for my daughter — she never lets it go. Thank you, Galyna!", by:"Марія, Львів" },
+  { uk:"Ваші вірші — як теплий чай у холодний вечір.", en:"Your poems feel like warm tea on a cold evening.", by:"Andrii, Warsaw" }
+];
+
+const FAQ = [
+  { q:{uk:"Як я можу підтримати родину?", en:"How can I support the family?"},
+    a:{uk:"Через банку Monobank у розділі «Підтримати родину» або замовивши виріб Галини. Обидва способи дуже допомагають.", en:"Through the Monobank jar in the “Support our family” section, or by ordering one of Galyna's pieces. Both help a lot."} },
+  { q:{uk:"Чи можна замовити виріб?", en:"Can I order a handmade piece?"},
+    a:{uk:"Так. Натисніть кнопку з кошиком на картці виробу та надішліть запит — Галина зв'яжеться з вами особисто.", en:"Yes. Tap the cart button on a product card and send a request — Galyna will contact you personally."} },
+  { q:{uk:"Як відбувається доставка?", en:"How does delivery work?"},
+    a:{uk:"Нова пошта або Укрпошта по Україні. Деталі та вартість Галина узгодить з вами після запиту.", en:"Nova Poshta or Ukrposhta within Ukraine. Galyna will agree the details and cost with you after your request."} },
+  { q:{uk:"Чи є звіти про використання коштів?", en:"Are there reports on how funds are used?"},
+    a:{uk:"Так, у розділі «Прозорість» ми публікуємо звіти про витрати та оновлення.", en:"Yes, we publish spending reports and updates in the “Transparency” section."} }
+];
+
+/* =========================================================
+   I18N
+   ========================================================= */
+const T = {
+uk:{
+ skip:"Перейти до змісту", navLabel:"Головне меню", menuOpen:"Відкрити меню", close:"Закрити",
+ tagline:"Ручна робота • Поезія • Надія",
+ "nav.home":"Головна","nav.story":"Наша історія","nav.handmade":"Ручна робота","nav.journal":"Щоденник","nav.support":"Підтримати","nav.transparency":"Прозорість","nav.contacts":"Контакти",
+ "cta.support":"Підтримати родину","cta.readStory":"Читати історію",
+ "hero.l1":"Ручна робота з любов'ю.","hero.l2":"Слова від серця.","hero.l3":"Історія родини з надією.",
+ "hero.desc":"Вироби ручної роботи, вірші та історія сили. Ваша підтримка допомагає нашій родині й дає надію на світле завтра.",
+ "note.hero":"Маленькі речі. Великий зміст. Дякуємо, що ви частина нашої історії",
+ pillarsLabel:"Про проєкт",
+ "pil.1":"Ручна робота","pil.1s":"створена з любов'ю","pil.2":"Поезія","pil.2s":"слова та думки Галини","pil.3":"Справжня історія","pil.3s":"нашої родини","pil.4":"Ваша підтримка","pil.4s":"дарує надію",
+ "hm.title":"Вироби ручної роботи","hm.lead":"Унікальні речі, створені з любов'ю. Кожна має свою маленьку історію і дарує тепло у повсякденному житті.","hm.all":"Дивитись усі",
+ "hm.avail":"В наявності","hm.made":"Під замовлення","hm.order":"Замовити","currency":"грн",
+ "note.hm":"Зроблено з любов'ю для світлого завтра",
+ "j.title":"Щоденник Галини","j.lead":"Вірші, думки та маленькі моменти з повсякденного життя. Особистий щоденник про родину, силу і надію.","j.all":"Усі записи","j.read":"Читати щоденник","j.more":"Читати далі",
+ "cat.poetry":"Вірші","cat.life":"Наше життя","cat.craft":"Творчість","cat.thoughts":"Думки","cat.news":"Новини",
+ "note.j":"Слова, що лікують. Моменти, що мають значення",
+ "st.title":"Наша історія","st.p1":"Ми — звичайна родина, яка проходить складний, але важливий шлях. Галина створює унікальні вироби і пише вірші, які допомагають нам залишатися сильними й вірити у світле майбутнє.","st.p2":"Щодня Галина піклується про сина, а у вільні хвилини в'яже, шиє та записує думки. Ваша підтримка дуже багато для нас значить.","st.cta":"Читати нашу історію","note.story":"Разом ми сильніші",
+ "sp.title":"Підтримати родину","sp.lead":"Ваша добра підтримка допомагає покривати щоденні потреби, лікування, реабілітацію та створює більше можливостей для майбутнього.","sp.progress":"Зібрано коштів","sp.of":"з","sp.updated":"Оновлено","sp.mono":"Підтримати родину через Monobank","newTab":"(відкриється в новій вкладці)",
+ "sp.note":"Це добровільна допомога родині без купівлі виробу. Сайт не збирає і не зберігає банківських даних.",
+ "sp.c1":"Прозорість та звіти","sp.c2":"Реальна допомога родині","sp.c3":"Кожен внесок має значення",
+ "hp.title":"Як ваша підтримка допомагає","hp.1":"Медичні потреби","hp.1s":"Лікування та необхідні медичні засоби","hp.2":"Реабілітація","hp.2s":"Заняття, обладнання та розвиток","hp.3":"Щоденний догляд і побут","hp.3s":"Підтримка щоденного життя родини","hp.4":"Більше можливостей","hp.4s":"Ваш внесок дає більше можливостей і надії",
+ "note.sp":"Дякуємо, що ви тут",
+ "tr.title":"Прозорість","tr.lead":"Ми хочемо, щоб кожен, хто підтримує нашу родину, знав, куди йдуть кошти.","tr.a1":"Медичні документи","tr.a2":"Звіти про витрати","tr.a3":"Оновлення","tr.privacy":"Особисті дані в документах приховані перед публікацією.",
+ "up.title":"Приклади ваших добрих справ",
+ "kw.title":"Добрі слова","kw.lead":"Ваші повідомлення, підтримка й підбадьорення дають нам сили. Дякуємо, що ви частина нашого шляху.","kw.cta":"Читати повідомлення","kw.nav":"Повідомлення","kw.msg":"Повідомлення",
+ "note.kw":"Сонячний день і нова енергія. Дякуємо за вашу підтримку",
+ "faq.title":"Часті питання","quote.text":"Коли серце наповнене добротою, народжуються справжні дива.","quote.by":"— Галина",
+ "ct.title":"Контакти","ct.lead":"З радістю відповімо на ваші питання та повідомлення.","ct.tg":"Написати в Telegram","ct.ig":"Наш Instagram",
+ "tc.title":"Залишайтеся на зв'язку","tc.lead":"Отримуйте нові вірші, роботи та новини від Галини.","tc.label":"Ваш email","tc.ph":"Ваш email","tc.btn":"Підписатися","tc.ok":"Дякуємо! Ви підписані на новини Галини.","tc.err":"Введіть email у форматі name@example.com.",
+ "ft.rights":"Усі права захищено.","ft.made":"Зроблено з ♡ для родини Галини в Україні","ft.hand":"Маленькі речі. Великий зміст. Дякуємо, що ви тут ♡","ft.privacy":"Політика конфіденційності","ft.terms":"Умови підтримки","ft.contact":"Контакти",
+ "ph.hero":"Фото: Галина з сином","ph.craft":"Фото: в'язання на столі","ph.galyna":"Фото: Галина за рукоділлям","ph.together":"Фото: мама і син разом","ph.flowers":"Фото: квіти на столі","ph.son":"Фото: усміхнений син","ph.photo":"Фото",
+ "o.title":"Запит на замовлення","o.hint":"Це запит, а не оплата. Галина зв'яжеться з вами, щоб підтвердити замовлення, оплату та доставку.",
+ "o.name":"Ім'я","o.phone":"Телефон","o.city":"Місто","o.delivery":"Спосіб доставки","o.d1":"Нова пошта","o.d2":"Укрпошта","o.d3":"Інше — обговорю з Галиною","o.branch":"Відділення / адреса","o.comment":"Коментар","o.commentPh":"Наприклад, бажаний колір або розмір",
+ "o.consent":"Я погоджуюсь на обробку моїх даних для виконання замовлення.","o.submit":"Надіслати запит","o.sending":"Надсилаємо запит…",
+ "o.okTitle":"Дякуємо!","o.ok":"Ваш запит надіслано Галині. Вона зв'яжеться з вами для підтвердження замовлення, оплати та доставки. ♡","o.done":"Повернутися на сайт",
+ "e.name":"Вкажіть ваше ім'я.","e.phone":"Вкажіть номер телефону, наприклад +380 67 123 45 67.","e.email":"Перевірте email: формат name@example.com.","e.consent":"Потрібна згода на обробку даних, щоб Галина могла зв'язатися з вами.","e.fix":"Перевірте поля, позначені вище.","e.send":"Запит не надіслано. Перевірте інтернет і спробуйте ще раз."
+},
+en:{
+ skip:"Skip to content", navLabel:"Main menu", menuOpen:"Open menu", close:"Close",
+ tagline:"Handmade • Poetry • Hope",
+ "nav.home":"Home","nav.story":"Our Story","nav.handmade":"Handmade","nav.journal":"Journal","nav.support":"Support","nav.transparency":"Transparency","nav.contacts":"Contacts",
+ "cta.support":"Support our family","cta.readStory":"Read our story",
+ "hero.l1":"Handmade with love.","hero.l2":"Words from the heart.","hero.l3":"A family story of hope.",
+ "hero.desc":"Handmade creations, poetry and a story of strength. Your support helps our family and gives hope for a brighter tomorrow.",
+ "note.hero":"Small creations. Big meaning. Thank you for being part of our story",
+ pillarsLabel:"About the project",
+ "pil.1":"Handmade creations","pil.1s":"made with love","pil.2":"Poetry","pil.2s":"and thoughts from daily life","pil.3":"A real family","pil.3s":"story","pil.4":"Your support","pil.4s":"brings hope",
+ "hm.title":"Handmade Creations","hm.lead":"Unique handmade items created with love. Each piece carries a small story and brings warmth into everyday life.","hm.all":"View all creations",
+ "hm.avail":"In stock","hm.made":"Made to order","hm.order":"Order","currency":"UAH",
+ "note.hm":"Handmade with love for a brighter tomorrow",
+ "j.title":"Galyna's Journal","j.lead":"Poems, thoughts and small moments from everyday life. A personal diary about family, strength and hope.","j.all":"View all posts","j.read":"Read the journal","j.more":"Read more",
+ "cat.poetry":"Poetry","cat.life":"Daily Life","cat.craft":"Handmade","cat.thoughts":"Thoughts","cat.news":"News",
+ "note.j":"Words that heal. Moments that matter",
+ "st.title":"Our Family Story","st.p1":"We are a family going through a difficult but important journey. Galyna creates handmade items and writes poems, which help her stay strong and bring light into our everyday life.","st.p2":"Every day Galyna cares for her son, and in quiet moments she knits, sews and writes. Your support means a lot to us.","st.cta":"Read our story","note.story":"Together we are stronger",
+ "sp.title":"Support Our Family","sp.lead":"Your kind support helps with daily needs, medical care, rehabilitation and a brighter future.","sp.progress":"Funds raised","sp.of":"of","sp.updated":"Updated","sp.mono":"Support via Monobank","newTab":"(opens in a new tab)",
+ "sp.note":"This is a voluntary gift to the family, not a purchase. The site never collects or stores bank details.",
+ "sp.c1":"Transparency and reports","sp.c2":"Real help for the family","sp.c3":"Every gift matters",
+ "hp.title":"How your support helps","hp.1":"Medical needs","hp.1s":"Treatment and essential medical supplies","hp.2":"Rehabilitation","hp.2s":"Sessions, equipment and development","hp.3":"Daily care and living","hp.3s":"Support for the family's everyday life","hp.4":"A brighter future","hp.4s":"Your gift creates more opportunities and hope",
+ "note.sp":"Thank you for being here",
+ "tr.title":"Transparency","tr.lead":"We want everyone who supports our family to know where the money goes.","tr.a1":"Medical documents","tr.a2":"Spending reports","tr.a3":"Updates","tr.privacy":"Personal details in documents are hidden before publishing.",
+ "up.title":"What your kindness made possible",
+ "kw.title":"Kind Words","kw.lead":"Your messages, support and encouragement give us strength. Thank you for being part of our journey.","kw.cta":"Read messages","kw.nav":"Messages","kw.msg":"Message",
+ "note.kw":"A sunny day and new energy. Thank you for your support",
+ "faq.title":"Questions","quote.text":"When the heart is full of kindness, real miracles are born.","quote.by":"— Galyna",
+ "ct.title":"Contacts","ct.lead":"We'll gladly answer your questions and messages.","ct.tg":"Message us on Telegram","ct.ig":"Our Instagram",
+ "tc.title":"Stay in Touch","tc.lead":"Get new poems, creations and updates from Galyna.","tc.label":"Your email address","tc.ph":"Your email address","tc.btn":"Subscribe","tc.ok":"Thank you! You're subscribed to Galyna's updates.","tc.err":"Enter an email like name@example.com.",
+ "ft.rights":"All rights reserved.","ft.made":"Made with ♡ for Galyna's family in Ukraine","ft.hand":"Small creations. Big meaning. Thank you for being here ♡","ft.privacy":"Privacy Policy","ft.terms":"Terms","ft.contact":"Contact",
+ "ph.hero":"Photo: Galyna with her son","ph.craft":"Photo: knitting on the table","ph.galyna":"Photo: Galyna crafting","ph.together":"Photo: mother and son together","ph.flowers":"Photo: flowers on the table","ph.son":"Photo: smiling son","ph.photo":"Photo",
+ "o.title":"Order request","o.hint":"This is a request, not a payment. Galyna will contact you to confirm the order, payment and delivery.",
+ "o.name":"Name","o.phone":"Phone","o.city":"City","o.delivery":"Delivery method","o.d1":"Nova Poshta","o.d2":"Ukrposhta","o.d3":"Other — discuss with Galyna","o.branch":"Branch / address","o.comment":"Comment","o.commentPh":"For example, preferred colour or size",
+ "o.consent":"I agree to the processing of my data to fulfil this order.","o.submit":"Send request","o.sending":"Sending request…",
+ "o.okTitle":"Thank you!","o.ok":"Your request has been sent to Galyna. She will contact you to confirm the order, payment and delivery. ♡","o.done":"Back to the site",
+ "e.name":"Enter your name.","e.phone":"Enter a phone number, e.g. +380 67 123 45 67.","e.email":"Check the email: name@example.com.","e.consent":"Consent is needed so Galyna can contact you.","e.fix":"Check the fields marked above.","e.send":"Request not sent. Check your connection and try again."
+}};
+
+let lang = "uk";
+try { lang = new URLSearchParams(location.search).get("lang") || localStorage.getItem("hmg-lang") || "uk"; } catch(e){}
+if(!T[lang]) lang = "uk";
+const t = k => (T[lang][k] ?? T.uk[k] ?? k);
+const fmtNum = n => new Intl.NumberFormat(lang==="uk"?"uk-UA":"en-US").format(n).replace(/,/g, lang==="en"?",":" ");
+const fmtDate = d => new Intl.DateTimeFormat(lang==="uk"?"uk-UA":"en-GB",{day:"numeric",month:"long",year:"numeric"}).format(new Date(d+"T12:00:00")).replace(" р.","");
+const money = n => `${fmtNum(n)} ${t("currency")}`;
+
+const phHTML = (tone, label) => `<div class="ph ph--${tone}" aria-hidden="true"><span class="ph__cap"><svg><use href="#i-camera"/></svg><span>${label}</span></span></div>`;
+
+function renderProducts(){
+  document.getElementById("product-list").innerHTML = PRODUCTS.map(p=>`
+    <li class="p-card">
+      ${phHTML(p.tone, t("ph.photo"))}
+      <div class="p-card__body">
+        <span class="p-card__name">${p.name[lang]}</span>
+        <span class="p-card__avail ${p.available?"":"is-made"}">${p.available?t("hm.avail"):t("hm.made")}</span>
+        <div class="p-card__row">
+          <span class="p-card__price">${money(p.price)}</span>
+          <button class="cart-btn" type="button" data-order="${p.id}" aria-label="${t("hm.order")}: ${p.name[lang]}" title="${t("hm.order")}"><svg aria-hidden="true"><use href="#i-cart"/></svg></button>
+        </div>
+      </div>
+    </li>`).join("");
+}
+function renderPosts(){
+  document.getElementById("journal-list").innerHTML = POSTS.map(p=>`
+    <li><a class="j-card" href="#journal" data-slug="${p.slug}">
+      ${phHTML(p.tone, t("ph.photo"))}
+      <div class="j-card__body">
+        <span class="tag tag--${p.cat}">${t("cat."+p.cat)}</span>
+        <h3>${p.title[lang]}</h3>
+        <time datetime="${p.date}">${fmtDate(p.date)}</time>
+        <p>${p.excerpt[lang]}</p>
+        <span class="read">${t("j.more")} →</span>
+      </div></a></li>`).join("");
+}
+function renderUpdates(){
+  document.getElementById("updates-list").innerHTML = UPDATES.map(u=>`
+    <li class="u-card">${phHTML(u.tone, t("ph.photo"))}<div><strong>${u.title[lang]}</strong><time datetime="${u.date}">${fmtDate(u.date)}</time></div></li>`).join("");
+}
+let msgIdx = 0;
+function renderMessages(){
+  document.getElementById("msgs").innerHTML = MESSAGES.map((m,i)=>`
+    <blockquote class="msg ${i===msgIdx?"is-active":""}" style="margin:0"><span class="quote-mark" aria-hidden="true">“</span>${m[lang]}<footer>${m.by}</footer></blockquote>`).join("");
+  document.getElementById("dots").innerHTML = MESSAGES.map((_,i)=>`<button type="button" aria-label="${t("kw.msg")} ${i+1}" ${i===msgIdx?'aria-current="true"':""} data-msg="${i}"></button>`).join("");
+}
+function renderFaq(){
+  document.getElementById("faq-list").innerHTML = FAQ.map(f=>`<details><summary>${f.q[lang]}</summary><p>${f.a[lang]}</p></details>`).join("");
+}
+function renderFund(){
+  const {raised, goal, updated} = SITE.fundraising;
+  const pct = Math.min(100, Math.round(raised/goal*100));
+  document.getElementById("raised").textContent = money(raised);
+  document.getElementById("goal").textContent = `${t("sp.of")} ${money(goal)}`;
+  document.getElementById("pct").textContent = pct + "%";
+  const bar = document.getElementById("bar");
+  bar.setAttribute("aria-valuenow", pct);
+  bar.setAttribute("aria-valuetext", `${money(raised)} ${t("sp.of")} ${money(goal)}`);
+  bar.firstElementChild.style.width = pct + "%";
+  document.getElementById("updated").textContent = `${t("sp.updated")} ${fmtDate(updated)}`;
+  document.getElementById("mono-link").href = SITE.monobankUrl;
+}
+
+function applyLang(next){
+  lang = next;
+  try { localStorage.setItem("hmg-lang", lang); } catch(e){}
+  document.documentElement.lang = lang === "uk" ? "uk" : "en";
+  document.title = lang==="uk" ? "Home Made Galyna | Ручна робота, поезія та надія" : "Home Made Galyna | Handmade, Poetry & Hope";
+  document.querySelectorAll("[data-i18n]").forEach(el=>{ el.textContent = t(el.dataset.i18n); });
+  document.querySelectorAll("[data-i18n-attr]").forEach(el=>{
+    el.dataset.i18nAttr.split(";").forEach(pair=>{ const [a,k]=pair.split(":"); el.setAttribute(a, t(k)); });
+  });
+  document.querySelectorAll("[data-lang]").forEach(b=>b.setAttribute("aria-pressed", b.dataset.lang===lang));
+  renderProducts(); renderPosts(); renderUpdates(); renderMessages(); renderFaq(); renderFund();
+  if (currentProduct) fillOrderItem();
+}
+document.addEventListener("click", e=>{
+  const b = e.target.closest("[data-lang]"); if (b) applyLang(b.dataset.lang);
+  const d = e.target.closest("[data-msg]"); if (d){ msgIdx = +d.dataset.msg; renderMessages(); }
+});
+
+/* header shadow */
+const header = document.getElementById("header");
+addEventListener("scroll", ()=>header.classList.toggle("is-scrolled", scrollY>8), {passive:true});
+
+/* =========================================================
+   DIALOG HELPERS (focus trap)
+   ========================================================= */
+let lastFocus = null;
+function trap(container, e){
+  if (e.key !== "Tab") return;
+  const f = [...container.querySelectorAll('a[href],button:not([disabled]),input:not([tabindex="-1"]),select,textarea,[tabindex="0"]')].filter(x=>x.offsetParent!==null);
+  if (!f.length) return;
+  const first=f[0], last=f[f.length-1];
+  if (e.shiftKey && document.activeElement===first){ last.focus(); e.preventDefault(); }
+  else if (!e.shiftKey && document.activeElement===last){ first.focus(); e.preventDefault(); }
+}
+function openLayer(el, focusEl){
+  lastFocus = document.activeElement;
+  el.classList.add("is-open"); el.setAttribute("aria-hidden","false");
+  document.body.style.overflow="hidden";
+  (focusEl || el.querySelector("button,input,a")).focus();
+}
+function closeLayer(el){
+  el.classList.remove("is-open"); el.setAttribute("aria-hidden","true");
+  document.body.style.overflow="";
+  if (lastFocus) lastFocus.focus();
+}
+
+/* drawer */
+const drawer = document.getElementById("drawer"), burger = document.querySelector(".burger");
+burger.addEventListener("click", ()=>{ burger.setAttribute("aria-expanded","true"); openLayer(drawer, drawer.querySelector(".drawer__close")); });
+drawer.addEventListener("click", e=>{ if (e.target.closest("[data-close-drawer]") || e.target.closest("nav a")){ burger.setAttribute("aria-expanded","false"); closeLayer(drawer); }});
+drawer.addEventListener("keydown", e=>{ if(e.key==="Escape"){ burger.setAttribute("aria-expanded","false"); closeLayer(drawer);} trap(drawer.querySelector(".drawer__panel"), e); });
+
+/* =========================================================
+   ORDER REQUEST
+   ========================================================= */
+const modal = document.getElementById("order"), form = document.getElementById("order-form");
+let currentProduct = null;
+function fillOrderItem(){
+  const p = currentProduct;
+  document.getElementById("order-item").innerHTML = `${phHTML(p.tone,"")}<div><strong>${p.name[lang]}</strong><span>${money(p.price)} · ${p.available?t("hm.avail"):t("hm.made")}</span></div>`;
+}
+document.addEventListener("click", e=>{
+  const b = e.target.closest("[data-order]"); if (!b) return;
+  currentProduct = PRODUCTS.find(p=>p.id===b.dataset.order);
+  fillOrderItem();
+  form.reset(); clearErrors();
+  document.getElementById("order-form-wrap").hidden = false;
+  document.getElementById("order-success").hidden = true;
+  openLayer(modal, document.getElementById("o-name"));
+});
+modal.addEventListener("click", e=>{ if (e.target.closest("[data-close-modal]")) closeLayer(modal); });
+modal.addEventListener("keydown", e=>{ if(e.key==="Escape") closeLayer(modal); trap(modal.querySelector(".modal__box"), e); });
+
+function setErr(id, msg){
+  const input = document.getElementById(id), err = document.getElementById("e-"+id.replace("o-",""));
+  err.textContent = msg || ""; input.setAttribute("aria-invalid", msg ? "true" : "false");
+}
+function clearErrors(){ ["o-name","o-phone","o-email","o-consent"].forEach(id=>setErr(id,"")); document.getElementById("o-status").textContent=""; }
+
+let lastSent = 0;
+form.addEventListener("submit", async e=>{
+  e.preventDefault(); clearErrors();
+  const data = Object.fromEntries(new FormData(form));
+  if (data.website) return; // honeypot
+  let bad = [];
+  if (!data.name.trim()) { setErr("o-name", t("e.name")); bad.push("o-name"); }
+  if (data.phone.replace(/\D/g,"").length < 9) { setErr("o-phone", t("e.phone")); bad.push("o-phone"); }
+  if (data.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.email)) { setErr("o-email", t("e.email")); bad.push("o-email"); }
+  if (!document.getElementById("o-consent").checked) { setErr("o-consent", t("e.consent")); bad.push("o-consent"); }
+  const status = document.getElementById("o-status");
+  if (bad.length){ status.className="form__status err"; status.textContent=t("e.fix"); document.getElementById(bad[0]).focus(); return; }
+  if (Date.now() - lastSent < 15000) return; // simple client-side rate limit (server must enforce too)
+
+  const btn = document.getElementById("o-submit"); btn.disabled = true;
+  status.className="form__status"; status.textContent = t("o.sending");
+  const payload = { product: currentProduct.id, productName: currentProduct.name.uk, price: currentProduct.price, lang, ...data };
+  try {
+    /* PHASE 2: replace with  await fetch("/api/order", {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(payload)})
+       The server route sends the message to Galyna via Telegram Bot (token stays server-side). */
+    await new Promise(r=>setTimeout(r, 700));
+    console.info("[prototype] order request", payload);
+    lastSent = Date.now();
+    document.getElementById("order-form-wrap").hidden = true;
+    const ok = document.getElementById("order-success"); ok.hidden = false; ok.focus();
+  } catch(err){
+    status.className="form__status err"; status.textContent = t("e.send");
+  } finally { btn.disabled = false; }
+});
+
+/* subscribe */
+document.getElementById("sub-form").addEventListener("submit", e=>{
+  e.preventDefault();
+  const v = document.getElementById("sub-email").value.trim(), m = document.getElementById("sub-msg");
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)){ m.className="sub-msg err"; m.textContent=t("tc.err"); document.getElementById("sub-email").focus(); return; }
+  m.className="sub-msg ok"; m.textContent=t("tc.ok"); e.target.reset();
+});
+
+applyLang(lang);
+</script>
+</body>
+</html>
