@@ -8,6 +8,7 @@ import { formatMoney } from "@/lib/format";
 import { useFocusTrap } from "@/lib/useFocusTrap";
 import { Icon } from "../Icon";
 import { Placeholder } from "../Placeholder";
+import { Heart } from "@/components/Heart";
 
 type Field = "name" | "phone" | "email" | "consent";
 type Errors = Partial<Record<Field, string>>;
@@ -146,7 +147,7 @@ export function OrderModal({
           </div>
         ) : (
           <div className="success" ref={successRef} tabIndex={-1}>
-            <Icon name="heart" />
+            <Heart variant="double" size={64} />
             <h2 id="order-title">{d["o.okTitle"]}</h2>
             <p>{d["o.ok"]}</p>
             <button className="btn btn--sage" type="button" onClick={onClose}>{d["o.done"]}</button>

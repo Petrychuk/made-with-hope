@@ -7,6 +7,7 @@ import type { Dict } from "@/i18n/dictionaries";
 import { site } from "@/content/site";
 import { Icon } from "./Icon";
 import { LangSwitch } from "./LangSwitch";
+import { Heart } from "@/components/Heart";
 
 export function Footer({ locale, d }: { locale: Locale; d: Dict }) {
   const base = `/${locale}`;
@@ -17,7 +18,7 @@ export function Footer({ locale, d }: { locale: Locale; d: Dict }) {
       <div className="wrap">
         <div className="footer__top">
           <Link className="logo" href={base}>
-            <Icon name="heart" className="heart-ico" />
+            <Heart variant="main" size={38} />
             <span>
               <span className="logo__name">Home Made Galyna</span>
               <span className="logo__tag" style={{ display: "block" }}>{d.tagline}</span>

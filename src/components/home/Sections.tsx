@@ -7,6 +7,8 @@ import { publishedPosts } from "@/content/posts";
 import { faq, kindMessages, updates } from "@/content/home";
 import { formatDate, formatMoney } from "@/lib/format";
 import { Icon } from "../Icon";
+import { Heart } from "../Heart";
+import { Botanical } from "../Botanical";
 import { Placeholder } from "../Placeholder";
 import { ProductCard } from "../ProductCard";
 import { JournalCard } from "../JournalCard";
@@ -23,7 +25,7 @@ export function Hero({ locale, d }: P) {
           <h1 id="hero-title">
             Home Made{" "}
             <span className="nowrap-heart">
-              Galyna <Icon name="heart" className="heart-ico" />
+              Galyna <Heart variant="main" size={64} />
             </span>
           </h1>
           <p className="hero__sub">
@@ -34,7 +36,7 @@ export function Hero({ locale, d }: P) {
           <p className="hero__desc">{d["hero.desc"]}</p>
           <div className="hero__cta">
             <Link className="btn btn--primary" href={`/${locale}#support`}>
-              <Icon name="heart-fill" />
+              <Heart variant="small" size={20} className="" />
               <span>{d["cta.support"]}</span>
             </Link>
             <Link className="btn btn--ghost" href={`/${locale}#story`}>
@@ -43,12 +45,12 @@ export function Hero({ locale, d }: P) {
             </Link>
           </div>
         </div>
-        <Icon name="branch" className="leaf hero__leaf" />
+        <Botanical name="leaves-buds" width={92} className="leaf hero__leaf" />
       </div>
       <div className="hero__media">
         <Placeholder tone="sun" label={d["ph.hero"]} priority sizes="(max-width: 767px) 100vw, 57vw" />
         <p className="note hero__note">
-          {d["note.hero"]} <Icon name="heart-fill" className="heart-ico" size={18} />
+          {d["note.hero"]} <Heart variant="small" size={18} />
         </p>
       </div>
     </section>
@@ -61,21 +63,23 @@ export function Pillars({ d }: P) {
     { icon: "yarn", t: d["pil.1"], s: d["pil.1s"] },
     { icon: "book", t: d["pil.2"], s: d["pil.2s"] },
     { icon: "family", t: d["pil.3"], s: d["pil.3s"] },
-    { icon: "heart", t: d["pil.4"], s: d["pil.4s"] },
+    { icon: "heart", t: d["pil.4"], s: d["pil.4s"] }, // rendered as hand-drawn <Heart>
   ] as const;
   return (
     <section className="pillars" aria-label={d.pillarsLabel}>
-      <Icon name="branch" className="leaf leaf--l" />
+      <Botanical name="eucalyptus" width={78} className="leaf leaf--l" />
       <ul className="wrap pillars__grid">
         {items.map((it) => (
           <li className="pillar" key={it.icon}>
-            <span className="pillar__ico"><Icon name={it.icon} /></span>
+            <span className="pillar__ico">
+              {it.icon === "heart" ? <Heart variant="main" size={38} className="" /> : <Icon name={it.icon} />}
+            </span>
             <span>{it.t}</span>
             <small>{it.s}</small>
           </li>
         ))}
       </ul>
-      <Icon name="branch" className="leaf leaf--r" />
+      <Botanical name="pale-leaves" width={84} className="leaf leaf--r" flip />
     </section>
   );
 }
@@ -91,7 +95,7 @@ export function Handmade({ locale, d }: P) {
             <div>
               <h2 className="sec-title" id="hm-title">
                 <span className="brush brush--peach" aria-hidden="true" />
-                <span>{d["hm.title"]}</span> <Icon name="heart" className="heart-ico" size={30} />
+                <span>{d["hm.title"]}</span> <Heart variant="tilt" size={32} />
               </h2>
               <p className="sec-lead">{d["hm.lead"]}</p>
             </div>
@@ -123,7 +127,7 @@ export function JournalPreview({ locale, d }: P) {
             <div>
               <h2 className="sec-title" id="j-title">
                 <span className="brush brush--sage" aria-hidden="true" />
-                <span>{d["j.title"]}</span> <Icon name="branch" className="leaf" size={36} />
+                <span>{d["j.title"]}</span> <Botanical name="pale-leaves" width={36} className="leaf title-sprig" />
               </h2>
               <p className="sec-lead">{d["j.lead"]}</p>
             </div>
@@ -139,7 +143,8 @@ export function JournalPreview({ locale, d }: P) {
           </Link>
         </div>
         <div className="journal__aside" aria-hidden="true">
-          <p className="note">{d["note.j"]} <Icon name="heart-fill" className="heart-ico" size={16} /></p>
+          <p className="note">{d["note.j"]} <Heart variant="small" size={16} /></p>
+          <Botanical name="daisies" width={130} className="journal__daisies" />
         </div>
       </div>
     </section>
@@ -154,17 +159,18 @@ export function Story({ locale, d }: P) {
         <Placeholder tone="peach" label={d["ph.galyna"]} className="story__photo" />
         <div className="story__text">
           <h2 className="sec-title" id="st-title">
-            <span>{d["st.title"]}</span> <Icon name="heart" className="heart-ico" size={30} />
+            <span>{d["st.title"]}</span> <Heart variant="tilt" size={32} />
           </h2>
           <p>{d["st.p1"]}</p>
           <p>{d["st.p2"]}</p>
           <Link className="btn btn--primary" href={`/${locale}#story`}>
             <span>{d["st.cta"]}</span><Icon name="arrow" />
           </Link>
+          <Botanical name="gypsophila" width={86} className="story__sprig" />
         </div>
         <figure className="polaroid">
           <Placeholder tone="pink" label={d["ph.together"]} />
-          <figcaption>{d["note.story"]} <Icon name="heart-fill" className="heart-ico" size={16} /></figcaption>
+          <figcaption>{d["note.story"]} <Heart variant="small" size={16} /></figcaption>
         </figure>
       </div>
     </section>
@@ -184,9 +190,9 @@ export function Support({ locale, d }: P) {
   return (
     <section className="section support" id="support" aria-labelledby="sp-title">
       <div className="wrap support__grid">
-        <div>
+        <div className="support__main">
           <h2 className="sec-title" id="sp-title">
-            <span>{d["sp.title"]}</span> <Icon name="heart" className="heart-ico" size={30} />
+            <span>{d["sp.title"]}</span> <Heart variant="tilt" size={32} />
           </h2>
           <p className="support__lead">{d["sp.lead"]}</p>
           <div className="progress">
@@ -216,7 +222,7 @@ export function Support({ locale, d }: P) {
             <span className="sr-only">{d.newTab}</span>
           </a>
           <p className="support__note">
-            <Icon name="heart-fill" className="heart-ico" size={18} style={{ marginTop: 2 }} />
+            <Heart variant="small" size={18} style={{ marginTop: 2 }} />
             <span>{d["sp.note"]}</span>
           </p>
           <ul className="checks">
@@ -224,6 +230,7 @@ export function Support({ locale, d }: P) {
               <li key={k}><Icon name="check" /><span>{d[k]}</span></li>
             ))}
           </ul>
+          <Botanical name="pink-buds" width={78} className="support__sprig" />
         </div>
         <div className="helps">
           <h3>{d["hp.title"]}</h3>
@@ -238,7 +245,7 @@ export function Support({ locale, d }: P) {
         </div>
         <div className="support__photo" aria-hidden="true">
           <Placeholder tone="pink" label={d["ph.flowers"]} decorative />
-          <p className="note">{d["note.sp"]} <Icon name="heart-fill" className="heart-ico" size={16} /></p>
+          <p className="note">{d["note.sp"]} <Heart variant="small" size={16} /></p>
         </div>
       </div>
     </section>
@@ -269,7 +276,7 @@ export function Transparency({ locale, d }: P) {
             <p className="transp__privacy">{d["tr.privacy"]}</p>
           </div>
           <div className="updates" id="updates">
-            <h3>{d["up.title"]} <Icon name="heart" className="heart-ico" size={24} /></h3>
+            <h3>{d["up.title"]} <Heart variant="tilt" size={26} className="heart-ico heart--sage" /></h3>
             <ul className="u-list">
               {updates.map((u) => (
                 <li className="u-card" key={u.date}>
@@ -297,7 +304,7 @@ export function KindWords({ locale, d }: P) {
           <Placeholder tone="sun" label={d["ph.son"]} />
           <p className="note">
             <span className="quote-mark" aria-hidden="true">“</span>
-            <span className="hand">{d["note.kw"]}</span> <Icon name="heart-fill" className="heart-ico" size={16} />
+            <span className="hand">{d["note.kw"]}</span> <Heart variant="small" size={16} />
           </p>
         </div>
         <div className="kind__panel">
@@ -307,7 +314,7 @@ export function KindWords({ locale, d }: P) {
           <Link className="btn btn--sage btn--sm" href={`/${locale}#kind`}>
             <span>{d["kw.cta"]}</span><Icon name="arrow" />
           </Link>
-          <Icon name="branch" className="leaf" />
+          <Botanical name="peach-blossom" width={96} className="leaf" />
         </div>
       </div>
     </section>
@@ -322,7 +329,7 @@ export function FaqContacts({ locale, d }: P) {
       <div className="wrap faq__grid">
         <div>
           <h2 className="sec-title" id="faq-title" style={{ marginBottom: 20 }}>
-            <span>{d["faq.title"]}</span> <Icon name="branch" className="leaf" size={34} />
+            <span>{d["faq.title"]}</span> <Botanical name="eucalyptus" width={34} className="leaf title-sprig" />
           </h2>
           {faq.map((f) => (
             <details key={f.q.uk}>

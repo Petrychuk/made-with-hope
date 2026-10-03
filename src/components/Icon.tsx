@@ -1,9 +1,6 @@
 import type { CSSProperties } from "react";
 
 export type IconName =
-  | "heart"
-  | "heart-fill"
-  | "branch"
   | "camera"
   | "yarn"
   | "book"

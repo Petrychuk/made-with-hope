@@ -6,9 +6,9 @@ import { getDictionary } from "@/i18n/dictionaries";
 import { findPost, publishedPosts } from "@/content/posts";
 import { categoryLabel, formatDate } from "@/lib/format";
 import { pageMeta } from "@/lib/seo";
-import { Icon } from "@/components/Icon";
 import { JournalCard } from "@/components/JournalCard";
 import { Placeholder } from "@/components/Placeholder";
+import { Heart } from "@/components/Heart";
 
 type Props = { params: Promise<{ locale: string; slug: string }> };
 
@@ -66,7 +66,7 @@ export default async function PostPage({ params }: Props) {
             <div className={`post__body${isPoem ? " is-poem" : ""}`} lang="uk">{post.body.uk}</div>
           )}
 
-          <p className="post__sign hand">— Галина <Icon name="heart-fill" className="heart-ico" size={18} /></p>
+          <p className="post__sign hand">— Галина <Heart variant="small" size={20} /></p>
         </div>
       </article>
 

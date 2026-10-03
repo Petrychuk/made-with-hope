@@ -7,8 +7,8 @@ import { categories, publishedPosts } from "@/content/posts";
 import type { PostCategory } from "@/content/types";
 import { categoryLabel } from "@/lib/format";
 import { pageMeta } from "@/lib/seo";
-import { Icon } from "@/components/Icon";
 import { JournalCard } from "@/components/JournalCard";
+import { Botanical } from "@/components/Botanical";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -35,7 +35,7 @@ export default async function JournalPage({ params, searchParams }: Props) {
       <div className="wrap">
         <h1 className="sec-title page-title" id="jp-title">
           <span className="brush brush--sage" aria-hidden="true" />
-          <span>{d["j.title"]}</span> <Icon name="branch" className="leaf" size={40} />
+          <span>{d["j.title"]}</span> <Botanical name="pale-leaves" width={40} className="leaf title-sprig" />
         </h1>
         <p className="sec-lead">{d["j.subtitle"]}</p>
 

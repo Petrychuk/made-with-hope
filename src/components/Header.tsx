@@ -8,6 +8,7 @@ import type { Dict } from "@/i18n/dictionaries";
 import { Icon } from "./Icon";
 import { LangSwitch } from "./LangSwitch";
 import { useFocusTrap } from "@/lib/useFocusTrap";
+import { Heart } from "@/components/Heart";
 
 export function Header({ locale, d }: { locale: Locale; d: Dict }) {
   const pathname = usePathname() || "";
@@ -42,7 +43,7 @@ export function Header({ locale, d }: { locale: Locale; d: Dict }) {
       <header className={`header${scrolled ? " is-scrolled" : ""}`}>
         <div className="wrap header__in">
           <Link className="logo" href={base} aria-label="Home Made Galyna">
-            <Icon name="heart" className="heart-ico" />
+            <Heart variant="main" size={38} />
             <span>
               <span className="logo__name">Home Made Galyna</span>
               <span className="logo__tag">{d.tagline}</span>
@@ -59,7 +60,7 @@ export function Header({ locale, d }: { locale: Locale; d: Dict }) {
           </nav>
 
           <Link className="btn btn--primary btn--sm desktop-cta" href={`${base}#support`}>
-            <Icon name="heart-fill" />
+            <Heart variant="small" size={20} className="" />
             <span>{d["cta.support"]}</span>
           </Link>
 
@@ -82,7 +83,7 @@ export function Header({ locale, d }: { locale: Locale; d: Dict }) {
         <div className="drawer__panel" role="dialog" aria-modal="true" aria-label={d.navLabel} ref={panelRef}>
           <div className="drawer__top">
             <span className="logo">
-              <Icon name="heart" className="heart-ico" />
+              <Heart variant="main" size={34} />
               <span className="logo__name">Home Made Galyna</span>
             </span>
             <button className="drawer__close" type="button" aria-label={d.close} onClick={() => setOpen(false)}>
@@ -100,7 +101,7 @@ export function Header({ locale, d }: { locale: Locale; d: Dict }) {
           </nav>
           <LangSwitch locale={locale} />
           <Link className="btn btn--primary" href={`${base}#support`} onClick={() => setOpen(false)}>
-            <Icon name="heart-fill" />
+            <Heart variant="small" size={20} className="" />
             <span>{d["cta.support"]}</span>
           </Link>
         </div>

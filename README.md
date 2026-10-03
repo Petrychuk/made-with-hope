@@ -67,6 +67,14 @@ prototype/index.html     статичний прототип-еталон диз
 
 Фон футера — `src/assets/footer/meadow-wide.webp` (desktop/tablet) і `meadow-tall.webp` (mobile).
 
+## Декор: сердечка і гілочки
+
+- **Сердечка** — `<Heart variant="main | tilt | small | soft | double" size={…} />` (`src/components/Heart.tsx`).
+  Векторні, обведені з акварельного набору; колір задається CSS `color` (терракота за замовчуванням, `heart--sage` — зелене).
+- **Гілочки** — `<Botanical name="eucalyptus" width={80} />` (`src/components/Botanical.tsx`), прозорі WebP у `src/assets/decor/`:
+  `leaves-buds`, `gypsophila`, `peach-blossom`, `eucalyptus`, `pale-leaves`, `pink-buds`, `daisies`.
+  `next/image` віддає їх у потрібному розмірі (зазвичай 5–20 КБ).
+
 ## Далі
 
 - [ ] Реальні фото і тексти
