@@ -6,7 +6,7 @@ import { getDictionary } from "@/i18n/dictionaries";
 import { getProduct, getProducts } from "@/lib/content";
 import { formatMoney, statusLabel } from "@/lib/format";
 import { pageMeta } from "@/lib/seo";
-import { site } from "@/content/site";
+import { getHome } from "@/lib/home";
 import { ProductCard } from "@/components/ProductCard";
 import { ProductGallery } from "@/components/ProductGallery";
 import { OrderButton } from "@/components/order/OrderButton";
@@ -38,6 +38,7 @@ export default async function ProductPage({ params }: Props) {
   const product = await getProduct(slug);
   if (!product) notFound();
   const d = getDictionary(locale);
+  const { contacts } = await getHome(locale, d);
 
   const name = pick(product.name, locale);
   const description = pick(product.description, locale);
@@ -74,7 +75,7 @@ export default async function ProductPage({ params }: Props) {
               {sold ? (
                 <p className="product__sold">
                   {d["pd.soldNote"]}{" "}
-                  <a href={site.contacts.telegram} target="_blank" rel="noopener noreferrer">Telegram</a>
+                  {contacts.telegram && <a href={contacts.telegram} target="_blank" rel="noopener noreferrer">Telegram</a>}
                 </p>
               ) : (
                 <>

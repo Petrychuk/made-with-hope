@@ -1,8 +1,7 @@
 import Link from "next/link";
 import { pick, type Locale } from "@/i18n/config";
 import type { Dict } from "@/i18n/dictionaries";
-import { site } from "@/content/site";
-import { faq, kindMessages } from "@/content/home";
+import type { HomeContent } from "@/lib/home";
 import type { Post, Product, Support as SupportData, Update } from "@/content/types";
 import { formatDate, formatMoney } from "@/lib/format";
 import { Icon } from "../Icon";
@@ -14,9 +13,10 @@ import { JournalCard } from "../JournalCard";
 import { KindWordsCarousel } from "./KindWords";
 
 type P = { locale: Locale; d: Dict };
+type H = { home: HomeContent };
 
 /* ---------------- HERO ---------------- */
-export function Hero({ locale, d }: P) {
+export function Hero({ locale, d, home }: P & H) {
   return (
     <section className="hero" aria-labelledby="hero-title">
       <div className="wrap hero__grid">
@@ -28,11 +28,9 @@ export function Hero({ locale, d }: P) {
             </span>
           </h1>
           <p className="hero__sub">
-            <span>{d["hero.l1"]}</span>
-            <span>{d["hero.l2"]}</span>
-            <span>{d["hero.l3"]}</span>
+            {home.heroLines.map((l) => <span key={l}>{l}</span>)}
           </p>
-          <p className="hero__desc">{d["hero.desc"]}</p>
+          <p className="hero__desc">{home.heroDesc}</p>
           <div className="hero__cta">
             <Link className="btn btn--primary" href={`/${locale}#support`}>
               <Heart variant="small" size={20} className="" />
@@ -47,9 +45,9 @@ export function Hero({ locale, d }: P) {
         <Botanical name="leaves-buds" width={92} className="leaf hero__leaf" />
       </div>
       <div className="hero__media">
-        <Placeholder tone="sun" label={d["ph.hero"]} priority sizes="(max-width: 767px) 100vw, 57vw" />
+        <Placeholder tone="sun" image={home.heroImage} label={d["ph.hero"]} priority sizes="(max-width: 767px) 100vw, 57vw" />
         <p className="note hero__note">
-          {d["note.hero"]} <Heart variant="small" size={18} />
+          {home.heroNote} <Heart variant="small" size={18} />
         </p>
       </div>
     </section>
@@ -84,7 +82,7 @@ export function Pillars({ d }: P) {
 }
 
 /* ---------------- HANDMADE ---------------- */
-export function Handmade({ locale, d, products }: P & { products: Product[] }) {
+export function Handmade({ locale, d, products, home }: P & H & { products: Product[] }) {
   const items = products.filter((p) => p.featured && p.status !== "sold").slice(0, 4);
   return (
     <section className="section" id="handmade" aria-labelledby="hm-title">
@@ -111,7 +109,7 @@ export function Handmade({ locale, d, products }: P & { products: Product[] }) {
           )}
         </div>
         <div className="handmade__aside" aria-hidden="true">
-          <Placeholder tone="sand" label={d["ph.craft"]} decorative />
+          <Placeholder tone="sand" image={home.craftImage} label={d["ph.craft"]} decorative sizes="360px" />
           <p className="note">{d["note.hm"]}</p>
         </div>
       </div>
@@ -155,25 +153,24 @@ export function JournalPreview({ locale, d, posts }: P & { posts: Post[] }) {
 }
 
 /* ---------------- FAMILY STORY ---------------- */
-export function Story({ locale, d }: P) {
+export function Story({ locale, d, home }: P & H) {
   return (
     <section className="story" id="story" aria-labelledby="st-title">
       <div className="wrap story__grid">
-        <Placeholder tone="peach" label={d["ph.galyna"]} className="story__photo" />
+        <Placeholder tone="peach" image={home.storyImage} label={d["ph.galyna"]} className="story__photo" sizes="(max-width: 767px) 100vw, 300px" />
         <div className="story__text">
           <h2 className="sec-title" id="st-title">
             <span>{d["st.title"]}</span> <Heart variant="tilt" size={32} />
           </h2>
-          <p>{d["st.p1"]}</p>
-          <p>{d["st.p2"]}</p>
+          {home.storyParagraphs.map((p) => <p key={p.slice(0, 40)}>{p}</p>)}
           <Link className="btn btn--primary" href={`/${locale}#story`}>
             <span>{d["st.cta"]}</span><Icon name="arrow" />
           </Link>
           <Botanical name="gypsophila" width={86} className="story__sprig" />
         </div>
         <figure className="polaroid">
-          <Placeholder tone="pink" label={d["ph.together"]} />
-          <figcaption>{d["note.story"]} <Heart variant="small" size={16} /></figcaption>
+          <Placeholder tone="pink" image={home.polaroidImage} label={d["ph.together"]} sizes="230px" />
+          <figcaption>{home.polaroidCaption} <Heart variant="small" size={16} /></figcaption>
         </figure>
       </div>
     </section>
@@ -181,7 +178,7 @@ export function Story({ locale, d }: P) {
 }
 
 /* ---------------- SUPPORT ---------------- */
-export function Support({ locale, d, support }: P & { support: SupportData }) {
+export function Support({ locale, d, support, home }: P & H & { support: SupportData }) {
   const { raised, goal, updated, monobankUrl } = support;
   const pct = Math.min(100, Math.round((raised / goal) * 100));
   const helps = [
@@ -247,7 +244,7 @@ export function Support({ locale, d, support }: P & { support: SupportData }) {
           </ul>
         </div>
         <div className="support__photo" aria-hidden="true">
-          <Placeholder tone="pink" label={d["ph.flowers"]} decorative />
+          <Placeholder tone="pink" image={home.supportImage} label={d["ph.flowers"]} decorative sizes="320px" />
           <p className="note">{d["note.sp"]} <Heart variant="small" size={16} /></p>
         </div>
       </div>
@@ -299,21 +296,21 @@ export function Transparency({ locale, d, updates }: P & { updates: Update[] }) 
 }
 
 /* ---------------- KIND WORDS ---------------- */
-export function KindWords({ locale, d }: P) {
+export function KindWords({ locale, d, home }: P & H) {
   return (
     <section className="section" id="kind" aria-labelledby="kw-title" style={{ paddingTop: 8 }}>
       <div className="wrap kind__grid">
         <div className="kind__photo">
-          <Placeholder tone="sun" label={d["ph.son"]} />
+          <Placeholder tone="sun" image={home.kindImage} label={d["ph.son"]} sizes="(max-width: 767px) 100vw, 600px" />
           <p className="note">
             <span className="quote-mark" aria-hidden="true">“</span>
-            <span className="hand">{d["note.kw"]}</span> <Heart variant="small" size={16} />
+            <span className="hand">{home.kindNote}</span> <Heart variant="small" size={16} />
           </p>
         </div>
         <div className="kind__panel">
           <h2 className="sec-title" id="kw-title">{d["kw.title"]}</h2>
           <p className="lead">{d["kw.lead"]}</p>
-          <KindWordsCarousel messages={kindMessages} locale={locale} d={d} />
+          <KindWordsCarousel messages={home.messages} d={d} />
           <Link className="btn btn--sage btn--sm" href={`/${locale}#kind`}>
             <span>{d["kw.cta"]}</span><Icon name="arrow" />
           </Link>
@@ -325,7 +322,8 @@ export function KindWords({ locale, d }: P) {
 }
 
 /* ---------------- FAQ + QUOTE + CONTACTS ---------------- */
-export function FaqContacts({ locale, d }: P) {
+export function FaqContacts({ d, home }: P & H) {
+  const c = home.contacts;
   const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
   return (
     <section className="section faq" id="faq" aria-labelledby="faq-title" style={{ paddingTop: 8 }}>
@@ -334,26 +332,26 @@ export function FaqContacts({ locale, d }: P) {
           <h2 className="sec-title" id="faq-title" style={{ marginBottom: 20 }}>
             <span>{d["faq.title"]}</span> <Botanical name="eucalyptus" width={34} className="leaf title-sprig" />
           </h2>
-          {faq.map((f) => (
-            <details key={f.q.uk}>
-              <summary>{pick(f.q, locale)}</summary>
-              <p>{pick(f.a, locale)}</p>
+          {home.faq.map((f) => (
+            <details key={f.q}>
+              <summary>{f.q}</summary>
+              <p>{f.a}</p>
             </details>
           ))}
         </div>
         <div>
           <figure className="gquote">
             <span className="quote-mark" aria-hidden="true">“</span>
-            <blockquote>{d["quote.text"]}</blockquote>
+            <blockquote>{home.quote}</blockquote>
             <figcaption><cite>{d["quote.by"]}</cite></figcaption>
           </figure>
           <div className="contacts" id="contacts">
             <h3>{d["ct.title"]}</h3>
             <p>{d["ct.lead"]}</p>
             <ul>
-              <li><a href={site.contacts.telegram} {...ext}><span className="c-ico c-ico--tg"><Icon name="tg" /></span><span>{d["ct.tg"]}</span></a></li>
-              <li><a href={site.contacts.instagram} {...ext}><span className="c-ico c-ico--ig"><Icon name="ig" /></span><span>{d["ct.ig"]}</span></a></li>
-              <li><a href={`mailto:${site.contacts.email}`}><span className="c-ico c-ico--mail"><Icon name="mail" /></span>{site.contacts.email}</a></li>
+              {c.telegram && <li><a href={c.telegram} {...ext}><span className="c-ico c-ico--tg"><Icon name="tg" /></span><span>{d["ct.tg"]}</span></a></li>}
+              {c.instagram && <li><a href={c.instagram} {...ext}><span className="c-ico c-ico--ig"><Icon name="ig" /></span><span>{d["ct.ig"]}</span></a></li>}
+              <li><a href={`mailto:${c.email}`}><span className="c-ico c-ico--mail"><Icon name="mail" /></span>{c.email}</a></li>
             </ul>
           </div>
         </div>

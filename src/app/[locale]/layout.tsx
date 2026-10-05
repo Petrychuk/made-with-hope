@@ -4,6 +4,7 @@ import { Caveat, Lora, Nunito } from "next/font/google";
 import { isLocale, locales } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { getProducts } from "@/lib/content";
+import { getHome } from "@/lib/home";
 import { siteUrl } from "@/lib/seo";
 import { IconSprite } from "@/components/IconSprite";
 import { Header } from "@/components/Header";
@@ -48,7 +49,8 @@ export default async function LocaleLayout({
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
   const d = getDictionary(locale);
-  const orderable = (await getProducts()).filter((p) => p.status !== "sold");
+  const [products, home] = await Promise.all([getProducts(), getHome(locale, d)]);
+  const orderable = products.filter((p) => p.status !== "sold");
 
   return (
     <html lang={locale} className={`${lora.variable} ${nunito.variable} ${caveat.variable}`}>
@@ -58,7 +60,7 @@ export default async function LocaleLayout({
         <OrderProvider products={orderable} locale={locale} d={d}>
           <Header locale={locale} d={d} />
           <main id="main">{children}</main>
-          <Footer locale={locale} d={d} />
+          <Footer locale={locale} d={d} contacts={home.contacts} />
         </OrderProvider>
       </body>
     </html>

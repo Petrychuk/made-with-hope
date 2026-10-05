@@ -34,3 +34,20 @@ export const localeText = defineType({
     }),
   ],
 });
+
+/** Short multi-line text (hero lines, answers, quotes) — no poem hint. */
+export const localeTextShort = defineType({
+  name: "localeTextShort",
+  title: "Короткий текст UA / EN",
+  type: "object",
+  fields: [
+    defineField({ name: "uk", title: "Українською", type: "text", rows: 3 }),
+    defineField({
+      name: "en",
+      title: "English (необов'язково)",
+      type: "text",
+      rows: 3,
+      description: "Якщо порожньо — на англійській версії покажемо текст українською.",
+    }),
+  ],
+});

@@ -1,20 +1,19 @@
 "use client";
 
 import { useState } from "react";
-import { pick, type Locale } from "@/i18n/config";
 import type { Dict } from "@/i18n/dictionaries";
-import type { KindMessage } from "@/content/types";
 
-export function KindWordsCarousel({ messages, locale, d }: { messages: KindMessage[]; locale: Locale; d: Dict }) {
+export function KindWordsCarousel({ messages, d }: { messages: { text: string; by: string }[]; d: Dict }) {
   const [i, setI] = useState(0);
   const m = messages[i];
+  if (!m) return null;
   return (
     <>
       <div className="msgs" aria-live="polite">
         <blockquote className="msg is-active" style={{ margin: 0 }}>
           <span className="quote-mark" aria-hidden="true">“</span>
-          {pick(m.text, locale)}
-          <footer>{m.by}</footer>
+          {m.text}
+          {m.by && <footer>{m.by}</footer>}
         </blockquote>
       </div>
       <div className="dots" role="group" aria-label={d["kw.nav"]}>

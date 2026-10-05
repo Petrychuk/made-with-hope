@@ -9,6 +9,12 @@ export const structure: StructureResolver = (S) =>
   S.list()
     .title("Home Made Galyna")
     .items([
+      S.listItem()
+        .title("Головна сторінка")
+        .id("homePage")
+        .icon(() => "🏠")
+        .child(S.document().schemaType("homePage").documentId("homePage").title("Головна сторінка")),
+      S.divider(),
       S.documentTypeListItem("post").title("Щоденник"),
       S.documentTypeListItem("product").title("Вироби"),
       S.documentTypeListItem("update").title("Оновлення"),

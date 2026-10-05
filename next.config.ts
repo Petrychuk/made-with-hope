@@ -10,6 +10,11 @@ const nextConfig: NextConfig = {
   // The project root is this folder, even if there is another package-lock.json higher up
   // (e.g. C:\Users\<name>\package-lock.json). Removes the "multiple lockfiles" warning.
   outputFileTracingRoot: __dirname,
+  // Temporary / preview domain: SITE_NOINDEX=1 keeps the whole site out of Google until launch
+  async headers() {
+    if (process.env.SITE_NOINDEX !== "1") return [];
+    return [{ source: "/:path*", headers: [{ key: "X-Robots-Tag", value: "noindex, nofollow" }] }];
+  },
 };
 
 export default nextConfig;

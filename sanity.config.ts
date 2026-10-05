@@ -12,7 +12,7 @@ import { schemaTypes } from "./src/sanity/schemaTypes";
 import { structure } from "./src/sanity/structure";
 import { apiVersion, dataset, projectId } from "./src/sanity/env";
 
-const SINGLETONS = new Set(["support"]);
+const SINGLETONS = new Set(["support", "homePage"]);
 const SINGLETON_ACTIONS = new Set(["publish", "discardChanges", "restore"]);
 
 export default defineConfig({

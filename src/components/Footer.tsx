@@ -4,12 +4,12 @@ import meadowWide from "@/assets/footer/meadow-wide.webp";
 import meadowTall from "@/assets/footer/meadow-tall.webp";
 import type { Locale } from "@/i18n/config";
 import type { Dict } from "@/i18n/dictionaries";
-import { site } from "@/content/site";
+import type { Contacts } from "@/lib/home";
 import { Icon } from "./Icon";
 import { LangSwitch } from "./LangSwitch";
 import { Heart } from "@/components/Heart";
 
-export function Footer({ locale, d }: { locale: Locale; d: Dict }) {
+export function Footer({ locale, d, contacts: c }: { locale: Locale; d: Dict; contacts: Contacts }) {
   const base = `/${locale}`;
   const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
   return (
@@ -34,10 +34,10 @@ export function Footer({ locale, d }: { locale: Locale; d: Dict }) {
             <LangSwitch locale={locale} />
           </nav>
           <div className="socials">
-            <a href={site.contacts.instagram} {...ext} aria-label="Instagram"><Icon name="ig" /></a>
-            <a href={site.contacts.facebook} {...ext} aria-label="Facebook"><Icon name="fb" /></a>
-            <a href={`mailto:${site.contacts.email}`} aria-label="Email"><Icon name="mail" /></a>
-            <a href={site.contacts.telegram} {...ext} aria-label="Telegram"><Icon name="tg" /></a>
+            {c.instagram && <a href={c.instagram} {...ext} aria-label="Instagram"><Icon name="ig" /></a>}
+            {c.facebook && <a href={c.facebook} {...ext} aria-label="Facebook"><Icon name="fb" /></a>}
+            <a href={`mailto:${c.email}`} aria-label="Email"><Icon name="mail" /></a>
+            {c.telegram && <a href={c.telegram} {...ext} aria-label="Telegram"><Icon name="tg" /></a>}
           </div>
         </div>
         <div className="footer__mid">

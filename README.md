@@ -111,11 +111,28 @@ prototype/index.html     статичний прототип-еталон диз
 - Фото з телефона можна завантажувати як є: Sanity зберігає оригінал, а сайт отримує стиснуту WebP-версію потрібного розміру.
 - Адреса сторінки: кнопка «Згенерувати» робить її з назви латиницею («Осінній ранок» → `osinnii-ranok`).
 
+### Головна сторінка
+
+Studio → **🏠 Головна сторінка**: тексти головного екрана й «Нашої історії», 6 фото, «Добрі слова», FAQ,
+цитата Галини, контакти. Будь-яке порожнє поле → на сайті лишається текст за замовчуванням,
+порожні Instagram / Facebook → іконка зникає.
+
 ### Сторінки
 
 - `/uk/handmade` — усі вироби; `/uk/handmade/<адреса>` — сторінка виробу зі слайдером до 5 фото
   (свайп на телефоні, стрілки й мініатюри на комп'ютері, клавіші ← →).
 - `/uk/transparency` — звіти та документи.
+
+## Деплой на тимчасовий домен (Vercel)
+
+1. vercel.com → увійти через GitHub → **Add New → Project** → репозиторій `made-with-hope` → **Deploy**.
+2. **Settings → Environment Variables**: усі змінні з `.env.local` +
+   `NEXT_PUBLIC_SITE_URL=https://made-with-hope.vercel.app` і `SITE_NOINDEX=1`. Потім **Deployments → Redeploy**.
+3. Sanity → **API → CORS origins**: додати `https://made-with-hope.vercel.app` (Allow credentials).
+4. Sanity → **API → Webhooks**: `https://made-with-hope.vercel.app/api/revalidate`, секрет = `SANITY_REVALIDATE_SECRET`.
+5. Кожен `git push` у `main` → сайт оновлюється сам за 1–2 хвилини.
+
+При запуску на справжньому домені: змінити `NEXT_PUBLIC_SITE_URL`, **видалити** `SITE_NOINDEX`, додати домен у CORS і вебхук.
 
 ## Далі
 

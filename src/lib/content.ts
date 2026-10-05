@@ -22,7 +22,7 @@ const TONES: Tone[] = ["pink", "sand", "sage", "peach", "sun", "blue"];
 const tone = (i: number) => TONES[i % TONES.length];
 
 /** Photos from Sanity are requested already resized & compressed (phones upload 3–8 MB originals). */
-function img(raw?: Partial<ImageRef> | null, max = 1600): ImageRef | undefined {
+export function sanityImage(raw?: Partial<ImageRef> | null, max = 1600): ImageRef | undefined {
   if (!raw?.url) return undefined;
   return { ...raw, url: `${raw.url}?w=${max}&fit=max&q=82&fm=webp` } as ImageRef;
 }
@@ -48,7 +48,7 @@ const mapProduct = (p: RawProduct, i: number): Product => ({
   price: p.price ?? undefined,
   status: p.status ?? "available",
   featured: p.featured ?? true,
-  images: (p.images ?? []).map((x) => img(x)).filter((x): x is ImageRef => Boolean(x)).slice(0, 5),
+  images: (p.images ?? []).map((x) => sanityImage(x)).filter((x): x is ImageRef => Boolean(x)).slice(0, 5),
 });
 
 export const getProducts = cache(async (): Promise<Product[]> => {
@@ -81,7 +81,7 @@ const mapPost = (p: RawPost, i: number): Post => {
       uk: p.excerpt?.uk || firstLine(body.uk),
       en: p.excerpt?.en || (body.en ? firstLine(body.en) : undefined),
     },
-    image: img(p.image, 1400),
+    image: sanityImage(p.image, 1400),
   };
 };
 
@@ -101,7 +101,7 @@ export const getPost = cache(async (slug: string): Promise<Post | null> => {
 export const getUpdates = cache(async (): Promise<Update[]> => {
   if (!sanityEnabled) return localUpdates;
   const rows = await sanityFetch<{ id: string; date: string; title?: Localized; image?: Partial<ImageRef> }[]>(updatesQuery);
-  return rows.map((u, i) => ({ id: u.id, date: u.date, title: loc(u.title), image: img(u.image, 800), tone: tone(i + 5) }));
+  return rows.map((u, i) => ({ id: u.id, date: u.date, title: loc(u.title), image: sanityImage(u.image, 800), tone: tone(i + 5) }));
 });
 
 export const getSupport = cache(async (): Promise<Support> => {

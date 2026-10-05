@@ -4,6 +4,7 @@ import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { pageMeta } from "@/lib/seo";
 import { getPosts, getProducts, getSupport, getUpdates } from "@/lib/content";
+import { getHome } from "@/lib/home";
 import {
   FaqContacts, Handmade, Hero, JournalPreview, KindWords, Pillars,
   Story, Support, Transparency,
@@ -23,19 +24,22 @@ export default async function HomePage({ params }: Props) {
   if (!isLocale(locale)) notFound();
   const d = getDictionary(locale);
   const p = { locale, d };
-  const [products, posts, updates, support] = await Promise.all([getProducts(), getPosts(), getUpdates(), getSupport()]);
+  const [products, posts, updates, support, home] = await Promise.all([
+    getProducts(), getPosts(), getUpdates(), getSupport(), getHome(locale, d),
+  ]);
+  const h = { ...p, home };
 
   return (
     <>
-      <Hero {...p} />
+      <Hero {...h} />
       <Pillars {...p} />
-      <Handmade {...p} products={products} />
+      <Handmade {...h} products={products} />
       <JournalPreview {...p} posts={posts} />
-      <Story {...p} />
-      <Support {...p} support={support} />
+      <Story {...h} />
+      <Support {...h} support={support} />
       <Transparency {...p} updates={updates} />
-      <KindWords {...p} />
-      <FaqContacts {...p} />
+      <KindWords {...h} />
+      <FaqContacts {...h} />
     </>
   );
 }
