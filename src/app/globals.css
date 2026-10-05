@@ -2,6 +2,9 @@
    TOKENS
    ========================================================= */
 :root{
+  --font-lora:"Lora Variable";
+  --font-nunito:"Nunito Variable";
+  --font-caveat:"Caveat Variable";
   --cream:#FDFBF7;
   --cream-2:#FBF3EA;
   --paper:#FFFDF9;

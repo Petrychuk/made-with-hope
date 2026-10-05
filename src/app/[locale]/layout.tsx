@@ -1,6 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
-import { Caveat, Lora, Nunito } from "next/font/google";
+// Self-hosted fonts (npm @fontsource-variable/*): no request to Google Fonts at build or runtime.
+import "@fontsource-variable/lora";
+import "@fontsource-variable/nunito";
+import "@fontsource-variable/caveat";
 import { isLocale, locales } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { getProducts } from "@/lib/content";
@@ -11,10 +14,6 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { OrderProvider } from "@/components/order/OrderProvider";
 import "../globals.css";
-
-const lora = Lora({ subsets: ["latin", "cyrillic"], weight: ["500", "600", "700"], variable: "--font-lora", display: "swap" });
-const nunito = Nunito({ subsets: ["latin", "cyrillic"], weight: ["400", "600", "700"], variable: "--font-nunito", display: "swap" });
-const caveat = Caveat({ subsets: ["latin", "cyrillic"], weight: ["500", "600"], variable: "--font-caveat", display: "swap" });
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -53,7 +52,7 @@ export default async function LocaleLayout({
   const orderable = products.filter((p) => p.status !== "sold");
 
   return (
-    <html lang={locale} className={`${lora.variable} ${nunito.variable} ${caveat.variable}`}>
+    <html lang={locale}>
       <body>
         <a className="skip" href="#main">{d.skip}</a>
         <IconSprite />
