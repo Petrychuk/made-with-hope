@@ -684,3 +684,64 @@ p{margin:0}
   .custom-card__hand{display:block;font-size:17px;margin:auto 0;order:1}
   .custom-card__btn{font-size:13px;padding:9px 8px;min-height:42px;margin-top:0;order:2}
 }
+
+/* =========================================================
+   ABOUT THE SON — scrapbook page: taped photos, sticker chips, dream note
+   ========================================================= */
+.son{position:relative;padding:76px 0 84px;
+  background:linear-gradient(180deg,var(--peach-2) 0%,#F5F0F7 18%,#F5F0F7 82%,var(--cream) 100%)}
+.son__grid{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:64px;align-items:center}
+.son__collage{position:relative;min-height:480px}
+.son__frame{position:absolute;margin:0;background:#fff;padding:12px 12px 18px;box-shadow:var(--shadow-lg);border-radius:3px}
+.son__frame .ph{aspect-ratio:4/5}
+.son__frame--main{width:70%;left:3%;top:18px;transform:rotate(-3deg)}
+.son__frame--small{width:44%;right:0;bottom:6px;transform:rotate(5deg);padding-bottom:12px;z-index:2}
+.son__frame--small .ph{aspect-ratio:1/1}
+/* washi tape */
+.tape{position:absolute;z-index:3;width:92px;height:26px;top:-12px;opacity:.9;
+  background:repeating-linear-gradient(135deg,rgba(255,255,255,.35) 0 6px,transparent 6px 12px),var(--tape,#EBB49A);
+  box-shadow:0 1px 3px rgba(0,0,0,.08);clip-path:polygon(3% 0,97% 4%,100% 50%,96% 100%,2% 96%,0 50%)}
+.tape--l{left:-20px;transform:rotate(-32deg)}
+.tape--r{right:-20px;transform:rotate(30deg);--tape:#BFD0B1}
+.tape--c{left:50%;transform:translateX(-50%) rotate(-4deg);--tape:#D9CBE6}
+.son__hearts{position:absolute;right:8%;top:0;color:var(--terracotta);transform:rotate(12deg);z-index:3}
+.son__stamp{position:absolute;left:0;bottom:-8px;max-width:52%;font-family:var(--f-hand);font-size:24px;line-height:1.1;
+  color:var(--terracotta-cta);transform:rotate(-6deg);z-index:3}
+
+.son__text{position:relative}
+.son__kicker{display:block;font-family:var(--f-hand);font-size:30px;line-height:1;color:var(--terracotta-cta);transform:rotate(-2deg);margin-bottom:4px}
+.son__text > p{color:var(--text-2);margin-top:14px;font-size:16.5px;max-width:54ch}
+.son__sub{font-size:19px;margin-top:26px}
+.son__likes{list-style:none;padding:0;margin:12px 0 0;display:flex;flex-wrap:wrap;gap:10px;max-width:520px}
+.chip-tag{display:inline-flex;align-items:center;gap:6px;padding:8px 15px;border-radius:999px;font-weight:700;font-size:14.5px;
+  border:1.5px dashed rgba(58,46,43,.2);box-shadow:0 2px 8px rgba(120,78,48,.07)}
+.chip-tag:nth-child(odd){transform:rotate(-2deg)}
+.chip-tag:nth-child(even){transform:rotate(1.5deg)}
+.chip-tag--peach{background:#FBE3D6}
+.chip-tag--sage{background:var(--sage-soft-2)}
+.chip-tag--lavender{background:#E9E0F1}
+.chip-tag--sand{background:#F4E8D2}
+.chip-tag--pink{background:#F8DFDD}
+.son__dream{position:relative;margin-top:34px;max-width:430px;background:#FBF1E4;padding:22px 24px 18px;transform:rotate(-1.5deg);
+  box-shadow:0 10px 24px rgba(90,60,40,.14);border-radius:3px}
+.son__dream::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent 0 27px,rgba(180,140,110,.09) 27px 28px);pointer-events:none}
+.son__dream-label{position:absolute;top:-13px;left:18px;background:var(--sage);color:#fff;font-weight:700;font-size:12.5px;
+  letter-spacing:.03em;padding:4px 12px;border-radius:999px}
+.son__dream p{font-family:var(--f-hand);font-size:26px;line-height:1.2;color:#4C3A33}
+.son__dream .heart-ico{display:inline-block;vertical-align:-3px}
+.son__sprig{position:absolute;right:2%;bottom:-36px;transform:rotate(14deg)}
+
+@media (max-width:1199px){
+  .son__grid{gap:36px}
+  .son__collage{min-height:420px}
+}
+@media (max-width:767px){
+  .son{padding:52px 0 64px}
+  .son__grid{grid-template-columns:1fr;gap:40px}
+  .son__collage{min-height:0;height:min(112vw,440px);max-width:420px;width:100%;margin:0 auto}
+  .son__frame--main{width:68%}
+  .son__frame--small{width:46%}
+  .son__stamp{font-size:20px}
+  .son__kicker{font-size:26px}
+  .son__sprig{display:none}
+}

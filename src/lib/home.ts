@@ -19,6 +19,8 @@ type RawImage = Partial<ImageRef> | null | undefined;
 
 type RawHome = {
   heroSubtitle?: L; heroDescription?: L; heroNote?: L; heroImage?: RawImage;
+  sonShow?: boolean | null; sonName?: L; sonIntro?: L; sonLikes?: L[] | null; sonDream?: L;
+  sonPhoto?: RawImage; sonPhoto2?: RawImage;
   storyText?: L; storyImage?: RawImage; polaroidImage?: RawImage; polaroidCaption?: L;
   kindImage?: RawImage; kindNote?: L; messages?: { text?: L; author?: string }[] | null;
   faq?: { question?: L; answer?: L }[] | null; quote?: L;
@@ -30,6 +32,10 @@ export type Contacts = { telegram?: string; instagram?: string; facebook?: strin
 
 export type HomeContent = {
   heroLines: string[]; heroDesc: string; heroNote: string; heroImage?: ImageRef;
+  son: {
+    show: boolean; title: string; paragraphs: string[]; likes: string[]; dream: string;
+    photo?: ImageRef; photo2?: ImageRef;
+  };
   storyParagraphs: string[]; storyImage?: ImageRef; polaroidImage?: ImageRef; polaroidCaption: string;
   kindImage?: ImageRef; kindNote: string; messages: { text: string; by: string }[];
   faq: { q: string; a: string }[]; quote: string;
@@ -64,6 +70,20 @@ export async function getHome(locale: Locale, d: Dict): Promise<HomeContent> {
     heroNote: t(r.heroNote, locale, d["note.hero"]),
     heroImage: sanityImage(r.heroImage, 2000),
 
+    son: {
+      show: r.sonShow !== false,
+      title: (() => {
+        const name = t(r.sonName, locale, "");
+        return name ? `${d["son.title"]} ${name}` : d["son.title"];
+      })(),
+      paragraphs: paragraphs(t(r.sonIntro, locale, d["son.intro"])),
+      likes: (r.sonLikes ?? []).filter((l) => l?.uk).length
+        ? (r.sonLikes ?? []).filter((l) => l?.uk).map((l) => t(l, locale, ""))
+        : [d["son.like1"], d["son.like2"], d["son.like3"], d["son.like4"], d["son.like5"]],
+      dream: t(r.sonDream, locale, d["son.dreamText"]),
+      photo: sanityImage(r.sonPhoto, 1000),
+      photo2: sanityImage(r.sonPhoto2, 600),
+    },
     storyParagraphs: paragraphs(t(r.storyText, locale, `${d["st.p1"]}\n\n${d["st.p2"]}`)),
     storyImage: sanityImage(r.storyImage, 1000),
     polaroidImage: sanityImage(r.polaroidImage, 600),

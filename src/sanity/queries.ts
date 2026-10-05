@@ -26,6 +26,7 @@ export const transparencyQuery = `*[_type == "transparencyDoc"] | order(date des
 
 export const homeQuery = `*[_type == "homePage" && _id == "homePage"][0]{
   heroSubtitle, heroDescription, heroNote, "heroImage": heroImage${image},
+  sonShow, sonName, sonIntro, sonLikes, sonDream, "sonPhoto": sonPhoto${image}, "sonPhoto2": sonPhoto2${image},
   storyText, "storyImage": storyImage${image}, "polaroidImage": polaroidImage${image}, polaroidCaption,
   "kindImage": kindImage${image}, kindNote, messages[]{ text, author },
   faq[]{ question, answer }, quote,

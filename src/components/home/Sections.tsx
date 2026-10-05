@@ -247,6 +247,62 @@ export function Story({ locale, d, home }: P & H) {
   );
 }
 
+/* ---------------- ABOUT THE SON ---------------- */
+const LIKE_TONES = ["peach", "sage", "lavender", "sand", "pink"] as const;
+
+export function AboutSon({ d, home }: P & H) {
+  const s = home.son;
+  if (!s.show) return null;
+  return (
+    <section className="son" id="son" aria-labelledby="son-title">
+      <div className="wrap son__grid">
+        <div className="son__collage">
+          <figure className="son__frame son__frame--main">
+            <span className="tape tape--l" aria-hidden="true" />
+            <span className="tape tape--r" aria-hidden="true" />
+            <Placeholder tone="sun" image={s.photo} label={d["ph.son1"]} sizes="(max-width: 767px) 80vw, 380px" />
+          </figure>
+          <figure className="son__frame son__frame--small">
+            <span className="tape tape--c" aria-hidden="true" />
+            <Placeholder tone="sage" image={s.photo2} label={d["ph.son2"]} sizes="200px" />
+          </figure>
+          <Heart variant="double" size={54} className="son__hearts" />
+          <span className="son__stamp" aria-hidden="true">{d["son.wins"]}</span>
+        </div>
+
+        <div className="son__text">
+          <span className="son__kicker">{d["son.kicker"]}</span>
+          <h2 className="sec-title" id="son-title">
+            <span>{s.title}</span> <Heart variant="tilt" size={32} className="heart-ico heart--sage" />
+          </h2>
+          {s.paragraphs.map((p) => <p key={p.slice(0, 40)}>{p}</p>)}
+
+          {s.likes.length > 0 && (
+            <>
+              <h3 className="son__sub">{d["son.likes"]}</h3>
+              <ul className="son__likes">
+                {s.likes.map((l, i) => (
+                  <li key={l} className={`chip-tag chip-tag--${LIKE_TONES[i % LIKE_TONES.length]}`}>
+                    <Heart variant="small" size={14} /> {l}
+                  </li>
+                ))}
+              </ul>
+            </>
+          )}
+
+          {s.dream && (
+            <div className="son__dream">
+              <span className="son__dream-label">{d["son.dream"]}</span>
+              <p>{s.dream} <Heart variant="small" size={18} /></p>
+            </div>
+          )}
+          <Botanical name="pink-buds" width={70} className="son__sprig" />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ---------------- SUPPORT ---------------- */
 export function Support({ locale, d, support, home }: P & H & { support: SupportData }) {
   const { raised, goal, updated, monobankUrl } = support;

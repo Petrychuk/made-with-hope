@@ -23,6 +23,7 @@ export const homePage = defineType({
   groups: [
     { name: "hero", title: "Головний екран", default: true },
     { name: "story", title: "Наша історія" },
+    { name: "son", title: "Про сина" },
     { name: "kind", title: "Добрі слова" },
     { name: "faq", title: "Питання і цитата" },
     { name: "photos", title: "Інші фото" },
@@ -52,6 +53,42 @@ export const homePage = defineType({
     photo("storyImage", "Фото до історії", "Ви за рукоділлям. Вертикальне фото.", "story"),
     photo("polaroidImage", "Фото на картці-полароїді", "Квадратне або близьке до квадрата. Видно тільки на комп'ютері.", "story"),
     defineField({ name: "polaroidCaption", title: "Підпис на полароїді", type: "localeString", group: "story" }),
+
+    // ---- about the son
+    defineField({
+      name: "sonShow",
+      title: "Показувати блок про сина на сайті",
+      description: "Вимкніть, якщо поки не готові розповідати — блок зникне з сайту.",
+      type: "boolean",
+      initialValue: true,
+      group: "son",
+    }),
+    defineField({
+      name: "sonName",
+      title: "Ім'я сина (необов'язково)",
+      description: "Якщо порожньо — заголовок буде «Наш син».",
+      type: "localeString",
+      group: "son",
+    }),
+    defineField({
+      name: "sonIntro",
+      title: "Розповідь про нього",
+      description: "Який він, що вміє, чим дивує. Абзаци розділяйте порожнім рядком.",
+      type: "localeText",
+      group: "son",
+    }),
+    defineField({
+      name: "sonLikes",
+      title: "Що його радує",
+      description: "Коротко, 1–3 слова: «Музика», «Котики», «Мамині обійми». До 8 штук.",
+      type: "array",
+      of: [defineArrayMember({ type: "localeString" })],
+      validation: (r) => r.max(8),
+      group: "son",
+    }),
+    defineField({ name: "sonDream", title: "Його мрія", description: "Одне речення — буде на рукописній записці.", type: "localeString", group: "son" }),
+    photo("sonPhoto", "Головне фото сина", "Вертикальне або квадратне.", "son"),
+    photo("sonPhoto2", "Друге фото (необов'язково)", "Улюблена справа, прогулянка, момент радості.", "son"),
 
     // ---- kind words
     photo("kindImage", "Фото в блоці «Добрі слова»", "Наприклад, усміхнений син.", "kind"),
