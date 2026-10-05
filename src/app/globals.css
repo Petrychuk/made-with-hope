@@ -579,3 +579,34 @@ p{margin:0}
   .product__order{max-width:none}
 }
 .p-card__row{min-height:50px}
+
+/* =========================================================
+   HOW YOUR PURCHASE HELPS (between Handmade and Journal)
+   ========================================================= */
+.buy-helps{padding-top:8px}
+.buy-helps__grid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:40px;align-items:center}
+.bh-steps{list-style:none;padding:0;margin:28px 0 0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:64px}
+.bh-step{position:relative;text-align:center}
+.bh-step .pillar__ico{width:76px;height:76px;margin-bottom:14px}
+.bh-step .pillar__ico svg{width:40px;height:40px}
+.bh-step h3{font-size:19px;line-height:1.25}
+.bh-step p{color:var(--text-2);font-size:14.5px;line-height:1.5;margin-top:6px;max-width:24ch;margin-inline:auto}
+.bh-arrow{position:absolute;top:30px;right:-58px;width:52px;height:18px;color:var(--terracotta)}
+.bh-note{position:relative;padding:44px 40px 52px;isolation:isolate;font-family:var(--f-hand);font-size:28px;line-height:1.2;color:#4C3A33}
+.bh-note::before{content:"";position:absolute;inset:0;z-index:-1;background:
+  radial-gradient(70% 60% at 30% 30%,rgba(255,255,255,.35),transparent 70%),
+  linear-gradient(160deg,#F7E0D2,#F1CDBB);
+  border-radius:38% 62% 46% 54% / 52% 38% 62% 48%;transform:rotate(-4deg)}
+.bh-note p{transform:rotate(-4deg)}
+.bh-note .heart-ico{display:inline-block;vertical-align:-4px}
+.bh-note__sprig{position:absolute;right:6px;bottom:-14px;transform:rotate(18deg)}
+
+@media (max-width:1199px){
+  .buy-helps__grid{grid-template-columns:1fr}
+  .bh-note{max-width:360px;margin:8px auto 0;text-align:center}
+}
+@media (max-width:767px){
+  .bh-steps{grid-template-columns:1fr;gap:56px;margin-top:24px}
+  .bh-arrow{top:auto;right:auto;bottom:-42px;left:50%;transform:translateX(-50%) rotate(90deg);width:40px}
+  .bh-note{font-size:24px;padding:36px 28px 44px}
+}

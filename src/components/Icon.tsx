@@ -1,6 +1,8 @@
 import type { CSSProperties } from "react";
 
 export type IconName =
+  | "bag"
+  | "arrow-long"
   | "camera"
   | "yarn"
   | "book"

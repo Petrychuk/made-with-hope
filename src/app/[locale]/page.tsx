@@ -6,7 +6,7 @@ import { pageMeta } from "@/lib/seo";
 import { getPosts, getProducts, getSupport, getUpdates } from "@/lib/content";
 import { getHome } from "@/lib/home";
 import {
-  FaqContacts, Handmade, Hero, JournalPreview, KindWords, Pillars,
+  FaqContacts, Handmade, Hero, JournalPreview, KindWords, Pillars, PurchaseHelps,
   Story, Support, Transparency,
 } from "@/components/home/Sections";
 
@@ -34,6 +34,7 @@ export default async function HomePage({ params }: Props) {
       <Hero {...h} />
       <Pillars {...p} />
       <Handmade {...h} products={products} />
+      <PurchaseHelps {...p} />
       <JournalPreview {...p} posts={posts} />
       <Story {...h} />
       <Support {...h} support={support} />

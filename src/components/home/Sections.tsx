@@ -117,6 +117,39 @@ export function Handmade({ locale, d, products, home }: P & H & { products: Prod
   );
 }
 
+/* ---------------- HOW YOUR PURCHASE HELPS ---------------- */
+export function PurchaseHelps({ d }: P) {
+  const steps = [
+    { key: "bag", icon: <Icon name="bag" />, t: d["bh.1"], s: d["bh.1s"] },
+    { key: "heart", icon: <Heart variant="main" size={36} className="" />, t: d["bh.2"], s: d["bh.2s"] },
+    { key: "family", icon: <Icon name="family" />, t: d["bh.3"], s: d["bh.3s"] },
+  ];
+  return (
+    <section className="section buy-helps" aria-labelledby="bh-title">
+      <div className="wrap buy-helps__grid">
+        <div>
+          <h2 className="sec-title" id="bh-title">{d["bh.title"]}</h2>
+          <p className="sec-lead">{d["bh.lead"]}</p>
+          <ol className="bh-steps">
+            {steps.map((st, i) => (
+              <li className="bh-step" key={st.key}>
+                <span className="pillar__ico">{st.icon}</span>
+                <h3>{st.t}</h3>
+                <p>{st.s}</p>
+                {i < steps.length - 1 && <Icon name="arrow-long" className="bh-arrow" />}
+              </li>
+            ))}
+          </ol>
+        </div>
+        <div className="bh-note">
+          <p>{d["bh.note"]} <Heart variant="small" size={24} /></p>
+          <Botanical name="pale-leaves" width={70} className="bh-note__sprig" />
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ---------------- JOURNAL PREVIEW ---------------- */
 export function JournalPreview({ locale, d, posts }: P & { posts: Post[] }) {
   const items = posts.slice(0, 4);
