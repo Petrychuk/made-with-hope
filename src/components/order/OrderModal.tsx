@@ -10,36 +10,45 @@ import { Icon } from "../Icon";
 import { Placeholder } from "../Placeholder";
 import { Heart } from "@/components/Heart";
 
-type Field = "name" | "phone" | "email" | "consent";
+type Field = "name" | "phone" | "email" | "idea" | "consent";
 type Errors = Partial<Record<Field, string>>;
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+/**
+ * Order request form.
+ * product set   → request for that product
+ * product unset → custom order («Замовити унікальне»): what & idea instead of the product card
+ */
 export function OrderModal({
   product, locale, d, trigger, onClose,
-}: { product: Product; locale: Locale; d: Dict; trigger: HTMLElement | null; onClose: () => void }) {
+}: { product?: Product; locale: Locale; d: Dict; trigger: HTMLElement | null; onClose: () => void }) {
+  const custom = !product;
   const boxRef = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
+  const ideaRef = useRef<HTMLTextAreaElement>(null);
   const triggerRef = useRef<HTMLElement | null>(trigger);
   const [errors, setErrors] = useState<Errors>({});
   const [status, setStatus] = useState<{ kind: "idle" | "sending" | "error"; text?: string }>({ kind: "idle" });
   const [done, setDone] = useState(false);
   const successRef = useRef<HTMLDivElement>(null);
 
-  useFocusTrap(boxRef, true, onClose, triggerRef, nameRef);
+  useFocusTrap(boxRef, true, onClose, triggerRef, custom ? ideaRef : nameRef);
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const fd = new FormData(e.currentTarget);
     const v = Object.fromEntries(fd) as Record<string, string>;
     const next: Errors = {};
+    if (custom && (v.idea ?? "").trim().length < 5) next.idea = d["e.idea"];
     if (!v.name?.trim()) next.name = d["e.name"];
     if ((v.phone ?? "").replace(/\D/g, "").length < 9) next.phone = d["e.phone"];
     if (v.email && !EMAIL_RE.test(v.email)) next.email = d["e.email"];
     if (!fd.get("consent")) next.consent = d["e.consent"];
     setErrors(next);
 
-    const firstBad = (Object.keys(next) as Field[])[0];
+    const order: Field[] = ["idea", "name", "phone", "email", "consent"];
+    const firstBad = order.find((f) => next[f]);
     if (firstBad) {
       setStatus({ kind: "error", text: d["e.fix"] });
       document.getElementById(`o-${firstBad}`)?.focus();
@@ -51,7 +60,7 @@ export function OrderModal({
       const res = await fetch("/api/order", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...v, productId: product.slug, locale, consent: true }),
+        body: JSON.stringify({ ...v, productId: product ? product.slug : "custom", locale, consent: true }),
       });
       if (res.status === 429) { setStatus({ kind: "error", text: d["e.rate"] }); return; }
       if (!res.ok) throw new Error(String(res.status));
@@ -62,10 +71,7 @@ export function OrderModal({
     }
   }
 
-  const err = (f: Field) =>
-    errors[f] ? { "aria-invalid": true as const } : { "aria-invalid": false as const };
-
-  const name = pick(product.name, locale);
+  const err = (f: Field) => ({ "aria-invalid": Boolean(errors[f]) });
 
   return (
     <div className="modal is-open">
@@ -77,20 +83,53 @@ export function OrderModal({
 
         {!done ? (
           <div>
-            <h2 id="order-title">{d["o.title"]}</h2>
-            <div className="modal__item">
-              <Placeholder tone={product.tone} image={product.images[0]} decorative sizes="64px" />
-              <div>
-                <strong>{name}</strong>
-                <span>
-                  {product.price != null && <>{formatMoney(product.price, locale, d)} · </>}
-                  {statusLabel(d, product.status)}
-                </span>
+            <h2 id="order-title">{custom ? d["co.title"] : d["o.title"]}</h2>
+            {product ? (
+              <div className="modal__item">
+                <Placeholder tone={product.tone} image={product.images[0]} decorative sizes="64px" />
+                <div>
+                  <strong>{pick(product.name, locale)}</strong>
+                  <span>
+                    {product.price != null && <>{formatMoney(product.price, locale, d)} · </>}
+                    {statusLabel(d, product.status)}
+                  </span>
+                </div>
               </div>
-            </div>
-            <p className="modal__hint">{d["o.hint"]}</p>
+            ) : (
+              <div className="modal__item modal__item--custom">
+                <span className="pillar__ico"><Icon name="yarn" /></span>
+                <div>
+                  <strong>{d["co.cardKicker"]}</strong>
+                  <span>{d["co.cardHand"]}</span>
+                </div>
+              </div>
+            )}
+            <p className="modal__hint">{custom ? d["co.hint"] : d["o.hint"]}</p>
 
             <form className="form" onSubmit={onSubmit} noValidate>
+              {custom && (
+                <>
+                  <div className="field field--full">
+                    <label htmlFor="o-kind">{d["co.kind"]}</label>
+                    <select id="o-kind" name="kind" defaultValue="toy">
+                      <option value="toy">{d["co.k1"]}</option>
+                      <option value="bag">{d["co.k2"]}</option>
+                      <option value="decor">{d["co.k3"]}</option>
+                      <option value="wear">{d["co.k4"]}</option>
+                      <option value="other">{d["co.k5"]}</option>
+                    </select>
+                  </div>
+                  <div className="field field--full">
+                    <label htmlFor="o-idea">{d["co.idea"]} <span className="req" aria-hidden="true">*</span></label>
+                    <textarea ref={ideaRef} id="o-idea" name="idea" maxLength={1200} placeholder={d["co.ideaPh"]} required aria-describedby="e-idea" {...err("idea")} />
+                    <span className="err" id="e-idea">{errors.idea}</span>
+                  </div>
+                  <div className="field field--full">
+                    <label htmlFor="o-when">{d["co.when"]}</label>
+                    <input id="o-when" name="when" maxLength={80} placeholder={d["co.whenPh"]} />
+                  </div>
+                </>
+              )}
               <div className="field">
                 <label htmlFor="o-name">{d["o.name"]} <span className="req" aria-hidden="true">*</span></label>
                 <input ref={nameRef} id="o-name" name="name" autoComplete="name" required aria-describedby="e-name" {...err("name")} />
@@ -122,10 +161,12 @@ export function OrderModal({
                 <label htmlFor="o-branch">{d["o.branch"]}</label>
                 <input id="o-branch" name="branch" />
               </div>
-              <div className="field field--full">
-                <label htmlFor="o-comment">{d["o.comment"]}</label>
-                <textarea id="o-comment" name="comment" maxLength={800} placeholder={d["o.commentPh"]} />
-              </div>
+              {!custom && (
+                <div className="field field--full">
+                  <label htmlFor="o-comment">{d["o.comment"]}</label>
+                  <textarea id="o-comment" name="comment" maxLength={800} placeholder={d["o.commentPh"]} />
+                </div>
+              )}
               {/* honeypot: real people never see or fill this */}
               <input type="text" name="website" tabIndex={-1} autoComplete="off" aria-hidden="true" className="hp" />
               <label className="consent">
@@ -137,7 +178,7 @@ export function OrderModal({
               </label>
               <div className="form__actions">
                 <button className="btn btn--primary" type="submit" disabled={status.kind === "sending"}>
-                  {d["o.submit"]}
+                  {custom ? d["co.submit"] : d["o.submit"]}
                 </button>
                 <p className={`form__status${status.kind === "error" ? " err" : ""}`} role="status">
                   {status.text}
@@ -149,7 +190,7 @@ export function OrderModal({
           <div className="success" ref={successRef} tabIndex={-1}>
             <Heart variant="double" size={64} />
             <h2 id="order-title">{d["o.okTitle"]}</h2>
-            <p>{d["o.ok"]}</p>
+            <p>{custom ? d["co.ok"] : d["o.ok"]}</p>
             <button className="btn btn--sage" type="button" onClick={onClose}>{d["o.done"]}</button>
           </div>
         )}

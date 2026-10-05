@@ -613,3 +613,49 @@ p{margin:0}
   .bh-arrow{top:auto;right:auto;bottom:-42px;left:50%;transform:translateX(-50%) rotate(90deg);width:40px}
   .bh-note{font-size:24px;padding:36px 28px 44px}
 }
+
+/* =========================================================
+   HOME HANDMADE: 4 random products + «coming soon» + custom order card
+   ========================================================= */
+.cards--home{grid-template-columns:repeat(5,minmax(0,1fr))}
+.p-card--soon .ph{filter:saturate(.75)}
+.p-card--soon .p-card__name{color:var(--text-2)}
+.soon-ico{position:absolute;inset:0;display:grid;place-items:center;pointer-events:none}
+.soon-ico svg{width:46px;height:46px;color:rgba(191,87,55,.55);animation:soon-spin 9s linear infinite}
+@keyframes soon-spin{to{transform:rotate(360deg)}}
+.p-card--soon .ph__cap{display:none}
+
+.custom-card{list-style:none;position:relative;border-radius:var(--r);padding:7px;
+  background:
+    radial-gradient(80% 60% at 20% 10%,rgba(255,255,255,.55),transparent 70%),
+    linear-gradient(160deg,#FBE6D8 0%,#F4D3C0 100%);
+  box-shadow:var(--shadow)}
+/* dashed "stitches" around the card — like a sewn label */
+.custom-card__in{height:100%;border:2px dashed rgba(191,87,55,.55);border-radius:calc(var(--r) - 5px);
+  padding:14px 14px 14px;display:flex;flex-direction:column;align-items:flex-start;gap:8px;position:relative}
+.custom-card__top{display:flex;align-items:center;justify-content:space-between;width:100%;gap:8px}
+.custom-card__kicker{white-space:nowrap;font-family:var(--f-hand);font-size:19px;line-height:1;color:var(--terracotta-cta);
+  background:var(--paper);padding:4px 12px 5px;border-radius:999px;transform:rotate(-3deg);box-shadow:0 2px 8px rgba(120,78,48,.1)}
+.custom-card__yarn{position:relative;width:50px;height:50px;flex:none;border-radius:50%;background:rgba(255,253,249,.75);
+  display:grid;place-items:center;color:var(--terracotta-cta);margin-right:10px}
+.custom-card__yarn > svg:first-child{width:30px;height:30px}
+.custom-card__hearts{position:absolute;right:-16px;top:-10px;transform:rotate(12deg)}
+.custom-card h3{font-size:18px;line-height:1.2;margin-top:4px}
+.custom-card p{font-size:13.5px;line-height:1.45;color:var(--text-2)}
+.custom-card__btn{width:100%;margin-top:auto;font-size:14px;min-height:46px;padding:10px 12px;gap:8px;white-space:normal;line-height:1.2}
+.custom-card__hand{font-family:var(--f-hand);font-size:19px;color:#93413E;align-self:center;line-height:1.1;text-align:center}
+@media (min-width:1200px){ .custom-card__hand{display:none} }
+.modal__item--custom .pillar__ico{width:56px;height:56px;margin:0;flex:none}
+.modal__item--custom .pillar__ico svg{width:30px;height:30px}
+
+@media (max-width:1199px){
+  .cards--home{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .cards--home .custom-card{grid-column:span 2}
+}
+@media (max-width:900px){
+  .cards--home{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .cards--home .custom-card{grid-column:1 / -1}
+  .custom-card__in{padding:20px 18px}
+  .custom-card__btn{width:auto}
+}
+@media (prefers-reduced-motion:reduce){ .soon-ico svg{animation:none} }

@@ -11,6 +11,7 @@ import { Placeholder } from "../Placeholder";
 import { ProductCard } from "../ProductCard";
 import { JournalCard } from "../JournalCard";
 import { KindWordsCarousel } from "./KindWords";
+import { CustomOrderButton } from "../order/CustomOrderButton";
 
 type P = { locale: Locale; d: Dict };
 type H = { home: HomeContent };
@@ -82,11 +83,24 @@ export function Pillars({ d }: P) {
 }
 
 /* ---------------- HANDMADE ---------------- */
-export function Handmade({ locale, d, products, home }: P & H & { products: Product[] }) {
-  const items = products.filter((p) => p.featured && p.status !== "sold").slice(0, 4);
+/** 4 random products (new mix on every visit); missing ones → «coming soon» cards. */
+function pickRandom<T>(list: T[], n: number): T[] {
+  const a = [...list];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a.slice(0, n);
+}
+
+const SOON_TONES = ["sand", "sage", "pink", "peach"] as const;
+
+export function Handmade({ locale, d, products }: P & H & { products: Product[] }) {
+  const items = pickRandom(products.filter((p) => p.status !== "sold"), 4);
+  const soon = Math.max(0, 4 - items.length);
   return (
     <section className="section" id="handmade" aria-labelledby="hm-title">
-      <div className="wrap handmade__grid">
+      <div className="wrap">
         <div>
           <div className="sec-head">
             <div>
@@ -100,17 +114,36 @@ export function Handmade({ locale, d, products, home }: P & H & { products: Prod
               <span>{d["hm.all"]}</span><Icon name="arrow" size={18} />
             </Link>
           </div>
-          {items.length ? (
-            <ul className="cards">
-              {items.map((p) => <ProductCard key={p.slug} p={p} locale={locale} d={d} />)}
-            </ul>
-          ) : (
-            <p className="empty">{d["hm.empty"]}</p>
-          )}
-        </div>
-        <div className="handmade__aside" aria-hidden="true">
-          <Placeholder tone="sand" image={home.craftImage} label={d["ph.craft"]} decorative sizes="360px" />
-          <p className="note">{d["note.hm"]}</p>
+          <ul className="cards cards--home">
+            {items.map((p) => <ProductCard key={p.slug} p={p} locale={locale} d={d} />)}
+            {Array.from({ length: soon }, (_, i) => (
+              <li className="p-card p-card--soon" key={`soon-${i}`}>
+                <div className="p-card__media">
+                  <Placeholder tone={SOON_TONES[i % SOON_TONES.length]} decorative />
+                  <span className="soon-ico" aria-hidden="true"><Icon name="yarn" /></span>
+                </div>
+                <div className="p-card__body">
+                  <span className="p-card__name">{d["hm.soonT"]}</span>
+                  <span className="p-card__avail is-made_to_order">{d["hm.soonS"]} <Heart variant="small" size={14} /></span>
+                </div>
+              </li>
+            ))}
+            <li className="custom-card">
+              <div className="custom-card__in">
+                <div className="custom-card__top">
+                  <span className="custom-card__kicker">{d["co.cardKicker"]}</span>
+                  <span className="custom-card__yarn" aria-hidden="true">
+                    <Icon name="yarn" />
+                    <Heart variant="double" size={28} className="custom-card__hearts" />
+                  </span>
+                </div>
+                <h3>{d["co.cardTitle"]}</h3>
+                <p>{d["co.cardText"]}</p>
+                <CustomOrderButton label={d["co.cardBtn"]} />
+                <span className="custom-card__hand" aria-hidden="true">{d["co.cardHand"]} <Heart variant="small" size={16} /></span>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
     </section>

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { connection } from "next/server";
 import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { pageMeta } from "@/lib/seo";
@@ -22,6 +23,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function HomePage({ params }: Props) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
+  // rendered per visit so the 4 handmade cards are a new random mix each time
+  // (Sanity data itself stays cached — see src/sanity/client.ts)
+  await connection();
   const d = getDictionary(locale);
   const p = { locale, d };
   const [products, posts, updates, support, home] = await Promise.all([

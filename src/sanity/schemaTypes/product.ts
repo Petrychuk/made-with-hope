@@ -49,7 +49,8 @@ export const product = defineType({
       initialValue: "available",
       validation: (r) => r.required(),
     }),
-    defineField({ name: "featured", title: "Показувати на головній", type: "boolean", initialValue: true }),
+    // home page now shows 4 random products — the flag is kept for old documents but hidden
+    defineField({ name: "featured", title: "Показувати на головній", type: "boolean", initialValue: true, hidden: true }),
   ],
   preview: {
     select: { title: "name.uk", media: "images.0", status: "status", price: "price" },

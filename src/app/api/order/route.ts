@@ -27,6 +27,7 @@ function rateLimited(ip: string) {
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 const clean = (v: unknown, max = 200) => (typeof v === "string" ? v.trim().slice(0, max) : "");
 
+const CUSTOM_KIND: Record<string, string> = { toy: "Іграшка", bag: "Сумочка або кошик", decor: "Декор для дому", wear: "Одяг або аксесуар", other: "Інше" };
 const DELIVERY: Record<string, string> = { nova: "Нова пошта", ukr: "Укрпошта", other: "Інше — обговорити" };
 
 export async function POST(req: Request) {
@@ -47,22 +48,38 @@ export async function POST(req: Request) {
   const delivery = DELIVERY[clean(body.delivery, 10)] ?? DELIVERY.other;
   const branch = clean(body.branch, 160);
   const comment = clean(body.comment, 800);
-  const product = await getProduct(clean(body.productId, 80)); // price is taken from the server, not from the client
+  const productId = clean(body.productId, 80);
+  const isCustom = productId === "custom";
+  const idea = clean(body.idea, 1200);
+  const when = clean(body.when, 80);
+  const kind = CUSTOM_KIND[clean(body.kind, 10)] ?? CUSTOM_KIND.other;
+  const product = isCustom ? null : await getProduct(productId); // price is taken from the server, not from the client
 
-  if (!product || product.status === "sold" || !name || phone.replace(/\D/g, "").length < 9 || body.consent !== true) {
+  if ((isCustom ? idea.length < 5 : !product || product.status === "sold") || !name || phone.replace(/\D/g, "").length < 9 || body.consent !== true) {
     return NextResponse.json({ ok: false, error: "validation" }, { status: 422 });
   }
 
   const ip = req.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || req.headers.get("x-real-ip") || "local";
   if (rateLimited(ip)) return NextResponse.json({ ok: false, error: "rate_limited" }, { status: 429 });
 
+  const head = product
+    ? [
+        "🧶 <b>Нове замовлення — Home Made Galyna</b>",
+        "",
+        `Виріб: ${esc(product.name.uk)}`,
+        product.price != null ? `Ціна: ${product.price} грн` : null,
+        product.status === "made_to_order" ? "Статус: на замовлення" : null,
+        `🔗 ${siteUrl}/uk/handmade/${product.slug}`,
+      ]
+    : [
+        "✨ <b>Індивідуальне замовлення — Home Made Galyna</b>",
+        "",
+        `Що: ${esc(kind)}`,
+        `💡 Ідея: ${esc(idea)}`,
+        when ? `📅 Потрібно до: ${esc(when)}` : null,
+      ];
   const lines = [
-    "🧶 <b>Нове замовлення — Home Made Galyna</b>",
-    "",
-    `Виріб: ${esc(product.name.uk)}`,
-    product.price != null ? `Ціна: ${product.price} грн` : null,
-    product.status === "made_to_order" ? "Статус: на замовлення" : null,
-    `🔗 ${siteUrl}/uk/handmade/${product.slug}`,
+    ...head,
     "",
     `👤 ${esc(name)}`,
     `📞 ${esc(phone)}`,
