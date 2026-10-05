@@ -6,11 +6,10 @@
  */
 import { defineConfig } from "sanity";
 import { structureTool } from "sanity/structure";
-import { visionTool } from "@sanity/vision";
 import { ukUALocale } from "@sanity/locale-uk-ua";
 import { schemaTypes } from "./src/sanity/schemaTypes";
 import { structure } from "./src/sanity/structure";
-import { apiVersion, dataset, projectId } from "./src/sanity/env";
+import { dataset, projectId } from "./src/sanity/env";
 
 const SINGLETONS = new Set(["support", "homePage"]);
 const SINGLETON_ACTIONS = new Set(["publish", "discardChanges", "restore"]);
@@ -24,7 +23,6 @@ export default defineConfig({
   plugins: [
     structureTool({ structure }),
     ukUALocale(), // Studio interface in Ukrainian
-    ...(process.env.NODE_ENV === "development" ? [visionTool({ defaultApiVersion: apiVersion })] : []),
   ],
   schema: {
     types: schemaTypes,
