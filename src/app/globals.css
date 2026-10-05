@@ -659,3 +659,28 @@ p{margin:0}
   .custom-card__btn{width:auto}
 }
 @media (prefers-reduced-motion:reduce){ .soon-ico svg{animation:none} }
+
+/* desktop: 5 compact cards + the craft photo on the right */
+@media (min-width:1200px){
+  .handmade__grid--five{grid-template-columns:minmax(0,1fr) 210px;gap:24px}
+  .handmade__grid--five .handmade__aside{min-height:300px}
+  .handmade__grid--five .handmade__aside .ph{right:-24px}
+  .handmade__grid--five .handmade__aside .note{width:150px;right:6px;font-size:19px}
+  .cards--home{gap:12px}
+  .cards--home .p-card__body{padding:10px 10px 12px}
+  .cards--home .p-card__name{font-size:14px}
+  .cards--home .p-card__avail{font-size:12px}
+  .cards--home .p-card__price{font-size:14px}
+  .cards--home .p-card__row{min-height:44px}
+  .cards--home .cart-btn{width:40px;height:40px}
+  .cards--home .p-card__count{font-size:11px;padding:2px 7px}
+  /* custom card: compact, description lives in the form */
+  .custom-card__in{padding:12px 10px;gap:6px;align-items:center;text-align:center}
+  .custom-card__top{flex-direction:column;align-items:center;gap:6px}
+  .custom-card__yarn{margin:0}
+  .custom-card__kicker{font-size:17px}
+  .custom-card h3{font-size:16px}
+  .custom-card p{display:none}
+  .custom-card__hand{display:block;font-size:17px;margin:auto 0;order:1}
+  .custom-card__btn{font-size:13px;padding:9px 8px;min-height:42px;margin-top:0;order:2}
+}

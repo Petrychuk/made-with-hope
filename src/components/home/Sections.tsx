@@ -95,12 +95,12 @@ function pickRandom<T>(list: T[], n: number): T[] {
 
 const SOON_TONES = ["sand", "sage", "pink", "peach"] as const;
 
-export function Handmade({ locale, d, products }: P & H & { products: Product[] }) {
+export function Handmade({ locale, d, products, home }: P & H & { products: Product[] }) {
   const items = pickRandom(products.filter((p) => p.status !== "sold"), 4);
   const soon = Math.max(0, 4 - items.length);
   return (
     <section className="section" id="handmade" aria-labelledby="hm-title">
-      <div className="wrap">
+      <div className="wrap handmade__grid handmade__grid--five">
         <div>
           <div className="sec-head">
             <div>
@@ -144,6 +144,10 @@ export function Handmade({ locale, d, products }: P & H & { products: Product[] 
               </div>
             </li>
           </ul>
+        </div>
+        <div className="handmade__aside" aria-hidden="true">
+          <Placeholder tone="sand" image={home.craftImage} label={d["ph.craft"]} decorative sizes="300px" />
+          <p className="note">{d["note.hm"]}</p>
         </div>
       </div>
     </section>

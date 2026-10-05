@@ -99,8 +99,7 @@ export const homePage = defineType({
     defineField({ name: "quote", title: "Ваша цитата", type: "localeTextShort", group: "faq" }),
 
     // ---- other photos
-    // not shown since the handmade block became 5 cards; kept hidden for existing data
-    photo("craftImage", "Фото біля виробів", "Зараз не використовується.", "photos", true),
+    photo("craftImage", "Фото біля виробів", "Процес в'язання, клубки. Видно тільки на комп'ютері.", "photos"),
     photo("supportImage", "Фото біля збору", "Квіти або затишна деталь дому. Видно тільки на комп'ютері.", "photos"),
 
     // ---- contacts
