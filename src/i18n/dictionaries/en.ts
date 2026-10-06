@@ -7,6 +7,7 @@ const en: Record<DictKey, string> = {
   "nav.support": "Support", "nav.transparency": "Transparency", "nav.contacts": "Contacts",
   "cta.support": "Support our family", "cta.readStory": "Read our story",
   "hero.l1": "Handmade with love.", "hero.l2": "Words from the heart.", "hero.l3": "A family story of hope.",
+  "hero.alt": "Galyna and her son at home",
   "hero.desc": "Handmade creations, poetry and a story of strength. Your support helps our family and gives hope for a brighter tomorrow.",
   "note.hero": "Small creations. Big meaning. Thank you for being part of our story",
   pillarsLabel: "About the project",

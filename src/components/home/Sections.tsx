@@ -46,7 +46,7 @@ export function Hero({ locale, d, home }: P & H) {
         <Botanical name="leaves-buds" width={92} className="leaf hero__leaf" />
       </div>
       <div className="hero__media">
-        <Placeholder tone="sun" image={home.heroImage} label={d["ph.hero"]} priority sizes="(max-width: 767px) 100vw, 57vw" />
+        <Placeholder tone="sun" image={home.heroImage} label={d["ph.hero"]} alt={home.heroImage?.alt} priority sizes="(max-width: 767px) 100vw, 57vw" />
         <p className="note hero__note">
           {home.heroNote} <Heart variant="small" size={18} />
         </p>

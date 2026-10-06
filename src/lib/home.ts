@@ -13,6 +13,7 @@ import { sanityEnabled } from "@/sanity/env";
 import { sanityFetch } from "@/sanity/client";
 import { homeQuery } from "@/sanity/queries";
 import { sanityImage } from "./content";
+import heroDefault from "@/assets/hero/galyna-and-son.webp";
 
 type L = Partial<Localized> | null | undefined;
 type RawImage = Partial<ImageRef> | null | undefined;
@@ -68,7 +69,14 @@ export async function getHome(locale: Locale, d: Dict): Promise<HomeContent> {
     heroLines: lines(t(r.heroSubtitle, locale, [d["hero.l1"], d["hero.l2"], d["hero.l3"]].join("\n"))),
     heroDesc: t(r.heroDescription, locale, d["hero.desc"]),
     heroNote: t(r.heroNote, locale, d["note.hero"]),
-    heroImage: sanityImage(r.heroImage, 2000),
+    // photo from Studio → else the family photo shipped with the site
+    heroImage: sanityImage(r.heroImage, 2000) ?? {
+      url: heroDefault.src,
+      width: heroDefault.width,
+      height: heroDefault.height,
+      lqip: heroDefault.blurDataURL,
+      alt: d["hero.alt"],
+    },
 
     son: {
       show: r.sonShow !== false,
