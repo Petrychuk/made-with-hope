@@ -10,7 +10,7 @@ import type { ImageRef } from "@/content/types";
 import { faq as localFaq, kindMessages as localMessages } from "@/content/home";
 import { site } from "@/content/site";
 import { sanityEnabled } from "@/sanity/env";
-import { sanityFetch } from "@/sanity/client";
+import { onSanityError, sanityFetch } from "@/sanity/client";
 import { homeQuery } from "@/sanity/queries";
 import { sanityImage } from "./content";
 import heroDefault from "@/assets/hero/galyna-and-son.webp";
@@ -46,7 +46,7 @@ export type HomeContent = {
 
 export const getHomeRaw = cache(async (): Promise<RawHome | null> => {
   if (!sanityEnabled) return null;
-  return sanityFetch<RawHome | null>(homeQuery);
+  return sanityFetch<RawHome | null>(homeQuery).catch(onSanityError(null));
 });
 
 /** text for this language → Ukrainian original → default */

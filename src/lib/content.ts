@@ -13,7 +13,7 @@ import { localPosts } from "@/content/posts";
 import { localUpdates } from "@/content/home";
 import { site } from "@/content/site";
 import { sanityEnabled } from "@/sanity/env";
-import { sanityFetch } from "@/sanity/client";
+import { onSanityError, sanityFetch } from "@/sanity/client";
 import {
   postQuery, postsQuery, productQuery, productsQuery, supportQuery, transparencyQuery, updatesQuery,
 } from "@/sanity/queries";
@@ -53,13 +53,13 @@ const mapProduct = (p: RawProduct, i: number): Product => ({
 
 export const getProducts = cache(async (): Promise<Product[]> => {
   if (!sanityEnabled) return localProducts;
-  const rows = await sanityFetch<RawProduct[]>(productsQuery);
+  const rows = await sanityFetch<RawProduct[]>(productsQuery).catch(onSanityError([]));
   return rows.map(mapProduct);
 });
 
 export const getProduct = cache(async (slug: string): Promise<Product | null> => {
   if (!sanityEnabled) return localProducts.find((p) => p.slug === slug) ?? null;
-  const row = await sanityFetch<RawProduct | null>(productQuery, { slug });
+  const row = await sanityFetch<RawProduct | null>(productQuery, { slug }).catch(onSanityError(null));
   return row ? mapProduct(row, 0) : null;
 });
 
@@ -87,32 +87,32 @@ const mapPost = (p: RawPost, i: number): Post => {
 
 export const getPosts = cache(async (): Promise<Post[]> => {
   if (!sanityEnabled) return [...localPosts].sort((a, b) => b.date.localeCompare(a.date));
-  const rows = await sanityFetch<RawPost[]>(postsQuery);
+  const rows = await sanityFetch<RawPost[]>(postsQuery).catch(onSanityError([]));
   return rows.map(mapPost);
 });
 
 export const getPost = cache(async (slug: string): Promise<Post | null> => {
   if (!sanityEnabled) return localPosts.find((p) => p.slug === slug) ?? null;
-  const row = await sanityFetch<RawPost | null>(postQuery, { slug });
+  const row = await sanityFetch<RawPost | null>(postQuery, { slug }).catch(onSanityError(null));
   return row ? mapPost(row, 0) : null;
 });
 
 /* ---------------- updates / support / transparency ---------------- */
 export const getUpdates = cache(async (): Promise<Update[]> => {
   if (!sanityEnabled) return localUpdates;
-  const rows = await sanityFetch<{ id: string; date: string; title?: Localized; image?: Partial<ImageRef> }[]>(updatesQuery);
+  const rows = await sanityFetch<{ id: string; date: string; title?: Localized; image?: Partial<ImageRef> }[]>(updatesQuery).catch(onSanityError([]));
   return rows.map((u, i) => ({ id: u.id, date: u.date, title: loc(u.title), image: sanityImage(u.image, 800), tone: tone(i + 5) }));
 });
 
 export const getSupport = cache(async (): Promise<Support> => {
   const fallback: Support = { ...site.fundraising, monobankUrl: site.monobankUrl };
   if (!sanityEnabled) return fallback;
-  const row = await sanityFetch<Partial<Support> | null>(supportQuery);
+  const row = await sanityFetch<Partial<Support> | null>(supportQuery).catch(onSanityError(null));
   return { ...fallback, ...Object.fromEntries(Object.entries(row ?? {}).filter(([, v]) => v != null)) };
 });
 
 export const getTransparency = cache(async (): Promise<TransparencyItem[]> => {
   if (!sanityEnabled) return [];
-  const rows = await sanityFetch<(Omit<TransparencyItem, "title"> & { title?: Localized })[]>(transparencyQuery);
+  const rows = await sanityFetch<(Omit<TransparencyItem, "title"> & { title?: Localized })[]>(transparencyQuery).catch(onSanityError([]));
   return rows.map((r) => ({ ...r, title: loc(r.title), hasFile: Boolean(r.hasFile) }));
 });

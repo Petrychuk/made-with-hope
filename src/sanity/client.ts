@@ -15,3 +15,14 @@ export async function sanityFetch<T>(query: string, params: Record<string, unkno
     next: { revalidate: 300, tags: [SANITY_TAG] },
   });
 }
+
+/**
+ * If Sanity is unreachable (network, outage, quota), the site keeps working:
+ * lists come back empty / single documents null → pages show their default texts and placeholders.
+ */
+export function onSanityError<T>(fallback: T) {
+  return (err: unknown): T => {
+    console.error("[sanity] fetch failed, using fallback:", err instanceof Error ? err.message : err);
+    return fallback;
+  };
+}

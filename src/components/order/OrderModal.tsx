@@ -77,13 +77,16 @@ export function OrderModal({
     <div className="modal is-open">
       <div className="modal__bg" onClick={onClose} />
       <div className="modal__box" role="dialog" aria-modal="true" aria-labelledby="order-title" ref={boxRef}>
-        <button className="modal__close" type="button" aria-label={d.close} onClick={onClose}>
-          <Icon name="close" size={22} />
-        </button>
+        {/* sticky header: title + ✕ stay visible while the form scrolls (mobile) */}
+        <div className="modal__head">
+          {!done ? <h2 id="order-title">{custom ? d["co.title"] : d["o.title"]}</h2> : <span />}
+          <button className="modal__close" type="button" aria-label={d.close} onClick={onClose}>
+            <Icon name="close" size={22} />
+          </button>
+        </div>
 
         {!done ? (
-          <div>
-            <h2 id="order-title">{custom ? d["co.title"] : d["o.title"]}</h2>
+          <div className="modal__body">
             {product ? (
               <div className="modal__item">
                 <Placeholder tone={product.tone} image={product.images[0]} decorative sizes="64px" />
@@ -187,7 +190,7 @@ export function OrderModal({
             </form>
           </div>
         ) : (
-          <div className="success" ref={successRef} tabIndex={-1}>
+          <div className="success modal__body" ref={successRef} tabIndex={-1}>
             <Heart variant="double" size={64} />
             <h2 id="order-title">{d["o.okTitle"]}</h2>
             <p>{custom ? d["co.ok"] : d["o.ok"]}</p>
