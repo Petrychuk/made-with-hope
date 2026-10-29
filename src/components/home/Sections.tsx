@@ -227,19 +227,21 @@ export function Story({ locale, d, home }: P & H) {
   return (
     <section className="story" id="story" aria-labelledby="st-title">
       <div className="wrap story__grid">
-        <Placeholder tone="peach" image={home.storyImage} label={d["ph.galyna"]} className="story__photo" sizes="(max-width: 767px) 100vw, 300px" />
+        <Placeholder tone="peach" image={home.storyImage} label={d["ph.galyna"]} alt={home.storyImage?.alt} className="story__photo" sizes="(max-width: 767px) 100vw, (max-width: 1199px) 240px, 300px" />
         <div className="story__text">
           <h2 className="sec-title" id="st-title">
             <span>{d["st.title"]}</span> <Heart variant="tilt" size={32} />
           </h2>
           {home.storyParagraphs.map((p) => <p key={p.slice(0, 40)}>{p}</p>)}
-          <Link className="btn btn--primary" href={`/${locale}#story`}>
-            <span>{d["st.cta"]}</span><Icon name="arrow" />
+          {/* the whole story lives on the landing — the button leads on to helping */}
+          <Link className="btn btn--primary" href={`/${locale}#support`}>
+            <Heart variant="small" size={20} className="" />
+            <span>{d["cta.support"]}</span>
           </Link>
           <Botanical name="gypsophila" width={86} className="story__sprig" />
         </div>
         <figure className="polaroid">
-          <Placeholder tone="pink" image={home.polaroidImage} label={d["ph.together"]} sizes="230px" />
+          <Placeholder tone="pink" image={home.polaroidImage} label={d["ph.together"]} alt={home.polaroidImage?.alt} sizes="230px" />
           <figcaption>{home.polaroidCaption} <Heart variant="small" size={16} /></figcaption>
         </figure>
       </div>
@@ -260,11 +262,11 @@ export function AboutSon({ d, home }: P & H) {
           <figure className="son__frame son__frame--main">
             <span className="tape tape--l" aria-hidden="true" />
             <span className="tape tape--r" aria-hidden="true" />
-            <Placeholder tone="sun" image={s.photo} label={d["ph.son1"]} sizes="(max-width: 767px) 80vw, 380px" />
+            <Placeholder tone="sun" image={s.photo} label={d["ph.son1"]} alt={s.photo?.alt} sizes="(max-width: 767px) 68vw, (max-width: 1199px) 30vw, 380px" />
           </figure>
           <figure className="son__frame son__frame--small">
             <span className="tape tape--c" aria-hidden="true" />
-            <Placeholder tone="sage" image={s.photo2} label={d["ph.son2"]} sizes="200px" />
+            <Placeholder tone="sage" image={s.photo2} label={d["ph.son2"]} alt={s.photo2?.alt} sizes="(max-width: 767px) 46vw, 220px" />
           </figure>
           <Heart variant="double" size={54} className="son__hearts" />
           <span className="son__stamp" aria-hidden="true">{d["son.wins"]}</span>
@@ -427,7 +429,7 @@ export function KindWords({ locale, d, home }: P & H) {
     <section className="section" id="kind" aria-labelledby="kw-title" style={{ paddingTop: 8 }}>
       <div className="wrap kind__grid">
         <div className="kind__photo">
-          <Placeholder tone="sun" image={home.kindImage} label={d["ph.son"]} sizes="(max-width: 767px) 100vw, 600px" />
+          <Placeholder tone="sun" image={home.kindImage} label={d["ph.son"]} alt={home.kindImage?.alt} sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 600px" />
           <p className="note">
             <span className="quote-mark" aria-hidden="true">“</span>
             <span className="hand">{home.kindNote}</span> <Heart variant="small" size={16} />
@@ -437,9 +439,6 @@ export function KindWords({ locale, d, home }: P & H) {
           <h2 className="sec-title" id="kw-title">{d["kw.title"]}</h2>
           <p className="lead">{d["kw.lead"]}</p>
           <KindWordsCarousel messages={home.messages} d={d} />
-          <Link className="btn btn--sage btn--sm" href={`/${locale}#kind`}>
-            <span>{d["kw.cta"]}</span><Icon name="arrow" />
-          </Link>
           <Botanical name="peach-blossom" width={96} className="leaf" />
         </div>
       </div>
@@ -477,7 +476,8 @@ export function FaqContacts({ d, home }: P & H) {
             <ul>
               {c.telegram && <li><a href={c.telegram} {...ext}><span className="c-ico c-ico--tg"><Icon name="tg" /></span><span>{d["ct.tg"]}</span></a></li>}
               {c.instagram && <li><a href={c.instagram} {...ext}><span className="c-ico c-ico--ig"><Icon name="ig" /></span><span>{d["ct.ig"]}</span></a></li>}
-              <li><a href={`mailto:${c.email}`}><span className="c-ico c-ico--mail"><Icon name="mail" /></span>{c.email}</a></li>
+              {c.facebook && <li><a href={c.facebook} {...ext}><span className="c-ico c-ico--fb"><Icon name="fb" /></span><span>{d["ct.fb"]}</span></a></li>}
+              {c.email && <li><a href={`mailto:${c.email}`}><span className="c-ico c-ico--mail"><Icon name="mail" /></span>{c.email}</a></li>}
             </ul>
           </div>
         </div>

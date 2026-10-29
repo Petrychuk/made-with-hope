@@ -7,7 +7,9 @@ import "@fontsource-variable/caveat";
 import { isLocale, locales } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { getProducts } from "@/lib/content";
-import { getHome } from "@/lib/home";
+import { contactLine, getHome } from "@/lib/home";
+import { getLegalDocs } from "@/content/legal";
+import { site } from "@/content/site";
 import { siteUrl } from "@/lib/seo";
 import { IconSprite } from "@/components/IconSprite";
 import { Header } from "@/components/Header";
@@ -59,7 +61,8 @@ export default async function LocaleLayout({
         <OrderProvider products={orderable} locale={locale} d={d}>
           <Header locale={locale} d={d} />
           <main id="main">{children}</main>
-          <Footer locale={locale} d={d} contacts={home.contacts} />
+          <Footer locale={locale} d={d} contacts={home.contacts}
+            legal={getLegalDocs(locale, { owner: site.owner[locale], contact: contactLine(home.contacts, locale) })} />
         </OrderProvider>
       </body>
     </html>

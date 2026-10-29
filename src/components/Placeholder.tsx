@@ -27,7 +27,7 @@ export function Placeholder({ tone, label, image, alt, className = "", decorativ
           priority={priority}
           placeholder={image.lqip ? "blur" : "empty"}
           blurDataURL={image.lqip}
-          style={{ objectFit: "cover" }}
+          style={{ objectFit: "cover", ...(image.focus ? { objectPosition: image.focus } : {}) }}
         />
       </div>
     );

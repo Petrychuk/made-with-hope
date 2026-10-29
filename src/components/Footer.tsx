@@ -8,8 +8,10 @@ import type { Contacts } from "@/lib/home";
 import { Icon } from "./Icon";
 import { LangSwitch } from "./LangSwitch";
 import { Heart } from "@/components/Heart";
+import { LegalLinks } from "./LegalLinks";
+import type { LegalDoc } from "@/content/legal";
 
-export function Footer({ locale, d, contacts: c }: { locale: Locale; d: Dict; contacts: Contacts }) {
+export function Footer({ locale, d, contacts: c, legal }: { locale: Locale; d: Dict; contacts: Contacts; legal: LegalDoc[] }) {
   const base = `/${locale}`;
   const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
   return (
@@ -30,13 +32,12 @@ export function Footer({ locale, d, contacts: c }: { locale: Locale; d: Dict; co
             <Link href={`${base}#handmade`}>{d["nav.handmade"]}</Link>
             <Link href={`${base}/journal`}>{d["nav.journal"]}</Link>
             <Link href={`${base}#support`}>{d["nav.support"]}</Link>
-            <Link href={`${base}#transparency`}>{d["nav.transparency"]}</Link>
             <LangSwitch locale={locale} />
           </nav>
           <div className="socials">
             {c.instagram && <a href={c.instagram} {...ext} aria-label="Instagram"><Icon name="ig" /></a>}
             {c.facebook && <a href={c.facebook} {...ext} aria-label="Facebook"><Icon name="fb" /></a>}
-            <a href={`mailto:${c.email}`} aria-label="Email"><Icon name="mail" /></a>
+            {c.email && <a href={`mailto:${c.email}`} aria-label="Email"><Icon name="mail" /></a>}
             {c.telegram && <a href={c.telegram} {...ext} aria-label="Telegram"><Icon name="tg" /></a>}
           </div>
         </div>
@@ -46,13 +47,7 @@ export function Footer({ locale, d, contacts: c }: { locale: Locale; d: Dict; co
             <p className="footer__made">{d["ft.made"]}</p>
           </div>
           <p className="footer__hand" aria-hidden="true">{d["ft.hand"]}</p>
-          <div className="footer__legal">
-            <Link href={`${base}/privacy`}>{d["ft.privacy"]}</Link>
-            <span aria-hidden="true">|</span>
-            <Link href={`${base}/privacy#support-terms`}>{d["ft.terms"]}</Link>
-            <span aria-hidden="true">|</span>
-            <Link href={`${base}#contacts`}>{d["ft.contact"]}</Link>
-          </div>
+          <LegalLinks docs={legal} locale={locale} closeLabel={d.close} updatedLabel={d["lg.updated"]} />
         </div>
       </div>
     </footer>

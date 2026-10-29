@@ -6,10 +6,13 @@ export const site = {
     goal: 130000,
     updated: "2026-10-01",
   },
+  /** Owner named in the legal texts (Privacy Policy etc.). TODO: confirm the full name with Galyna. */
+  owner: { uk: "Галина Герасименко", en: "Galyna Herasymenko" },
+  /** Defaults; Studio → «Головна сторінка» → Контакти overrides them. Empty = icon/link hidden. */
   contacts: {
-    telegram: "https://t.me/", // TODO
-    instagram: "https://instagram.com/", // TODO
-    facebook: "https://facebook.com/", // TODO
-    email: "home.made.galyna@gmail.com",
+    telegram: "", // public Telegram contact — optional (the order bot works without it)
+    instagram: "https://www.instagram.com/gagemoniya_painting_decor_poem",
+    facebook: "https://www.facebook.com/galina.gerasimenko.301652",
+    email: "",
   },
 };

@@ -17,7 +17,9 @@ export function pageMeta(locale: Locale, path: string, title: string, descriptio
       siteName: "Home Made Galyna",
       locale: locale === "uk" ? "uk_UA" : "en_US",
       type: "website",
-      // TODO: add /public/og.jpg (1200×630) when real photos are ready
+      // link preview in Telegram / Viber / Facebook: Galyna & son (public/og.jpg, 1200×630)
+      images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "Home Made Galyna" }],
     },
+    twitter: { card: "summary_large_image", title, description, images: ["/og.jpg"] },
   };
 }

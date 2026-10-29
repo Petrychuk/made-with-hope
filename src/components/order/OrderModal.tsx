@@ -175,7 +175,10 @@ export function OrderModal({
               <label className="consent">
                 <input type="checkbox" id="o-consent" name="consent" aria-describedby="e-consent" {...err("consent")} />
                 <span>
-                  {d["o.consent"]} <span className="req" aria-hidden="true">*</span>
+                  {d["o.consent"]} <span className="req" aria-hidden="true">*</span>{" "}
+                  <a href={`/${locale}/privacy#privacy`} target="_blank" rel="noopener noreferrer" className="consent__link">
+                    {d["ft.privacy"]}
+                  </a>
                   <span className="err" id="e-consent" style={{ display: "block" }}>{errors.consent}</span>
                 </span>
               </label>

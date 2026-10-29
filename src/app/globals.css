@@ -322,7 +322,7 @@ p{margin:0}
 /* =========================================================
    FOOTER
    ========================================================= */
-.footer{--footer-shift:100px;position:relative;isolation:isolate;overflow:hidden;background:var(--cream);padding-top:calc(56px + var(--footer-shift));padding-bottom:clamp(240px,27vw,460px);margin-top:24px}
+.footer{--footer-shift:130px;position:relative;isolation:isolate;overflow:hidden;background:var(--cream);padding-top:calc(56px + var(--footer-shift));padding-bottom:clamp(240px,27vw,460px);margin-top:24px}
 .footer::before{content:"";position:absolute;left:0;right:0;top:0;height:180px;background:linear-gradient(var(--cream) 10%,rgba(253,251,247,0));z-index:-1;pointer-events:none}
 .footer__bg{position:absolute;inset:0;z-index:-2}
 .footer__bg img{width:100%;height:100%;object-fit:cover;object-position:center bottom;display:block}
@@ -341,13 +341,14 @@ p{margin:0}
   .footer__top{display:grid;grid-template-columns:240px minmax(0,1fr) auto;column-gap:20px}
   .footer__nav{margin-left:0;justify-content:flex-end;flex-wrap:nowrap}
   .footer__nav a{padding:10px 6px;white-space:nowrap}
-  .footer__mid{display:grid;grid-template-columns:320px minmax(0,1fr) 400px;align-items:start;margin-top:36px}
+  .footer__mid{display:grid;grid-template-columns:320px minmax(0,1fr) 320px;align-items:start;margin-top:36px}
   .footer__hand{justify-self:center;min-height:2.3em;display:flex;align-items:center}
-  .footer__legal{justify-self:end;justify-content:flex-end;flex-wrap:nowrap;white-space:nowrap}
+  .footer__mid .footer__legal{justify-self:end;align-items:flex-end}
 }
 .footer__made{font-size:13.5px}
-.footer__legal{display:flex;gap:4px;flex-wrap:wrap;align-items:center}
-.footer__legal a{padding:10px 6px;text-decoration:none}
+/* legal links: a tidy vertical list (same height in UA and EN) */
+.footer__legal{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:0;align-items:flex-start}
+.footer__legal a{display:inline-flex;align-items:center;min-height:32px;padding:4px 0;text-decoration:none;white-space:nowrap}
 .footer__legal a:hover{text-decoration:underline}
 .footer__hand{font-family:var(--f-hand);font-size:26px;color:var(--terracotta);transform:rotate(-6deg);line-height:1.1;text-align:center}
 
@@ -455,9 +456,10 @@ p{margin:0}
   .kind__photo .ph{border-radius:var(--r-lg) var(--r-lg) 0 0}
   .kind__photo .note{right:16px;width:180px;font-size:18px}
   .kind__panel{border-radius:0 0 var(--r-lg) var(--r-lg);padding:28px 20px}
-  .footer{--footer-shift:0px;padding-top:40px;padding-bottom:62vw}
-  .footer__legal{gap:0 14px;margin-left:-6px}
-  .footer__legal > span{display:none}
+  .footer{--footer-shift:30px;padding-top:calc(40px + var(--footer-shift));padding-bottom:78vw}
+  .footer__mid{flex-direction:column;align-items:flex-start;gap:14px}
+  .footer__hand{align-self:center;margin:6px 0}
+  .footer__legal a{min-height:44px;padding:0}
   .footer__top{flex-direction:column;align-items:flex-start}
   .footer__nav{margin-left:-8px}
   .form{grid-template-columns:1fr}
@@ -774,4 +776,51 @@ p{margin:0}
   .field textarea{min-height:76px}
   .consent{font-size:13.5px}
   .form__actions .btn{min-height:48px}
+}
+
+/* contacts: Facebook */
+.c-ico--fb{background:#1877F2}
+
+/* =========================================================
+   LEGAL (modals + /privacy page)
+   ========================================================= */
+.legal-modal .modal__box{width:min(720px,100%)}
+.legal__updated{font-size:13.5px;color:var(--text-2);margin-bottom:8px}
+.legal h3{font-family:var(--f-sans);font-size:16px;font-weight:700;margin:18px 0 6px}
+.legal section p,.legal__doc p{color:var(--text-2);font-size:15px;line-height:1.6;margin-top:6px}
+.legal__toc{display:flex;flex-wrap:wrap;gap:8px;margin:20px 0 8px}
+.legal__toc a{display:inline-flex;align-items:center;min-height:40px;padding:6px 14px;border-radius:999px;background:var(--paper);
+  border:1.5px solid var(--line);text-decoration:none;font-weight:600;font-size:14px}
+.legal__toc a:hover{border-color:var(--sage)}
+.legal__doc{margin-top:36px;padding-top:24px;border-top:1px dashed var(--line);scroll-margin-top:calc(var(--header-h) + 16px)}
+.legal__doc h2{font-size:26px}
+
+/* =========================================================
+   404
+   ========================================================= */
+.nf{padding:72px 0 96px}
+.nf__in{text-align:center;display:flex;flex-direction:column;align-items:center}
+.nf__code{font-family:var(--f-serif);font-weight:700;font-size:clamp(84px,14vw,128px);line-height:1;color:var(--text);
+  display:inline-flex;align-items:center;gap:6px}
+.nf__heart{width:.8em;height:.8em;transform:rotate(-8deg);--hw:2px}
+.nf .sec-title{margin-top:18px;font-size:clamp(26px,3.4vw,34px)}
+.nf__text{color:var(--text-2);margin-top:12px;max-width:42ch}
+.nf__cta{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-top:26px}
+@media (max-width:767px){ .nf__cta{flex-direction:column;width:100%} .nf__cta .btn{width:100%} }
+.consent__link{color:var(--terracotta-cta);font-weight:600;text-underline-offset:2px}
+
+/* =========================================================
+   FAMILY PHOTOS — tablet & mobile framing
+   ========================================================= */
+/* tablet: the polaroid with mum & son stays visible next to the story */
+@media (min-width:900px) and (max-width:1199px){
+  .story__grid{grid-template-columns:220px minmax(0,1fr) 190px;gap:32px}
+  .story .polaroid{display:block;padding:10px 10px 46px}
+  .story .polaroid figcaption{font-size:19px}
+}
+/* mobile: the note sits in the lower corner so it never covers a face */
+@media (max-width:767px){
+  .kind__photo{min-height:340px}
+  .kind__photo .note{top:auto;bottom:-12px;right:12px;transform:rotate(-3deg);width:168px;font-size:16px;padding:12px 14px}
+  .kind__panel{padding-top:40px}
 }

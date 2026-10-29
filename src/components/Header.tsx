@@ -96,7 +96,6 @@ export function Header({ locale, d }: { locale: Locale; d: Dict }) {
                 {l.label}
               </Link>
             ))}
-            <Link href={`${base}#transparency`}>{d["nav.transparency"]}</Link>
             <Link href={`${base}#contacts`}>{d["nav.contacts"]}</Link>
           </nav>
           <LangSwitch locale={locale} />

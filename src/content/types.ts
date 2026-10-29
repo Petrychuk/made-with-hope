@@ -11,6 +11,8 @@ export type ImageRef = {
   height?: number;
   /** tiny blurred preview (data URL) shown while the photo loads */
   lqip?: string;
+  /** CSS object-position — keeps faces in frame when the photo is cropped (e.g. "40% 25%") */
+  focus?: string;
 };
 
 export type ProductStatus = "available" | "made_to_order" | "sold";
