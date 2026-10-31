@@ -30,7 +30,9 @@ export type IconName =
   | "flower"
   | "mountain"
   | "paw"
-  | "chev";
+  | "chev"
+  | "chat"
+  | "faq";
 
 type Props = { name: IconName; className?: string; size?: number; style?: CSSProperties };
 

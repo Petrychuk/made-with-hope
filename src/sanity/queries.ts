@@ -40,6 +40,7 @@ export const homeQuery = `*[_type == "homePage" && _id == "homePage"][0]{
   storyText, "storyImage": storyImage${image}, "polaroidImage": polaroidImage${image}, polaroidCaption,
   "kindImage": kindImage${image}, kindNote, messages[]{ text, author },
   faq[]{ question, answer }, quote,
+  achievements[]{ title, text, tag, note, date, "photo": photo${image} },
   "craftImage": craftImage${image}, "supportImage": supportImage${image},
   telegramUrl, instagramUrl, facebookUrl, email
 }`;

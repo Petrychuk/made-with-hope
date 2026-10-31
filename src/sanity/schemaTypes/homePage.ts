@@ -25,8 +25,9 @@ export const homePage = defineType({
     { name: "hero", title: "Головний екран", default: true },
     { name: "story", title: "Наша історія" },
     { name: "son", title: "Про сина" },
-    { name: "kind", title: "Добрі слова" },
-    { name: "faq", title: "Питання і цитата" },
+    { name: "achievements", title: "Досягнення сина" },
+    { name: "kind", title: "Добрі слова (більше не показується)", hidden: true },
+    { name: "faq", title: "Питання" },
     { name: "photos", title: "Інші фото" },
     { name: "contacts", title: "Контакти" },
   ],
@@ -67,7 +68,7 @@ export const homePage = defineType({
     defineField({
       name: "sonName",
       title: "Ім'я сина (необов'язково)",
-      description: "Якщо порожньо — заголовок буде «Наш син».",
+      description: "Якщо порожньо — заголовок буде «Мій син».",
       type: "localeString",
       group: "son",
     }),
@@ -91,11 +92,38 @@ export const homePage = defineType({
     photo("sonPhoto", "Головне фото сина", "Вертикальне або квадратне.", "son"),
     photo("sonPhoto2", "Друге фото (необов'язково)", "Улюблена справа, прогулянка, момент радості.", "son"),
 
-    // ---- kind words
-    photo("kindImage", "Фото в блоці «Добрі слова»", "Наприклад, усміхнений син.", "kind"),
-    defineField({ name: "kindNote", title: "Напис на листочку", type: "localeString", group: "kind" }),
+    // ---- achievements slider
+    defineField({
+      name: "achievements",
+      title: "Досягнення сина",
+      description: "Слайдер на головній: фото + назва + короткий опис + рік. Додавайте тільки справжні події.",
+      type: "array",
+      group: "achievements",
+      validation: (r) => r.max(12),
+      of: [
+        defineArrayMember({
+          type: "object",
+          name: "achievement",
+          title: "Досягнення",
+          fields: [
+            defineField({ name: "photo", title: "Фото", type: "image", options: { hotspot: true }, fields: [defineField({ name: "alt", title: "Що на фото (для незрячих людей)", type: "string" })] }),
+            defineField({ name: "title", title: "Назва", type: "localeString", validation: (r) => r.required() }),
+            defineField({ name: "text", title: "Короткий опис", type: "localeTextShort" }),
+            defineField({ name: "tag", title: "Мітка (необов'язково)", description: "Одне-два слова, наприклад: Навчання, Творчість, Спорт", type: "localeString" }),
+            defineField({ name: "note", title: "Цитата на листочку (необов'язково)", description: "Одне речення, наприклад слова вчителя чи мами.", type: "localeString" }),
+            defineField({ name: "date", title: "Рік або дата (необов'язково)", description: "Наприклад: 2024 або Травень 2024", type: "string" }),
+          ],
+          preview: { select: { title: "title.uk", subtitle: "date", media: "photo" } },
+        }),
+      ],
+    }),
+
+    // ---- kind words (old block, hidden — data is kept)
+    photo("kindImage", "Фото в блоці «Добрі слова»", "Наприклад, усміхнений син.", "kind", true),
+    defineField({ name: "kindNote", title: "Напис на листочку", type: "localeString", group: "kind", hidden: true }),
     defineField({
       name: "messages",
+      hidden: true,
       title: "Повідомлення від людей",
       description: "Тільки з дозволу автора. Ім'я та місто, без прізвища.",
       type: "array",
@@ -134,7 +162,7 @@ export const homePage = defineType({
         }),
       ],
     }),
-    defineField({ name: "quote", title: "Ваша цитата", type: "localeTextShort", group: "faq" }),
+    defineField({ name: "quote", title: "Ваша цитата", type: "localeTextShort", group: "faq", hidden: true }),
 
     // ---- other photos
     photo("craftImage", "Фото біля виробів", "Процес в'язання, клубки. Видно тільки на комп'ютері.", "photos"),

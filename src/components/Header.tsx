@@ -30,13 +30,15 @@ export function Header({ locale, d, contacts: c }: { locale: Locale; d: Dict; co
   const base = `/${locale}`;
   const isHome = pathname === base;
   const isJournal = pathname.startsWith(`${base}/journal`);
+  const isPaintings = pathname.startsWith(`${base}/paintings`);
 
+  // on the home page there is no «Головна» link; elsewhere it leads back home
   const links = [
-    { href: base, label: d["nav.home"], current: isHome },
+    ...(isHome ? [] : [{ href: base, label: d["nav.home"] }]),
     { href: `${base}#story`, label: d["nav.story"] },
     { href: `${base}#handmade`, label: d["nav.handmade"] },
     { href: `${base}/journal`, label: d["nav.journal"], current: isJournal },
-    { href: `${base}#support`, label: d["nav.support"] },
+    { href: isHome ? `${base}#paintings` : `${base}/paintings`, label: d["nav.paintings"], current: isPaintings },
   ];
 
   return (
@@ -99,7 +101,6 @@ export function Header({ locale, d, contacts: c }: { locale: Locale; d: Dict; co
                 {l.label}
               </Link>
             ))}
-            <Link href={`${base}#contacts`}>{d["nav.contacts"]}</Link>
           </nav>
           <Socials c={c} />
           <LangSwitch locale={locale} />

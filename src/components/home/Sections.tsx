@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { pick, type Locale } from "@/i18n/config";
+import type { Locale } from "@/i18n/config";
 import type { Dict } from "@/i18n/dictionaries";
 import type { HomeContent } from "@/lib/home";
-import type { Post, Product, Support as SupportData, Update } from "@/content/types";
+import type { Post, Product, Support as SupportData } from "@/content/types";
 import { formatDate, formatMoney } from "@/lib/format";
 import { Icon } from "../Icon";
 import { Heart } from "../Heart";
@@ -10,7 +10,6 @@ import { Botanical } from "../Botanical";
 import { Placeholder } from "../Placeholder";
 import { ProductCard } from "../ProductCard";
 import { JournalCard } from "../JournalCard";
-import { KindWordsCarousel } from "./KindWords";
 import { CustomOrderButton } from "../order/CustomOrderButton";
 
 type P = { locale: Locale; d: Dict };
@@ -48,7 +47,7 @@ export function Hero({ locale, d, home }: P & H) {
         <Botanical name="leaves-buds" width={92} className="leaf hero__leaf" />
       </div>
       <div className="hero__media">
-        <Placeholder tone="sun" image={home.heroImage} label={d["ph.hero"]} alt={home.heroImage?.alt} priority fit="contain" sizes="(max-width: 767px) 100vw, 57vw" />
+        <Placeholder tone="sun" image={home.heroImage} label={d["ph.hero"]} alt={home.heroImage?.alt} priority sizes="(max-width: 767px) 100vw, 50vw" />
         <p className="note hero__note">
           {home.heroNote} <Heart variant="small" size={18} />
         </p>
@@ -382,8 +381,8 @@ export function Support({ locale, d, support, home }: P & H & { support: Support
   );
 }
 
-/* ---------------- TRANSPARENCY + UPDATES ---------------- */
-export function Transparency({ locale, d, updates }: P & { updates: Update[] }) {
+/* ---------------- TRANSPARENCY + FAQ ---------------- */
+export function Transparency({ locale, d, home }: P & H) {
   const actions = [
     { icon: "doc", t: d["tr.a1"], href: `/${locale}/transparency#documents` },
     { icon: "receipt", t: d["tr.a2"], href: `/${locale}/transparency#reports` },
@@ -393,95 +392,42 @@ export function Transparency({ locale, d, updates }: P & { updates: Update[] }) 
     <section className="section" id="transparency" aria-labelledby="tr-title" style={{ paddingTop: 8 }}>
       <div className="wrap">
         <div className="transp">
-          <div>
-            <h2 className="sec-title" id="tr-title" style={{ fontSize: 30 }}>{d["tr.title"]}</h2>
+          <Heart variant="tilt" size={44} className="transp__heart transp__heart--l" />
+          <Botanical name="eucalyptus" width={84} className="leaf transp__leaf transp__leaf--l" />
+          <div className="transp__main">
+            <h2 className="sec-title" id="tr-title">
+              <span>{d["tr.title"]}</span> <Botanical name="eucalyptus" width={34} className="leaf title-sprig" />
+            </h2>
             <p className="sec-lead">{d["tr.lead"]}</p>
             <div className="transp__actions">
               {actions.map((a) => (
                 <Link className="t-act" href={a.href} key={a.icon}>
-                  <Icon name={a.icon} /><span>{a.t}</span><span aria-hidden="true">→</span>
+                  <Icon name={a.icon} /><span>{a.t}</span><Icon name="chev" className="t-act__go" />
                 </Link>
               ))}
             </div>
             <p className="transp__privacy">{d["tr.privacy"]}</p>
           </div>
-          <div className="updates" id="updates">
-            <h3>{d["up.title"]} <Heart variant="tilt" size={26} className="heart-ico heart--sage" /></h3>
-            <ul className="u-list">
-              {updates.map((u) => (
-                <li className="u-card" key={u.id}>
-                  <Placeholder tone={u.tone} image={u.image} label={d["ph.photo"]} decorative sizes="(max-width: 767px) 72vw, 200px" />
-                  <div>
-                    <strong>{pick(u.title, locale)}</strong>
-                    <time dateTime={u.date}>{formatDate(u.date, locale)}</time>
-                  </div>
-                </li>
+          <div className="faq" id="faq">
+            <h2 className="sec-title">
+              <span>{d["faq.title"]}</span> <Icon name="faq" className="faq__title-ico" />
+            </h2>
+            <p className="sec-lead">{d["faq.lead"]}</p>
+            <div className="faq__list">
+              {home.faq.map((f) => (
+                <details key={f.q}>
+                  <summary>
+                    <span className="faq__ico" aria-hidden="true"><Icon name="chat" /></span>
+                    <span>{f.q}</span>
+                    <Icon name="chev" className="faq__chev" />
+                  </summary>
+                  <p>{f.a}</p>
+                </details>
               ))}
-            </ul>
+            </div>
           </div>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------------- KIND WORDS ---------------- */
-export function KindWords({ locale, d, home }: P & H) {
-  return (
-    <section className="section" id="kind" aria-labelledby="kw-title" style={{ paddingTop: 8 }}>
-      <div className="wrap kind__grid">
-        <div className="kind__photo">
-          <Placeholder tone="sun" image={home.kindImage} label={d["ph.son"]} alt={home.kindImage?.alt} sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 600px" />
-          <p className="note">
-            <span className="quote-mark" aria-hidden="true">“</span>
-            <span className="hand">{home.kindNote}</span> <Heart variant="small" size={16} />
-          </p>
-        </div>
-        <div className="kind__panel">
-          <h2 className="sec-title" id="kw-title">{d["kw.title"]}</h2>
-          <p className="lead">{d["kw.lead"]}</p>
-          <KindWordsCarousel messages={home.messages} d={d} />
-          <Botanical name="peach-blossom" width={96} className="leaf" />
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* ---------------- FAQ + QUOTE + CONTACTS ---------------- */
-export function FaqContacts({ d, home }: P & H) {
-  const c = home.contacts;
-  const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
-  return (
-    <section className="section faq" id="faq" aria-labelledby="faq-title" style={{ paddingTop: 8 }}>
-      <div className="wrap faq__grid">
-        <div>
-          <h2 className="sec-title" id="faq-title" style={{ marginBottom: 20 }}>
-            <span>{d["faq.title"]}</span> <Botanical name="eucalyptus" width={34} className="leaf title-sprig" />
-          </h2>
-          {home.faq.map((f) => (
-            <details key={f.q}>
-              <summary>{f.q}</summary>
-              <p>{f.a}</p>
-            </details>
-          ))}
-        </div>
-        <div>
-          <figure className="gquote">
-            <span className="quote-mark" aria-hidden="true">“</span>
-            <blockquote>{home.quote}</blockquote>
-            <figcaption><cite>{d["quote.by"]}</cite></figcaption>
-          </figure>
-          <div className="contacts" id="contacts">
-            <h3>{d["ct.title"]}</h3>
-            <p>{d["ct.lead"]}</p>
-            <ul>
-              {c.telegram && <li><a href={c.telegram} {...ext}><span className="c-ico c-ico--tg"><Icon name="tg" /></span><span>{d["ct.tg"]}</span></a></li>}
-              {c.instagram && <li><a href={c.instagram} {...ext}><span className="c-ico c-ico--ig"><Icon name="ig" /></span><span>{d["ct.ig"]}</span></a></li>}
-              {c.facebook && <li><a href={c.facebook} {...ext}><span className="c-ico c-ico--fb"><Icon name="fb" /></span><span>{d["ct.fb"]}</span></a></li>}
-              {c.email && <li><a href={`mailto:${c.email}`}><span className="c-ico c-ico--mail"><Icon name="mail" /></span>{c.email}</a></li>}
-            </ul>
-          </div>
+          <Heart variant="small" size={30} className="transp__heart transp__heart--r" />
+          <Botanical name="pale-leaves" width={84} className="leaf transp__leaf transp__leaf--r" flip />
         </div>
       </div>
     </section>

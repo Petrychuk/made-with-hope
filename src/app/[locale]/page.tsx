@@ -4,11 +4,14 @@ import { connection } from "next/server";
 import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { pageMeta } from "@/lib/seo";
-import { getPaintings, getPosts, getProducts, getSupport, getUpdates } from "@/lib/content";
+import { getPaintings, getPosts, getProducts, getSupport } from "@/lib/content";
 import { getHome } from "@/lib/home";
 import { Paintings } from "@/components/home/Paintings";
+import { Achievements } from "@/components/home/Achievements";
+import { JsonLd } from "@/components/JsonLd";
+import { brand, siteUrl } from "@/lib/seo";
 import {
-  AboutSon, FaqContacts, Handmade, Hero, JournalPreview, KindWords, Pillars, PurchaseHelps,
+  AboutSon, Handmade, Hero, JournalPreview, Pillars, PurchaseHelps,
   Story, Support, Transparency,
 } from "@/components/home/Sections";
 
@@ -29,13 +32,19 @@ export default async function HomePage({ params }: Props) {
   await connection();
   const d = getDictionary(locale);
   const p = { locale, d };
-  const [products, posts, updates, support, home, paintings] = await Promise.all([
-    getProducts(), getPosts(), getUpdates(), getSupport(), getHome(locale, d), getPaintings(),
+  const [products, posts, support, home, paintings] = await Promise.all([
+    getProducts(), getPosts(), getSupport(), getHome(locale, d), getPaintings(),
   ]);
   const h = { ...p, home };
 
+  const sameAs = [home.contacts.instagram, home.contacts.facebook, home.contacts.telegram].filter(Boolean);
+
   return (
     <>
+      <JsonLd data={{
+        "@context": "https://schema.org", "@type": "Organization", name: brand, url: `${siteUrl}/${locale}`,
+        logo: `${siteUrl}/icon-512.png`, description: d["meta.desc"], ...(sameAs.length ? { sameAs } : {}),
+      }} />
       <Hero {...h} />
       <Pillars {...p} />
       <Handmade {...h} products={products} />
@@ -44,10 +53,9 @@ export default async function HomePage({ params }: Props) {
       <JournalPreview {...p} posts={posts} />
       <Story {...h} />
       <AboutSon {...h} />
+      <Achievements d={d} slides={home.achievements} />
       <Support {...h} support={support} />
-      <Transparency {...p} updates={updates} />
-      <KindWords {...h} />
-      <FaqContacts {...h} />
+      <Transparency {...h} />
     </>
   );
 }

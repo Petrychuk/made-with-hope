@@ -42,7 +42,7 @@ const uk = ({ owner, contact }: Ctx): LegalDoc[] => [
         "Не довше, ніж потрібно для виконання замовлення, але не більше 1 року після нього. Після цього листування видаляється.",
       ] },
       { h: "7. Cookies та аналітика", p: [
-        "Сайт використовує лише технічний cookie для запам'ятовування обраної мови (UA/EN). Рекламних і аналітичних cookies немає.",
+        "Сайт використовує технічний cookie для запам'ятовування обраної мови (UA/EN) та сервіс статистики відвідувань Google Analytics (cookies Google, знеособлені дані про перегляди сторінок). Рекламних cookies немає. Ви можете вимкнути cookies у налаштуваннях браузера.",
       ] },
       { h: "8. Ваші права", p: [
         "Відповідно до ст. 8 Закону «Про захист персональних даних» ви маєте право знати, які дані про вас обробляються, вимагати їх виправлення чи видалення, відкликати згоду та звернутися до Уповноваженого Верховної Ради України з прав людини.",
@@ -147,7 +147,7 @@ const en = ({ owner, contact }: Ctx): LegalDoc[] => [
       ] },
       { h: "6. Retention", p: ["No longer than needed to complete the order, and no more than 1 year after it."] },
       { h: "7. Cookies and analytics", p: [
-        "The site uses only one technical cookie to remember your language (UA/EN). There are no advertising or analytics cookies.",
+        "The site uses a technical cookie to remember your language (UA/EN) and the Google Analytics visit statistics service (Google cookies, anonymised page-view data). There are no advertising cookies. You can disable cookies in your browser settings.",
       ] },
       { h: "8. Your rights", p: [
         "You have the right to know what data about you is processed, to ask for it to be corrected or deleted, to withdraw consent, and to complain to the Ukrainian Parliament Commissioner for Human Rights.",

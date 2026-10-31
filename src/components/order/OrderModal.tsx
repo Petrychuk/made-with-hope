@@ -5,6 +5,7 @@ import { pick, type Locale } from "@/i18n/config";
 import type { Dict } from "@/i18n/dictionaries";
 import type { Product } from "@/content/types";
 import { formatMoney, statusLabel } from "@/lib/format";
+import { track } from "@/lib/analytics";
 import { useFocusTrap } from "@/lib/useFocusTrap";
 import { isValidEmail, isValidIdea, isValidName, isValidPhone } from "@/lib/orderValidation";
 import { Icon } from "../Icon";
@@ -77,6 +78,7 @@ export function OrderModal({
       });
       if (res.status === 429) { setStatus({ kind: "error", text: d["e.rate"] }); return; }
       if (!res.ok) throw new Error(String(res.status));
+      track("generate_lead", { kind: painting ? "painting" : custom ? "custom" : "product" });
       setDone(true);
       setTimeout(() => successRef.current?.focus(), 0);
     } catch {
@@ -128,7 +130,7 @@ export function OrderModal({
                   <div className="field field--full">
                     <label htmlFor="o-idea">{painting ? d["pt.inq.idea"] : d["co.idea"]} <span className="req" aria-hidden="true">*</span></label>
                     <textarea ref={ideaRef} id="o-idea" name="idea" rows={3} maxLength={1200}
-                      defaultValue={painting ? `${d["pt.inq.prefill"]} «${painting}». ` : undefined}
+                      defaultValue={painting ? `${d["pt.inq.prefill"]} «${painting.replace(/^[«"„“]+|[»"”“]+$/g, "")}». ` : undefined}
                       placeholder={painting ? d["pt.inq.ph"] : d["co.ideaPh"]} required aria-describedby="e-idea" {...err("idea")} />
                     <span className="err" id="e-idea">{errors.idea}</span>
                   </div>
@@ -187,7 +189,7 @@ export function OrderModal({
               </label>
               <div className="form__actions">
                 <button className="btn btn--primary" type="submit" disabled={status.kind === "sending"}>
-                  {custom ? d["co.submit"] : d["o.submit"]}
+                  {painting ? d["pt.inq.submit"] : custom ? d["co.submit"] : d["o.submit"]}
                 </button>
                 <p className={`form__status${status.kind === "error" ? " err" : ""}`} role="status">
                   {status.text}
@@ -199,7 +201,7 @@ export function OrderModal({
           <div className="success modal__body" ref={successRef} tabIndex={-1}>
             <Heart variant="double" size={64} />
             <h2 id="order-title">{d["o.okTitle"]}</h2>
-            <p>{custom ? d["co.ok"] : d["o.ok"]}</p>
+            <p>{custom && !painting ? d["co.ok"] : d["o.ok"]}</p>
             <button className="btn btn--sage" type="button" onClick={onClose}>{d["o.done"]}</button>
           </div>
         )}

@@ -5,7 +5,8 @@ import { isLocale, locales, pick } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { getProduct, getProducts } from "@/lib/content";
 import { formatMoney, statusLabel } from "@/lib/format";
-import { brand, pageMeta } from "@/lib/seo";
+import { brand, pageMeta, siteUrl } from "@/lib/seo";
+import { JsonLd } from "@/components/JsonLd";
 import { getHome } from "@/lib/home";
 import { ProductCard } from "@/components/ProductCard";
 import { ProductGallery } from "@/components/ProductGallery";
@@ -45,8 +46,20 @@ export default async function ProductPage({ params }: Props) {
   const sold = product.status === "sold";
   const others = (await getProducts()).filter((p) => p.slug !== slug && p.status !== "sold").slice(0, 4);
 
+  const availability = { available: "InStock", made_to_order: "PreOrder", sold: "OutOfStock" }[product.status];
   return (
     <>
+      <JsonLd data={{
+        "@context": "https://schema.org", "@type": "Product", name,
+        ...(description ? { description } : {}),
+        ...(product.images.length ? { image: product.images.map((i) => i.url) } : {}),
+        brand: { "@type": "Brand", name: brand },
+        // price only when it is set in Studio — never invented
+        ...(product.price != null ? { offers: {
+          "@type": "Offer", url: `${siteUrl}/${locale}/handmade/${slug}`, price: product.price, priceCurrency: "UAH",
+          availability: `https://schema.org/${availability}`,
+        } } : {}),
+      }} />
       <section className="section product" aria-labelledby="product-title">
         <div className="wrap">
           <Link className="link-more product__back" href={`/${locale}/handmade`}>

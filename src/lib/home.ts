@@ -39,9 +39,13 @@ type RawHome = {
   storyText?: L; storyImage?: RawImage; polaroidImage?: RawImage; polaroidCaption?: L;
   kindImage?: RawImage; kindNote?: L; messages?: { text?: L; author?: string }[] | null;
   faq?: { question?: L; answer?: L }[] | null; quote?: L;
+  achievements?: { photo?: RawImage; title?: L; text?: L; tag?: L; note?: L; date?: string }[] | null;
   craftImage?: RawImage; supportImage?: RawImage;
   telegramUrl?: string; instagramUrl?: string; facebookUrl?: string; email?: string;
 };
+
+/** One slide of the son's achievements slider. */
+export type Achievement = { photo?: ImageRef; title: string; text: string; tag?: string; note?: string; date?: string };
 
 export type Contacts = { telegram?: string; instagram?: string; facebook?: string; email?: string };
 
@@ -54,6 +58,7 @@ export type HomeContent = {
   storyParagraphs: string[]; storyImage?: ImageRef; polaroidImage?: ImageRef; polaroidCaption: string;
   kindImage?: ImageRef; kindNote: string; messages: { text: string; by: string }[];
   faq: { q: string; a: string }[]; quote: string;
+  achievements: Achievement[];
   craftImage?: ImageRef; supportImage?: ImageRef;
   contacts: Contacts;
 };
@@ -77,6 +82,7 @@ export async function getHome(locale: Locale, d: Dict): Promise<HomeContent> {
   const r = (await getHomeRaw()) ?? {};
 
   const messages = (r.messages ?? []).filter((m) => m.text?.uk);
+  const wins = (r.achievements ?? []).filter((a) => a.title?.uk);
   const faq = (r.faq ?? []).filter((f) => f.question?.uk && f.answer?.uk);
 
   return {
@@ -121,6 +127,21 @@ export async function getHome(locale: Locale, d: Dict): Promise<HomeContent> {
       ? faq.map((f) => ({ q: t(f.question, locale, ""), a: t(f.answer, locale, "") }))
       : localFaq.map((f) => ({ q: t(f.q, locale, ""), a: t(f.a, locale, "") })),
     quote: t(r.quote, locale, d["quote.text"]),
+    // slides from Studio → else three placeholders on the family photos (no invented achievements)
+    achievements: wins.length
+      ? wins.map((a) => ({
+          photo: sanityImage(a.photo, 1200),
+          title: t(a.title, locale, ""),
+          text: t(a.text, locale, ""),
+          tag: t(a.tag, locale, "") || undefined,
+          note: t(a.note, locale, "") || undefined,
+          date: a.date?.trim() || undefined,
+        }))
+      : [
+          { photo: local(imgSonSmile, d["alt.sonSmile"], "42% 18%"), title: d["ach.p1t"], text: d["ach.p1s"] },
+          { photo: local(imgSonArtwork, d["alt.sonArtwork"], "50% 30%"), title: d["ach.p2t"], text: d["ach.p2s"] },
+          { photo: local(imgSonWriting, d["alt.sonWriting"], "35% 45%"), title: d["ach.p3t"], text: d["ach.p3s"] },
+        ],
 
     craftImage: sanityImage(r.craftImage, 1000) ?? local(imgCrafting, "", "50% 38%"),
     supportImage: sanityImage(r.supportImage, 1000) ?? local(imgTogetherLilac, "", "55% 35%"),

@@ -15,6 +15,7 @@ import { IconSprite } from "@/components/IconSprite";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { OrderProvider } from "@/components/order/OrderProvider";
+import { Analytics } from "@/components/Analytics";
 import "../globals.css";
 
 export const metadata: Metadata = {
@@ -64,6 +65,7 @@ export default async function LocaleLayout({
           <Footer locale={locale} d={d} contacts={home.contacts}
             legal={getLegalDocs(locale, { owner: site.owner[locale], contact: contactLine(home.contacts, locale) })} />
         </OrderProvider>
+        <Analytics />
       </body>
     </html>
   );

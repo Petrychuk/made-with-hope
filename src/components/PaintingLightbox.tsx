@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useRef, type KeyboardEvent, type RefObject } from "react";
+import { useEffect, useRef, type KeyboardEvent, type RefObject } from "react";
 import { createPortal } from "react-dom";
 import { useFocusTrap } from "@/lib/useFocusTrap";
 import { Icon } from "./Icon";
@@ -26,6 +26,13 @@ export function PaintingLightbox({ items, index, labels, trigger, onIndex, onClo
     if (e.key === "ArrowLeft") step(-1);
     if (e.key === "ArrowRight") step(1);
   };
+  // warm up the neighbours so ← → feels instant
+  useEffect(() => {
+    for (const d of [1, -1]) {
+      const src = items[(index + d + items.length) % items.length]?.image?.url;
+      if (src) new window.Image().src = src;
+    }
+  }, [index, items]);
   if (!p?.image) return null;
 
   return createPortal(
@@ -42,7 +49,8 @@ export function PaintingLightbox({ items, index, labels, trigger, onIndex, onClo
             alt={p.image.alt || p.title}
             width={p.image.width || 1200}
             height={p.image.height || 900}
-            sizes="100vw"
+            sizes="(max-width: 767px) 100vw, 900px"
+            unoptimized
             className="pt-lb__img"
             placeholder={p.image.lqip ? "blur" : "empty"}
             blurDataURL={p.image.lqip}
