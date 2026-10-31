@@ -20,8 +20,8 @@ type Errors = Partial<Record<Field, string>>;
  * product unset → custom order («Замовити унікальне»): what & idea instead of the product card
  */
 export function OrderModal({
-  product, locale, d, trigger, onClose,
-}: { product?: Product; locale: Locale; d: Dict; trigger: HTMLElement | null; onClose: () => void }) {
+  product, painting, locale, d, trigger, onClose,
+}: { product?: Product; painting?: string; locale: Locale; d: Dict; trigger: HTMLElement | null; onClose: () => void }) {
   const custom = !product;
   const boxRef = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
@@ -92,7 +92,7 @@ export function OrderModal({
       <div className="modal__box" role="dialog" aria-modal="true" aria-labelledby="order-title" ref={boxRef}>
         {/* sticky header: title + ✕ stay visible while the form scrolls (mobile) */}
         <div className="modal__head">
-          {!done ? <h2 id="order-title">{custom ? d["co.title"] : d["o.title"]}</h2> : <span />}
+          {!done ? <h2 id="order-title">{painting ? d["pt.inq.title"] : custom ? d["co.title"] : d["o.title"]}</h2> : <span />}
           <button className="modal__close" type="button" aria-label={d.close} onClick={onClose}>
             <Icon name="close" size={22} />
           </button>
@@ -113,21 +113,23 @@ export function OrderModal({
               </div>
             ) : (
               <div className="modal__item modal__item--custom">
-                <span className="pillar__ico"><Icon name="yarn" /></span>
+                <span className="pillar__ico"><Icon name={painting ? "palette" : "yarn"} /></span>
                 <div>
-                  <strong>{d["co.cardKicker"]}</strong>
-                  <span>{d["co.cardHand"]}</span>
+                  <strong>{painting ?? d["co.cardKicker"]}</strong>
+                  <span>{painting ? d["pt.inq.kicker"] : d["co.cardHand"]}</span>
                 </div>
               </div>
             )}
-            <p className="modal__hint">{custom ? d["co.hint"] : d["o.hint"]}</p>
+            <p className="modal__hint">{painting ? d["pt.inq.hint"] : custom ? d["co.hint"] : d["o.hint"]}</p>
 
             <form className="form" onSubmit={onSubmit} onBlur={(e) => liveCheck(e, false)} onInput={(e) => liveCheck(e, true)} noValidate>
               {custom && (
                 <>
                   <div className="field field--full">
-                    <label htmlFor="o-idea">{d["co.idea"]} <span className="req" aria-hidden="true">*</span></label>
-                    <textarea ref={ideaRef} id="o-idea" name="idea" rows={3} maxLength={1200} placeholder={d["co.ideaPh"]} required aria-describedby="e-idea" {...err("idea")} />
+                    <label htmlFor="o-idea">{painting ? d["pt.inq.idea"] : d["co.idea"]} <span className="req" aria-hidden="true">*</span></label>
+                    <textarea ref={ideaRef} id="o-idea" name="idea" rows={3} maxLength={1200}
+                      defaultValue={painting ? `${d["pt.inq.prefill"]} «${painting}». ` : undefined}
+                      placeholder={painting ? d["pt.inq.ph"] : d["co.ideaPh"]} required aria-describedby="e-idea" {...err("idea")} />
                     <span className="err" id="e-idea">{errors.idea}</span>
                   </div>
                 </>

@@ -3,8 +3,9 @@ import { Heart } from "./Heart";
 import { Placeholder } from "./Placeholder";
 
 /** A painting ready to render: text already in the visitor's language. */
+export type ItemTopic = { key: string; label: string; icon?: string; order: number };
 export type PaintingItem = {
-  id: string; title: string; meta: string; category: string; tone: Tone; image?: ImageRef; placeholder?: boolean;
+  id: string; title: string; meta: string; topics: ItemTopic[]; forSale: boolean; tone: Tone; image?: ImageRef; placeholder?: boolean;
 };
 
 export function PaintingCard({ item, label, big, sizes, openLabel, onOpen }: {

@@ -6,7 +6,7 @@
 import { cache } from "react";
 import type { Localized } from "@/i18n/config";
 import type {
-  ImageRef, Painting, PaintingCategory, Post, PostCategory, Product, ProductStatus, Support, Tone, TransparencyItem, Update,
+  ImageRef, Painting, Post, PostCategory, Product, Topic, ProductStatus, Support, Tone, TransparencyItem, Update,
 } from "@/content/types";
 import { localProducts } from "@/content/products";
 import { localPosts } from "@/content/posts";
@@ -65,8 +65,8 @@ export const getProduct = cache(async (slug: string): Promise<Product | null> =>
 
 /* ---------------- paintings (gallery «Мої малюнки») ---------------- */
 type RawPainting = {
-  id: string; title?: Localized; technique?: Localized; year?: number | null;
-  category?: PaintingCategory; image?: Partial<ImageRef> | null;
+  id: string; title?: Localized; technique?: Localized; year?: number | null; forSale?: boolean | null;
+  topics?: (RawTopic | null)[] | null; image?: Partial<ImageRef> | null;
 };
 
 /** Only real paintings from Studio — with no Sanity (or none uploaded) the gallery shows placeholders. */
@@ -78,22 +78,30 @@ export const getPaintings = cache(async (): Promise<Painting[]> => {
     title: loc(p.title),
     technique: loc(p.technique),
     year: p.year ?? undefined,
-    category: p.category ?? "other",
+    topics: mapTopics(p.topics),
+    forSale: p.forSale !== false,
     image: sanityImage(p.image, 1200),
     tone: tone(i),
   }));
 });
 
 /* ---------------- journal ---------------- */
+type RawTopic = { key?: string | null; title?: Localized; icon?: string | null; order?: number | null };
+const mapTopics = (list?: (RawTopic | null)[] | null): Topic[] =>
+  (list ?? [])
+    .filter((t): t is RawTopic & { key: string } => Boolean(t?.key))
+    .map((t) => ({ key: t.key, title: loc(t.title), icon: t.icon ?? undefined, order: t.order ?? 0 }));
+
 type RawPost = {
   slug: string; category?: PostCategory; date: string; title?: Localized; excerpt?: Localized; body?: Localized;
-  image?: Partial<ImageRef> | null;
+  image?: Partial<ImageRef> | null; tags?: (RawTopic | null)[] | null;
 };
 const mapPost = (p: RawPost, i: number): Post => {
   const body = loc(p.body);
   return {
     slug: p.slug,
     category: p.category ?? "thoughts",
+    tags: mapTopics(p.tags),
     date: p.date,
     tone: tone(i + 3),
     title: loc(p.title),

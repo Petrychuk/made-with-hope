@@ -11,6 +11,7 @@ const photo = (name: string, title: string, description: string, group: string, 
     title,
     description,
     type: "image",
+    options: { hotspot: true },
     group,
     fields: [defineField({ name: "alt", title: "Що на фото (для незрячих людей)", type: "string" })],
   });
@@ -31,7 +32,7 @@ export const homePage = defineType({
   ],
   fields: [
     // ---- hero
-    photo("heroImage", "Головне фото", "Ви з сином. Горизонтальне фото — ліва частина ховається за текстом.", "hero"),
+    photo("heroImage", "Головне фото", "Ви з сином. Після завантаження натисніть на фото → «Hotspot» і поставте крапку на обличчях: на телефоні й комп'ютері вони не обріжуться.", "hero"),
     defineField({
       name: "heroSubtitle",
       title: "Три рядки під назвою",

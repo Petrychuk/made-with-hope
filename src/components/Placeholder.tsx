@@ -13,9 +13,10 @@ type Props = {
   decorative?: boolean;
   sizes?: string;
   priority?: boolean;
+  fit?: "cover" | "contain";
 };
 
-export function Placeholder({ tone, label, image, alt, className = "", decorative, sizes, priority }: Props) {
+export function Placeholder({ tone, label, image, alt, className = "", decorative, sizes, priority, fit = "cover", }: Props) {
   if (image) {
     return (
       <div className={`ph ph--photo ${className}`}>
@@ -27,7 +28,7 @@ export function Placeholder({ tone, label, image, alt, className = "", decorativ
           priority={priority}
           placeholder={image.lqip ? "blur" : "empty"}
           blurDataURL={image.lqip}
-          style={{ objectFit: "cover", ...(image.focus ? { objectPosition: image.focus } : {}) }}
+          style={{ objectFit: fit, ...(image.focus ? { objectPosition: image.focus } : {}) }}
         />
       </div>
     );

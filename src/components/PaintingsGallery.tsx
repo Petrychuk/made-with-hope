@@ -7,23 +7,19 @@ import { Icon, type IconName } from "./Icon";
 import { PaintingCard, type PaintingItem } from "./PaintingCard";
 import { PaintingLightbox } from "./PaintingLightbox";
 
-const CATS = ["all", "flowers", "landscapes", "home", "animals", "inspiration", "other"] as const;
-const CAT_ICON: Record<(typeof CATS)[number], IconName | "heart"> = {
-  all: "leafbtn", flowers: "flower", landscapes: "mountain", home: "home", animals: "paw", inspiration: "heart", other: "sun",
-};
+export type Chip = { key: string; label: string; icon?: string };
+const KNOWN_ICONS = ["flower", "mountain", "home", "paw", "sun", "leafbtn"] as const;
 
 /** Big featured painting + a swipeable row + category chips. `labels` = dictionary strings (pt.*). */
-export function PaintingsGallery({ items, labels, allHref }: { items: PaintingItem[]; labels: Record<string, string>; allHref: string }) {
-  const [cat, setCat] = useState<(typeof CATS)[number]>("all");
+export function PaintingsGallery({ items, chips, labels, allHref }: { items: PaintingItem[]; chips: Chip[]; labels: Record<string, string>; allHref: string }) {
+  const [cat, setCat] = useState("all");
   const track = useRef<HTMLUListElement>(null);
   const trigger = useRef<HTMLElement | null>(null);
   const [open, setOpen] = useState<number | null>(null);
   const [edge, setEdge] = useState({ prev: false, next: false });
 
   const real = items.some((i) => !i.placeholder);
-  // only categories that have paintings (all chips while the gallery still shows placeholders)
-  const chips = real ? CATS.filter((c) => c === "all" || items.some((i) => i.category === c)) : CATS;
-  const list = real && cat !== "all" ? items.filter((i) => i.category === cat) : items;
+  const list = real && cat !== "all" ? items.filter((i) => i.topics.some((t) => t.key === cat)) : items;
   const [first, ...rest] = list;
   const show = (i: number) => (el: HTMLElement) => { trigger.current = el; setOpen(i); };
 
@@ -82,9 +78,10 @@ export function PaintingsGallery({ items, labels, allHref }: { items: PaintingIt
       <div className="pt-bar">
         <div className="pt-chips" role="group" aria-label={labels.filter}>
           {chips.map((c) => (
-            <button key={c} type="button" className="pt-chip" aria-pressed={cat === c} onClick={() => setCat(c)}>
-              {CAT_ICON[c] === "heart" ? <Heart variant="small" size={20} className="" /> : <Icon name={CAT_ICON[c] as IconName} />}
-              <span>{labels[c]}</span>
+            <button key={c.key} type="button" className="pt-chip" aria-pressed={cat === c.key} onClick={() => setCat(c.key)}>
+              {c.icon === "heart" ? <Heart variant="small" size={20} className="" />
+                : (KNOWN_ICONS as readonly string[]).includes(c.icon ?? "") ? <Icon name={c.icon as IconName} /> : null}
+              <span>{c.label}</span>
             </button>
           ))}
         </div>

@@ -147,6 +147,13 @@ p{margin:0}
 .hero__media{position:absolute;top:0;right:0;bottom:0;width:57%}
 .hero__media .ph{position:absolute;inset:0;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 18%);mask-image:linear-gradient(90deg,transparent 0,#000 18%)}
 .hero__media .ph img{object-position:50% 12%}
+
+/* Desktop hero photo: preserve its natural proportions */
+@media (min-width:901px){
+  .hero__grid{min-height:clamp(560px,46vw,700px)}
+  .hero__media .ph{left:auto;width:auto;max-width:100%;aspect-ratio:var(--hero-ar,.8)}
+}
+
 /* note sits low on the right — never over faces */
 .hero__note{bottom:48px;right:40px;width:180px;transform:rotate(5deg)}
 .hero__leaf{position:absolute;left:47.5%;bottom:18px;z-index:2;transform:rotate(-8deg)}
@@ -939,6 +946,7 @@ p{margin:0}
 .pt-lb__fig figcaption{text-align:center;color:#fff;font-family:var(--f-serif)}
 .pt-lb__fig figcaption strong{display:block;font-size:20px}
 .pt-lb__fig figcaption small{display:block;font:600 14px var(--f-sans);opacity:.85;margin-top:2px}
+.pt-lb__ask{margin-top:12px;min-height:44px}
 .pt-lb__btn{position:absolute;width:44px;height:44px;border-radius:50%;border:0;background:var(--paper);color:var(--text);box-shadow:var(--shadow-lg);display:grid;place-items:center;cursor:pointer;z-index:2}
 .pt-lb__btn svg{width:20px;height:20px}
 .pt-lb__close{top:-6px;right:-6px}

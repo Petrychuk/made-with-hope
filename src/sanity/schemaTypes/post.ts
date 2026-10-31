@@ -24,6 +24,13 @@ export const post = defineType({
       initialValue: "poetry",
       validation: (r) => r.required(),
     }),
+    defineField({
+      name: "tags",
+      title: "Теми (теги) — необов'язково",
+      description: "Наприклад: «Про осінь», «Про маму». Нові теми створюються в розділі «Теми» зліва.",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "topic" }], options: { filter: 'kind == "poem"' } }],
+    }),
     defineField({ name: "image", title: "Фото", type: "image", fields: [defineField({ name: "alt", title: "Що на фото (необов'язково)", type: "string" })] }),
     defineField({ name: "body", title: "Текст", type: "localeText", validation: (r) => r.required() }),
     defineField({

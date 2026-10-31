@@ -11,6 +11,8 @@ type Ctx = {
   openOrder: (productId: string, trigger?: HTMLElement | null) => void;
   /** «Замовити унікальне» — custom piece made to the visitor's idea */
   openCustom: (trigger?: HTMLElement | null) => void;
+  /** «Мене цікавить ця картина» — custom form prefilled with the painting title */
+  openPainting: (title: string, trigger?: HTMLElement | null) => void;
 };
 const OrderContext = createContext<Ctx | null>(null);
 
@@ -20,7 +22,7 @@ export function useOrder() {
   return ctx;
 }
 
-type Open = { kind: "product"; product: Product } | { kind: "custom" } | null;
+type Open = { kind: "product"; product: Product } | { kind: "custom"; painting?: string } | null;
 
 export function OrderProvider({
   children, products, locale, d,
@@ -43,13 +45,19 @@ export function OrderProvider({
     setOpen({ kind: "custom" });
   }, []);
 
+  const openPainting = useCallback((title: string, el?: HTMLElement | null) => {
+    setTrigger(el ?? null);
+    setOpen({ kind: "custom", painting: title });
+  }, []);
+
   return (
-    <OrderContext.Provider value={{ openOrder, openCustom }}>
+    <OrderContext.Provider value={{ openOrder, openCustom, openPainting }}>
       {children}
       {open && (
         <OrderModal
-          key={open.kind === "product" ? open.product.slug : "custom"}
+          key={open.kind === "product" ? open.product.slug : `custom-${open.painting ?? ""}`}
           product={open.kind === "product" ? open.product : undefined}
+          painting={open.kind === "custom" ? open.painting : undefined}
           locale={locale}
           d={d}
           trigger={trigger}

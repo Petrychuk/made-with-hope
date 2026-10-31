@@ -15,14 +15,17 @@ export type ImageRef = {
   focus?: string;
 };
 
-export type PaintingCategory = "flowers" | "landscapes" | "home" | "animals" | "inspiration" | "other";
+/** A tag managed in Studio ("Теми"): used for painting themes and for poems. */
+export type Topic = { key: string; title: Localized; icon?: string; order: number };
 
 export type Painting = {
   id: string;
   title: Localized;
   technique: Localized;
   year?: number;
-  category: PaintingCategory;
+  topics: Topic[];
+  /** shows the «Мене цікавить» button */
+  forSale: boolean;
   image?: ImageRef;
   tone: Tone;
 };
@@ -47,6 +50,7 @@ export type Post = {
   category: PostCategory;
   date: string; // YYYY-MM-DD
   tone: Tone;
+  tags?: Topic[]; // from Studio "Теми"; bundled sample posts have none
   image?: ImageRef;
   title: Localized;
   excerpt: Localized;

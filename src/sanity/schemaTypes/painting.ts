@@ -1,14 +1,5 @@
 import { defineField, defineType } from "sanity";
 
-export const PAINTING_CATEGORIES = [
-  { title: "Квіти", value: "flowers" },
-  { title: "Пейзажі", value: "landscapes" },
-  { title: "Мій дім", value: "home" },
-  { title: "Тварини", value: "animals" },
-  { title: "Натхнення", value: "inspiration" },
-  { title: "Різне", value: "other" },
-];
-
 /** Gallery «Мої малюнки» — the home page shows a random selection of these. */
 export const painting = defineType({
   name: "painting",
@@ -29,12 +20,18 @@ export const painting = defineType({
     defineField({ name: "technique", title: "Техніка", description: "Наприклад: Акварель", type: "localeString" }),
     defineField({ name: "year", title: "Рік", type: "number", validation: (r) => r.integer().min(1950).max(2100) }),
     defineField({
-      name: "category",
-      title: "Розділ",
-      type: "string",
-      options: { list: PAINTING_CATEGORIES },
-      initialValue: "other",
-      validation: (r) => r.required(),
+      name: "topics",
+      title: "Теми (теги)",
+      description: "Можна кілька. Нові теми створюються в розділі «Теми» зліва.",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "topic" }], options: { filter: 'kind == "painting"' } }],
+    }),
+    defineField({
+      name: "forSale",
+      title: "Показувати кнопку «Мене цікавить»",
+      description: "Відвідувач надішле запит про цю картину (він прийде в Telegram). Вимкніть, якщо картина не продається.",
+      type: "boolean",
+      initialValue: true,
     }),
     defineField({ name: "show", title: "Показувати на сайті", type: "boolean", initialValue: true }),
   ],

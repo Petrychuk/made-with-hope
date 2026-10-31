@@ -10,6 +10,7 @@ import { Icon } from "../Icon";
 import { Placeholder } from "../Placeholder";
 import { PaintingsGallery } from "../PaintingsGallery";
 import type { PaintingItem } from "../PaintingCard";
+import type { Chip } from "../PaintingsGallery";
 
 const TONES: Tone[] = ["pink", "sage", "sand", "peach", "blue"];
 
@@ -18,17 +19,31 @@ export function toItems(paintings: Painting[], locale: Locale): PaintingItem[] {
     id: p.id,
     title: pick(p.title, locale),
     meta: [pick(p.technique, locale), p.year].filter(Boolean).join(" · "),
-    category: p.category,
+    topics: p.topics.map((t) => ({ key: t.key, label: pick(t.title, locale), icon: t.icon, order: t.order })),
+    forSale: p.forSale,
     image: p.image,
     tone: p.tone,
   }));
+}
+
+/** Filter chips = tags used by the shown paintings (managed in Studio → «Теми»); placeholders get sample chips. */
+export function buildChips(items: PaintingItem[], d: Dict): Chip[] {
+  const all: Chip = { key: "all", label: d["pt.c.all"], icon: "leafbtn" };
+  if (!items.some((i) => !i.placeholder)) {
+    const sample = [["flowers", "flower"], ["landscapes", "mountain"], ["home", "home"], ["animals", "paw"], ["inspiration", "heart"], ["other", "sun"]] as const;
+    return [all, ...sample.map(([k, icon]) => ({ key: k, label: d[`pt.c.${k}` as "pt.c.all"], icon }))];
+  }
+  const seen = new Map<string, { chip: Chip; order: number }>();
+  for (const i of items) for (const t of i.topics) if (!seen.has(t.key)) seen.set(t.key, { chip: { key: t.key, label: t.label, icon: t.icon }, order: t.order });
+  const topics = [...seen.values()].sort((a, b) => a.order - b.order || a.chip.label.localeCompare(b.chip.label)).map((x) => x.chip);
+  return topics.length ? [all, ...topics] : [all];
 }
 
 export const paintingLabels = (d: Dict): Record<string, string> => ({
   all: d["pt.c.all"], flowers: d["pt.c.flowers"], landscapes: d["pt.c.landscapes"], home: d["pt.c.home"],
   animals: d["pt.c.animals"], inspiration: d["pt.c.inspiration"], other: d["pt.c.other"],
   filter: d["pt.filter"], next: d["pt.next"], prev: d["pt.prev"], list: d["pt.list"], ph: d["pt.ph"], empty: d["pt.empty"],
-  cta: d["pt.all"], open: d["pt.open"], prev1: d["pt.prev1"], next1: d["pt.next1"], close: d.close,
+  cta: d["pt.all"], ask: d["pt.ask"], open: d["pt.open"], prev1: d["pt.prev1"], next1: d["pt.next1"], close: d.close,
 });
 
 /** Home page: «Мої малюнки» gallery + «Світ у кольорах» showcase. Random selection on every visit. */
@@ -39,7 +54,7 @@ export function Paintings({ locale, d, paintings }: { locale: Locale; d: Dict; p
   // no paintings uploaded yet → placeholders
   const items: PaintingItem[] = real.length
     ? real
-    : TONES.map((tone, i) => ({ id: `ph-${i}`, title: d["pt.soon"], meta: "", category: "other", tone, placeholder: true }));
+    : TONES.map((tone, i) => ({ id: `ph-${i}`, title: d["pt.soon"], meta: "", topics: [], forSale: false, tone, placeholder: true }));
   // showcase: two other paintings when there are enough, otherwise reuse the first ones
   const showA = items[items.length > 5 ? 5 : 0];
   const showB = items[items.length > 6 ? 6 : Math.min(1, items.length - 1)];
@@ -64,7 +79,7 @@ export function Paintings({ locale, d, paintings }: { locale: Locale; d: Dict; p
               <Botanical name="pink-buds" width={78} className="pt__sprig" />
             </p>
           </div>
-          <PaintingsGallery items={items} labels={labels} allHref={`${base}/paintings`} />
+          <PaintingsGallery items={items} chips={buildChips(items, d)} labels={labels} allHref={`${base}/paintings`} />
         </div>
       </section>
 

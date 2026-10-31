@@ -1,5 +1,6 @@
 // GROQ queries. Images come with url + size + tiny blurred preview (lqip).
-const image = `{ "url": asset->url, alt, "width": asset->metadata.dimensions.width, "height": asset->metadata.dimensions.height, "lqip": asset->metadata.lqip }`;
+const image = `{ "url": asset->url, alt, "width": asset->metadata.dimensions.width, "height": asset->metadata.dimensions.height, "lqip": asset->metadata.lqip,
+  "focus": select(defined(hotspot) => string(round(hotspot.x * 100)) + "% " + string(round(hotspot.y * 100)) + "%") }`;
 
 const productFields = `
   "slug": slug.current, name, description, price, status, featured,
@@ -9,17 +10,18 @@ const productFields = `
 export const productsQuery = `*[_type == "product" && defined(slug.current)] | order(_createdAt desc){${productFields}}`;
 export const productQuery = `*[_type == "product" && slug.current == $slug][0]{${productFields}}`;
 
-// hotspot (set in Studio) → CSS object-position, so the important part of a painting survives the crop
+const topicFields = `{ "key": slug.current, title, icon, order }`;
+
 export const paintingsQuery = `*[_type == "painting" && defined(image.asset) && show != false] | order(_createdAt desc){
-  "id": _id, title, technique, year, category,
-  "image": image{ "url": asset->url, alt, "width": asset->metadata.dimensions.width, "height": asset->metadata.dimensions.height,
-    "lqip": asset->metadata.lqip,
-    "focus": select(defined(hotspot) => string(round(hotspot.x * 100)) + "% " + string(round(hotspot.y * 100)) + "%") }
+  "id": _id, title, technique, year, forSale,
+  "image": image${image},
+  "topics": topics[]->${topicFields}
 }`;
 
 const postFields = `
   "slug": slug.current, category, date, title, excerpt, body,
-  "image": image${image}
+  "image": image${image},
+  "tags": tags[]->${topicFields}
 `;
 export const postsQuery = `*[_type == "post" && defined(slug.current)] | order(date desc, _createdAt desc){${postFields}}`;
 export const postQuery = `*[_type == "post" && slug.current == $slug][0]{${postFields}}`;

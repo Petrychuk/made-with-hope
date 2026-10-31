@@ -5,6 +5,7 @@ import { useRef, type KeyboardEvent, type RefObject } from "react";
 import { createPortal } from "react-dom";
 import { useFocusTrap } from "@/lib/useFocusTrap";
 import { Icon } from "./Icon";
+import { useOrder } from "./order/OrderProvider";
 import type { PaintingItem } from "./PaintingCard";
 
 /** Full-size view of a painting with ← → and Esc. Rendered into <body> so it always sits above the header. */
@@ -12,6 +13,7 @@ export function PaintingLightbox({ items, index, labels, trigger, onIndex, onClo
   items: PaintingItem[]; index: number; labels: Record<string, string>;
   trigger: RefObject<HTMLElement | null>; onIndex: (i: number) => void; onClose: () => void;
 }) {
+  const { openPainting } = useOrder();
   const boxRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   useFocusTrap(boxRef, true, onClose, trigger, closeRef);
@@ -49,6 +51,12 @@ export function PaintingLightbox({ items, index, labels, trigger, onIndex, onClo
           <figcaption>
             <strong>{p.title}</strong>
             {p.meta && <small>{p.meta}</small>}
+            {p.forSale && (
+              <button type="button" className="btn btn--primary pt-lb__ask"
+                onClick={() => { onClose(); openPainting(p.title, trigger.current); }}>
+                {labels.ask}
+              </button>
+            )}
           </figcaption>
         </figure>
         {many && (
