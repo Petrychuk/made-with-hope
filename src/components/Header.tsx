@@ -5,12 +5,13 @@ import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import type { Locale } from "@/i18n/config";
 import type { Dict } from "@/i18n/dictionaries";
+import type { Contacts } from "@/lib/home";
 import { Icon } from "./Icon";
 import { LangSwitch } from "./LangSwitch";
 import { useFocusTrap } from "@/lib/useFocusTrap";
 import { Heart } from "@/components/Heart";
 
-export function Header({ locale, d }: { locale: Locale; d: Dict }) {
+export function Header({ locale, d, contacts: c }: { locale: Locale; d: Dict; contacts: Contacts }) {
   const pathname = usePathname() || "";
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -42,10 +43,10 @@ export function Header({ locale, d }: { locale: Locale; d: Dict }) {
     <>
       <header className={`header${scrolled ? " is-scrolled" : ""}`}>
         <div className="wrap header__in">
-          <Link className="logo" href={base} aria-label="Home Made Galyna">
+          <Link className="logo" href={base} aria-label={d.brand}>
             <Heart variant="main" size={38} />
             <span>
-              <span className="logo__name">Home Made Galyna</span>
+              <span className="logo__name">{d.brand}</span>
               <span className="logo__tag">{d.tagline}</span>
             </span>
           </Link>
@@ -58,6 +59,8 @@ export function Header({ locale, d }: { locale: Locale; d: Dict }) {
             ))}
             <LangSwitch locale={locale} />
           </nav>
+
+          <Socials c={c} />
 
           <Link className="btn btn--primary btn--sm desktop-cta" href={`${base}#support`}>
             <Heart variant="small" size={20} className="" />
@@ -84,7 +87,7 @@ export function Header({ locale, d }: { locale: Locale; d: Dict }) {
           <div className="drawer__top">
             <span className="logo">
               <Heart variant="main" size={34} />
-              <span className="logo__name">Home Made Galyna</span>
+              <span className="logo__name">{d.brand}</span>
             </span>
             <button className="drawer__close" type="button" aria-label={d.close} onClick={() => setOpen(false)}>
               <Icon name="close" size={24} />
@@ -98,6 +101,7 @@ export function Header({ locale, d }: { locale: Locale; d: Dict }) {
             ))}
             <Link href={`${base}#contacts`}>{d["nav.contacts"]}</Link>
           </nav>
+          <Socials c={c} />
           <LangSwitch locale={locale} />
           <Link className="btn btn--primary" href={`${base}#support`} onClick={() => setOpen(false)}>
             <Heart variant="small" size={20} className="" />
@@ -106,5 +110,16 @@ export function Header({ locale, d }: { locale: Locale; d: Dict }) {
         </div>
       </div>
     </>
+  );
+}
+
+function Socials({ c }: { c: Contacts }) {
+  const ext = { target: "_blank", rel: "noopener noreferrer" } as const;
+  if (!c.instagram && !c.facebook) return null;
+  return (
+    <div className="socials">
+      {c.instagram && <a href={c.instagram} {...ext} aria-label="Instagram"><Icon name="ig" /></a>}
+      {c.facebook && <a href={c.facebook} {...ext} aria-label="Facebook"><Icon name="fb" /></a>}
+    </div>
   );
 }

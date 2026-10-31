@@ -59,7 +59,7 @@ export default async function LocaleLayout({
         <a className="skip" href="#main">{d.skip}</a>
         <IconSprite />
         <OrderProvider products={orderable} locale={locale} d={d}>
-          <Header locale={locale} d={d} />
+          <Header locale={locale} d={d} contacts={home.contacts} />
           <main id="main">{children}</main>
           <Footer locale={locale} d={d} contacts={home.contacts}
             legal={getLegalDocs(locale, { owner: site.owner[locale], contact: contactLine(home.contacts, locale) })} />

@@ -5,7 +5,7 @@ import { getDictionary, type Dict } from "@/i18n/dictionaries";
 import type { TransparencyItem } from "@/content/types";
 import { getTransparency } from "@/lib/content";
 import { formatDate } from "@/lib/format";
-import { pageMeta } from "@/lib/seo";
+import { brand, pageMeta } from "@/lib/seo";
 import { Icon } from "@/components/Icon";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const d = getDictionary(locale);
   // medical documents: keep this page out of search engines
   return {
-    ...pageMeta(locale, "/transparency", `${d["tr.pageTitle"]} | Home Made Galyna`, d["tr.lead"]),
+    ...pageMeta(locale, "/transparency", `${d["tr.pageTitle"]} | ${brand}`, d["tr.lead"]),
     robots: { index: false, follow: false, nocache: true, googleBot: { index: false, follow: false } },
   };
 }

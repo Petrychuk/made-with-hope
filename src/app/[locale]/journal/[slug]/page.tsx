@@ -5,7 +5,7 @@ import { isLocale, locales, pick } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { getPost, getPosts } from "@/lib/content";
 import { categoryLabel, formatDate } from "@/lib/format";
-import { pageMeta } from "@/lib/seo";
+import { brand, pageMeta } from "@/lib/seo";
 import { JournalCard } from "@/components/JournalCard";
 import { Placeholder } from "@/components/Placeholder";
 import { Heart } from "@/components/Heart";
@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
   const post = await getPost(slug);
   if (!isLocale(locale) || !post) return {};
-  return pageMeta(locale, `/journal/${slug}`, `${pick(post.title, locale)} | Home Made Galyna`, pick(post.excerpt, locale));
+  return pageMeta(locale, `/journal/${slug}`, `${pick(post.title, locale)} | ${brand}`, pick(post.excerpt, locale));
 }
 
 export default async function PostPage({ params }: Props) {

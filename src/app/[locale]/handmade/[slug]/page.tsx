@@ -5,7 +5,7 @@ import { isLocale, locales, pick } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { getProduct, getProducts } from "@/lib/content";
 import { formatMoney, statusLabel } from "@/lib/format";
-import { pageMeta } from "@/lib/seo";
+import { brand, pageMeta } from "@/lib/seo";
 import { getHome } from "@/lib/home";
 import { ProductCard } from "@/components/ProductCard";
 import { ProductGallery } from "@/components/ProductGallery";
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const meta = pageMeta(
     locale,
     `/handmade/${slug}`,
-    `${pick(product.name, locale)} | Home Made Galyna`,
+    `${pick(product.name, locale)} | ${brand}`,
     pick(product.description, locale) || getDictionary(locale)["hm.lead"],
   );
   const cover = product.images[0];

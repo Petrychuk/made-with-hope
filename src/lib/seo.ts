@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { locales, type Locale } from "@/i18n/config";
 
+export const brand = "Galyna's World";
 export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 /** canonical + hreflang alternates + Open Graph for a path without the locale prefix ("" | "/journal" ...). */
@@ -14,11 +15,11 @@ export function pageMeta(locale: Locale, path: string, title: string, descriptio
       title,
       description,
       url: `/${locale}${path}`,
-      siteName: "Home Made Galyna",
+      siteName: brand,
       locale: locale === "uk" ? "uk_UA" : "en_US",
       type: "website",
       // link preview in Telegram / Viber / Facebook: Galyna & son (public/og.jpg, 1200×630)
-      images: [{ url: "/og.jpg", width: 1200, height: 630, alt: "Home Made Galyna" }],
+      images: [{ url: "/og.jpg", width: 1200, height: 630, alt: brand }],
     },
     twitter: { card: "summary_large_image", title, description, images: ["/og.jpg"] },
   };

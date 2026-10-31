@@ -20,7 +20,7 @@ const uk = ({ owner, contact }: Ctx): LegalDoc[] => [
     updated: UPDATED,
     sections: [
       { h: "1. Хто обробляє ваші дані", p: [
-        `Володілець персональних даних — ${owner}, фізична особа, авторка сайту Home Made Galyna (далі — «ми»).`,
+        `Володілець персональних даних — ${owner}, фізична особа, авторка сайту Galyna's World (далі — «ми»).`,
         "Обробка здійснюється відповідно до Закону України «Про захист персональних даних».",
       ] },
       { h: "2. Які дані ми збираємо", p: [
@@ -59,7 +59,7 @@ const uk = ({ owner, contact }: Ctx): LegalDoc[] => [
     updated: UPDATED,
     sections: [
       { h: "1. Про сайт", p: [
-        `Home Made Galyna — особистий сайт родини: ручна робота, вірші, історія та можливість підтримати. Сайт веде ${owner}.`,
+        `Galyna's World — особистий сайт родини: ручна робота, вірші, історія та можливість підтримати. Сайт веде ${owner}.`,
         "Користуючись сайтом, ви погоджуєтеся з цими умовами.",
       ] },
       { h: "2. Авторські права", p: [
@@ -127,7 +127,7 @@ const en = ({ owner, contact }: Ctx): LegalDoc[] => [
     updated: UPDATED,
     sections: [
       { h: "1. Who processes your data", p: [
-        `The data controller is ${owner}, a private individual and author of the Home Made Galyna website ("we").`,
+        `The data controller is ${owner}, a private individual and author of the Galyna's World website ("we").`,
         "Data is processed in accordance with the Law of Ukraine «On Personal Data Protection».",
       ] },
       { h: "2. What we collect", p: [
@@ -164,7 +164,7 @@ const en = ({ owner, contact }: Ctx): LegalDoc[] => [
     updated: UPDATED,
     sections: [
       { h: "1. About the site", p: [
-        `Home Made Galyna is a personal family website: handmade items, poems, our story and a way to help. It is run by ${owner}.`,
+        `Galyna's World is a personal family website: handmade items, poems, our story and a way to help. It is run by ${owner}.`,
         "By using the site you agree to these terms.",
       ] },
       { h: "2. Copyright", p: [

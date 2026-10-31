@@ -6,7 +6,7 @@
 import { cache } from "react";
 import type { Localized } from "@/i18n/config";
 import type {
-  ImageRef, Post, PostCategory, Product, ProductStatus, Support, Tone, TransparencyItem, Update,
+  ImageRef, Painting, PaintingCategory, Post, PostCategory, Product, ProductStatus, Support, Tone, TransparencyItem, Update,
 } from "@/content/types";
 import { localProducts } from "@/content/products";
 import { localPosts } from "@/content/posts";
@@ -15,7 +15,7 @@ import { site } from "@/content/site";
 import { sanityEnabled } from "@/sanity/env";
 import { onSanityError, sanityFetch } from "@/sanity/client";
 import {
-  postQuery, postsQuery, productQuery, productsQuery, supportQuery, transparencyQuery, updatesQuery,
+  paintingsQuery, postQuery, postsQuery, productQuery, productsQuery, supportQuery, transparencyQuery, updatesQuery,
 } from "@/sanity/queries";
 
 const TONES: Tone[] = ["pink", "sand", "sage", "peach", "sun", "blue"];
@@ -61,6 +61,27 @@ export const getProduct = cache(async (slug: string): Promise<Product | null> =>
   if (!sanityEnabled) return localProducts.find((p) => p.slug === slug) ?? null;
   const row = await sanityFetch<RawProduct | null>(productQuery, { slug }).catch(onSanityError(null));
   return row ? mapProduct(row, 0) : null;
+});
+
+/* ---------------- paintings (gallery «Мої малюнки») ---------------- */
+type RawPainting = {
+  id: string; title?: Localized; technique?: Localized; year?: number | null;
+  category?: PaintingCategory; image?: Partial<ImageRef> | null;
+};
+
+/** Only real paintings from Studio — with no Sanity (or none uploaded) the gallery shows placeholders. */
+export const getPaintings = cache(async (): Promise<Painting[]> => {
+  if (!sanityEnabled) return [];
+  const rows = await sanityFetch<RawPainting[]>(paintingsQuery).catch(onSanityError([]));
+  return rows.map((p, i) => ({
+    id: p.id,
+    title: loc(p.title),
+    technique: loc(p.technique),
+    year: p.year ?? undefined,
+    category: p.category ?? "other",
+    image: sanityImage(p.image, 1200),
+    tone: tone(i),
+  }));
 });
 
 /* ---------------- journal ---------------- */

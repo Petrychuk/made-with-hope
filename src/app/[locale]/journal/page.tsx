@@ -7,7 +7,7 @@ import { categories } from "@/content/posts";
 import { getPosts } from "@/lib/content";
 import type { PostCategory } from "@/content/types";
 import { categoryLabel } from "@/lib/format";
-import { pageMeta } from "@/lib/seo";
+import { brand, pageMeta } from "@/lib/seo";
 import { JournalCard } from "@/components/JournalCard";
 import { Botanical } from "@/components/Botanical";
 
@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   if (!isLocale(locale)) return {};
   const d = getDictionary(locale);
-  return pageMeta(locale, "/journal", `${d["meta.journal"]} | Home Made Galyna`, d["j.subtitle"]);
+  return pageMeta(locale, "/journal", `${d["meta.journal"]} | ${brand}`, d["j.subtitle"]);
 }
 
 export default async function JournalPage({ params, searchParams }: Props) {

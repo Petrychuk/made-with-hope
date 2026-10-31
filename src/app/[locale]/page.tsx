@@ -4,8 +4,9 @@ import { connection } from "next/server";
 import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { pageMeta } from "@/lib/seo";
-import { getPosts, getProducts, getSupport, getUpdates } from "@/lib/content";
+import { getPaintings, getPosts, getProducts, getSupport, getUpdates } from "@/lib/content";
 import { getHome } from "@/lib/home";
+import { Paintings } from "@/components/home/Paintings";
 import {
   AboutSon, FaqContacts, Handmade, Hero, JournalPreview, KindWords, Pillars, PurchaseHelps,
   Story, Support, Transparency,
@@ -28,8 +29,8 @@ export default async function HomePage({ params }: Props) {
   await connection();
   const d = getDictionary(locale);
   const p = { locale, d };
-  const [products, posts, updates, support, home] = await Promise.all([
-    getProducts(), getPosts(), getUpdates(), getSupport(), getHome(locale, d),
+  const [products, posts, updates, support, home, paintings] = await Promise.all([
+    getProducts(), getPosts(), getUpdates(), getSupport(), getHome(locale, d), getPaintings(),
   ]);
   const h = { ...p, home };
 
@@ -39,6 +40,7 @@ export default async function HomePage({ params }: Props) {
       <Pillars {...p} />
       <Handmade {...h} products={products} />
       <PurchaseHelps {...p} />
+      <Paintings {...p} paintings={paintings} />
       <JournalPreview {...p} posts={posts} />
       <Story {...h} />
       <AboutSon {...h} />

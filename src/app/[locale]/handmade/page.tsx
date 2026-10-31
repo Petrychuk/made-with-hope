@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { isLocale } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";
 import { getProducts } from "@/lib/content";
-import { pageMeta } from "@/lib/seo";
+import { brand, pageMeta } from "@/lib/seo";
 import { Heart } from "@/components/Heart";
 import { ProductCard } from "@/components/ProductCard";
 
@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   if (!isLocale(locale)) return {};
   const d = getDictionary(locale);
-  return pageMeta(locale, "/handmade", `${d["hm.pageTitle"]} | Home Made Galyna`, d["hm.lead"]);
+  return pageMeta(locale, "/handmade", `${d["hm.pageTitle"]} | ${brand}`, d["hm.lead"]);
 }
 
 export default async function HandmadePage({ params }: Props) {

@@ -5,7 +5,7 @@ import { getDictionary } from "@/i18n/dictionaries";
 import { getLegalDocs } from "@/content/legal";
 import { site } from "@/content/site";
 import { contactLine, getHome } from "@/lib/home";
-import { pageMeta } from "@/lib/seo";
+import { brand, pageMeta } from "@/lib/seo";
 import { LegalBody } from "@/components/LegalLinks";
 
 type Props = { params: Promise<{ locale: string }> };
@@ -14,7 +14,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   if (!isLocale(locale)) return {};
   const d = getDictionary(locale);
-  return pageMeta(locale, "/privacy", `${d["lg.title"]} | Home Made Galyna`, d["ft.privacy"]);
+  return pageMeta(locale, "/privacy", `${d["lg.title"]} | ${brand}`, d["ft.privacy"]);
 }
 
 /** All legal documents on one page (the footer opens the same texts in modals). */

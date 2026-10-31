@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useState, type RefObject } from "react";
+import { createPortal } from "react-dom";
 import type { Locale } from "@/i18n/config";
 import type { LegalDoc } from "@/content/legal";
 import { formatDate } from "@/lib/format";
@@ -43,7 +44,8 @@ function LegalModal({ doc, locale, closeLabel, updatedLabel, trigger, onClose }:
   const boxRef = useRef<HTMLDivElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   useFocusTrap(boxRef, true, onClose, trigger, closeRef);
-  return (
+  // portal to <body>: the footer is its own stacking context, so inside it the modal would sit under the sticky header
+  return createPortal(
     <div className="modal is-open legal-modal">
       <div className="modal__bg" onClick={onClose} />
       <div className="modal__box" role="dialog" aria-modal="true" aria-labelledby="legal-title" ref={boxRef}>
@@ -57,7 +59,8 @@ function LegalModal({ doc, locale, closeLabel, updatedLabel, trigger, onClose }:
           <LegalBody doc={doc} locale={locale} updatedLabel={updatedLabel} />
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }
 

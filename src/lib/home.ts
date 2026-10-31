@@ -46,7 +46,7 @@ type RawHome = {
 export type Contacts = { telegram?: string; instagram?: string; facebook?: string; email?: string };
 
 export type HomeContent = {
-  heroLines: string[]; heroDesc: string; heroNote: string; heroImage?: ImageRef;
+  heroLines: string[]; heroDesc: string[]; heroNote: string; heroImage?: ImageRef;
   son: {
     show: boolean; title: string; paragraphs: string[]; likes: string[]; dream: string;
     photo?: ImageRef; photo2?: ImageRef;
@@ -80,8 +80,8 @@ export async function getHome(locale: Locale, d: Dict): Promise<HomeContent> {
   const faq = (r.faq ?? []).filter((f) => f.question?.uk && f.answer?.uk);
 
   return {
-    heroLines: lines(t(r.heroSubtitle, locale, [d["hero.l1"], d["hero.l2"], d["hero.l3"]].join("\n"))),
-    heroDesc: t(r.heroDescription, locale, d["hero.desc"]),
+    heroLines: lines(t(r.heroSubtitle, locale, [d["hero.l1"], d["hero.l2"]].join("\n"))),
+    heroDesc: paragraphs(t(r.heroDescription, locale, d["hero.desc"])),
     heroNote: t(r.heroNote, locale, d["note.hero"]),
     // photo from Studio → else the family photo shipped with the site
     heroImage: sanityImage(r.heroImage, 2000) ?? {

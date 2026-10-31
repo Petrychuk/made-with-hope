@@ -24,7 +24,13 @@ export type IconName =
   | "arrow"
   | "ext"
   | "close"
-  | "burger";
+  | "burger"
+  | "palette"
+  | "brush"
+  | "flower"
+  | "mountain"
+  | "paw"
+  | "chev";
 
 type Props = { name: IconName; className?: string; size?: number; style?: CSSProperties };
 

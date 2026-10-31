@@ -18,24 +18,26 @@ type H = { home: HomeContent };
 
 /* ---------------- HERO ---------------- */
 export function Hero({ locale, d, home }: P & H) {
+  const title = d["hero.title"].split(" ");
+  const lastWord = title.pop(); // last word keeps the heart on the same line
   return (
     <section className="hero" aria-labelledby="hero-title">
       <div className="wrap hero__grid">
         <div className="hero__text">
           <h1 id="hero-title">
-            Home Made{" "}
+            {title.join(" ")}{" "}
             <span className="nowrap-heart">
-              Galyna <Heart variant="main" size={64} />
+              {lastWord} <Heart variant="main" size={64} />
             </span>
           </h1>
           <p className="hero__sub">
             {home.heroLines.map((l) => <span key={l}>{l}</span>)}
           </p>
-          <p className="hero__desc">{home.heroDesc}</p>
+          {home.heroDesc.map((p) => <p key={p} className="hero__desc">{p}</p>)}
           <div className="hero__cta">
-            <Link className="btn btn--primary" href={`/${locale}#support`}>
+            <Link className="btn btn--primary" href={`/${locale}#handmade`}>
               <Heart variant="small" size={20} className="" />
-              <span>{d["cta.support"]}</span>
+              <span>{d["cta.explore"]}</span>
             </Link>
             <Link className="btn btn--ghost" href={`/${locale}#story`}>
               <Icon name="leafbtn" style={{ color: "var(--sage)" }} />

@@ -22,7 +22,7 @@ export function Footer({ locale, d, contacts: c, legal }: { locale: Locale; d: D
           <Link className="logo" href={base}>
             <Heart variant="main" size={38} />
             <span>
-              <span className="logo__name">Home Made Galyna</span>
+              <span className="logo__name">{d.brand}</span>
               <span className="logo__tag" style={{ display: "block" }}>{d.tagline}</span>
             </span>
           </Link>
@@ -43,7 +43,7 @@ export function Footer({ locale, d, contacts: c, legal }: { locale: Locale; d: D
         </div>
         <div className="footer__mid">
           <div>
-            <p>© 2026 Home Made Galyna. {d["ft.rights"]}</p>
+            <p>© 2026 {d.brand}. {d["ft.rights"]}</p>
             <p className="footer__made">{d["ft.made"]}</p>
           </div>
           <p className="footer__hand" aria-hidden="true">{d["ft.hand"]}</p>

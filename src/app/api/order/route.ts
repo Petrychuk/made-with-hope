@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { getProduct } from "@/lib/content";
 import { siteUrl } from "@/lib/seo";
+import { isValidEmail, isValidIdea, isValidName, isValidPhone } from "@/lib/orderValidation";
 
 /**
  * Order request -> Telegram message to Galyna.
@@ -27,7 +28,6 @@ function rateLimited(ip: string) {
 const esc = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 const clean = (v: unknown, max = 200) => (typeof v === "string" ? v.trim().slice(0, max) : "");
 
-const CUSTOM_KIND: Record<string, string> = { toy: "Іграшка", bag: "Сумочка або кошик", decor: "Декор для дому", wear: "Одяг або аксесуар", other: "Інше" };
 const DELIVERY: Record<string, string> = { nova: "Нова пошта", ukr: "Укрпошта", other: "Інше — обговорити" };
 
 export async function POST(req: Request) {
@@ -51,11 +51,9 @@ export async function POST(req: Request) {
   const productId = clean(body.productId, 80);
   const isCustom = productId === "custom";
   const idea = clean(body.idea, 1200);
-  const when = clean(body.when, 80);
-  const kind = CUSTOM_KIND[clean(body.kind, 10)] ?? CUSTOM_KIND.other;
   const product = isCustom ? null : await getProduct(productId); // price is taken from the server, not from the client
 
-  if ((isCustom ? idea.length < 5 : !product || product.status === "sold") || !name || phone.replace(/\D/g, "").length < 9 || body.consent !== true) {
+  if ((isCustom ? !isValidIdea(idea) : !product || product.status === "sold") || !isValidName(name) || !isValidPhone(phone) || !isValidEmail(email) || body.consent !== true) {
     return NextResponse.json({ ok: false, error: "validation" }, { status: 422 });
   }
 
@@ -64,7 +62,7 @@ export async function POST(req: Request) {
 
   const head = product
     ? [
-        "🧶 <b>Нове замовлення — Home Made Galyna</b>",
+        "🧶 <b>Нове замовлення — Galyna's World</b>",
         "",
         `Виріб: ${esc(product.name.uk)}`,
         product.price != null ? `Ціна: ${product.price} грн` : null,
@@ -72,11 +70,9 @@ export async function POST(req: Request) {
         `🔗 ${siteUrl}/uk/handmade/${product.slug}`,
       ]
     : [
-        "✨ <b>Індивідуальне замовлення — Home Made Galyna</b>",
+        "✨ <b>Індивідуальне замовлення — Galyna's World</b>",
         "",
-        `Що: ${esc(kind)}`,
         `💡 Ідея: ${esc(idea)}`,
-        when ? `📅 Потрібно до: ${esc(when)}` : null,
       ];
   const lines = [
     ...head,

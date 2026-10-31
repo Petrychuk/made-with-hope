@@ -15,6 +15,18 @@ export type ImageRef = {
   focus?: string;
 };
 
+export type PaintingCategory = "flowers" | "landscapes" | "home" | "animals" | "inspiration" | "other";
+
+export type Painting = {
+  id: string;
+  title: Localized;
+  technique: Localized;
+  year?: number;
+  category: PaintingCategory;
+  image?: ImageRef;
+  tone: Tone;
+};
+
 export type ProductStatus = "available" | "made_to_order" | "sold";
 
 export type Product = {
