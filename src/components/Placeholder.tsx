@@ -1,5 +1,8 @@
+"use client";
+
 import Image from "next/image";
 import type { ImageRef, Tone } from "@/content/types";
+import { imageLoader, isSanityUrl } from "@/lib/sanityLoader";
 import { Icon } from "./Icon";
 
 type Props = {
@@ -26,6 +29,7 @@ export function Placeholder({ tone, label, image, alt, className = "", decorativ
           src={image.url}
           alt={decorative ? "" : alt ?? image.alt ?? label ?? ""}
           fill
+          loader={isSanityUrl(image.url) ? imageLoader : undefined}
           sizes={sizes ?? "(max-width: 767px) 100vw, 50vw"}
           priority={priority}
           fetchPriority={priority ? "high" : undefined}

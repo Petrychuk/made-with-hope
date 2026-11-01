@@ -15,8 +15,8 @@ const SINGLETONS = new Set(["support", "homePage"]);
 const SINGLETON_ACTIONS = new Set(["publish", "discardChanges", "restore"]);
 
 export default defineConfig({
-  name: "home-made-galyna",
-  title: "Home Made Galyna",
+  name: "galynas-world",
+  title: "Galyna’s World",
   basePath: "/studio",
   projectId: projectId || "not-configured",
   dataset,

@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState, type KeyboardEvent } from "react";
 import type { ImageRef, Tone } from "@/content/types";
+import { imageLoader, isSanityUrl } from "@/lib/sanityLoader";
 import { Icon } from "./Icon";
 import { Placeholder } from "./Placeholder";
 
@@ -65,6 +66,7 @@ export function ProductGallery({ images, name, tone, labels }: { images: ImageRe
                 src={img.url}
                 alt={img.alt || `${name} — ${photoLabel(i)}`}
                 fill
+                loader={isSanityUrl(img.url) ? imageLoader : undefined}
                 sizes="(max-width: 767px) 100vw, (max-width: 1199px) 50vw, 600px"
                 priority={i === 0}
                 placeholder={img.lqip ? "blur" : "empty"}
@@ -99,7 +101,7 @@ export function ProductGallery({ images, name, tone, labels }: { images: ImageRe
               aria-current={i === index ? "true" : undefined}
               onClick={() => goTo(i)}
             >
-              <Image src={img.url} alt="" fill sizes="80px" style={{ objectFit: "cover" }} />
+              <Image src={img.url} alt="" fill loader={isSanityUrl(img.url) ? imageLoader : undefined} sizes="80px" style={{ objectFit: "cover" }} />
             </button>
           ))}
         </div>

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
+import { preconnect } from "react-dom";
 // Self-hosted fonts (npm @fontsource-variable/*): no request to Google Fonts at build or runtime.
 import "@fontsource-variable/lora"; // logo only
 import "@fontsource-variable/source-serif-4"; // headings (Latin + Cyrillic)
@@ -51,6 +52,7 @@ export default async function LocaleLayout({
 }) {
   const { locale } = await params;
   if (!isLocale(locale)) notFound();
+  preconnect("https://cdn.sanity.io"); // photos load straight from Sanity's CDN
   const d = getDictionary(locale);
   const [products, home] = await Promise.all([getProducts(), getHome(locale, d)]);
   const orderable = products.filter((p) => p.status !== "sold");
