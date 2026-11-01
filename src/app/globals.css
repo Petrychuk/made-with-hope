@@ -3,7 +3,8 @@
    ========================================================= */
 :root{
   --font-lora:"Lora Variable";
-  --font-nunito:"Nunito Variable";
+  --font-inter:"Inter Variable";
+  --font-source-serif:"Source Serif 4 Variable";
   --font-caveat:"Caveat Variable";
   --cream:#FDFBF7;
   --cream-2:#FBF3EA;
@@ -26,8 +27,9 @@
   --shadow:0 6px 20px rgba(120,78,48,.09);
   --shadow-lg:0 14px 40px rgba(120,78,48,.14);
   --r-sm:8px; --r:14px; --r-lg:22px;
-  --f-serif:var(--font-lora), Georgia, "Times New Roman", serif;
-  --f-sans:var(--font-nunito), "Segoe UI", system-ui, -apple-system, sans-serif;
+  --f-serif:var(--font-source-serif), Georgia, "Times New Roman", serif;
+  --f-brand:var(--font-lora), Georgia, "Times New Roman", serif; /* «Galyna's World» logo only */
+  --f-sans:var(--font-inter), "Segoe UI", system-ui, -apple-system, sans-serif;
   --f-hand:var(--font-caveat), "Segoe Script", "Comic Sans MS", cursive;
   --wrap:1200px;
   --header-h:76px;
@@ -64,7 +66,7 @@ p{margin:0}
 .brush--peach{background:var(--peach)}
 .brush--sage{background:var(--sage-soft-2)}
 .sec-lead{color:var(--text-2);max-width:46ch;margin-top:12px}
-.link-more{color:var(--terracotta-cta);font-weight:700;text-decoration:none;font-size:15px;white-space:nowrap;display:inline-flex;gap:6px;align-items:center;min-height:44px}
+.link-more{color:var(--terracotta-cta-h);font-weight:700;text-decoration:none;font-size:15px;white-space:nowrap;display:inline-flex;gap:6px;align-items:center;min-height:44px}
 .link-more:hover{text-decoration:underline;text-underline-offset:3px}
 
 /* ---------- buttons ---------- */
@@ -108,7 +110,7 @@ p{margin:0}
 .header__in{height:var(--header-h);display:flex;align-items:center;gap:24px}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--text);min-height:44px}
 .logo svg{width:38px;height:38px}
-.logo__name{font-family:var(--f-serif);font-weight:600;font-size:21px;line-height:1.05;display:block;white-space:nowrap}
+.logo__name{font-family:var(--f-brand);font-weight:600;font-size:21px;line-height:1.05;display:block;white-space:nowrap}
 .logo__tag{display:block;white-space:nowrap;font-size:12.5px;color:var(--text-2);margin-top:3px;letter-spacing:.01em}
 .nav{margin-left:auto;display:flex;align-items:center;gap:2px}
 .nav a{white-space:nowrap;text-decoration:none;font-size:15px;font-weight:600;padding:10px 10px;border-radius:8px;min-height:44px;display:inline-flex;align-items:center}
@@ -661,7 +663,7 @@ p{margin:0}
 .custom-card__in{height:100%;border:2px dashed rgba(191,87,55,.55);border-radius:calc(var(--r) - 5px);
   padding:14px 14px 14px;display:flex;flex-direction:column;align-items:flex-start;gap:8px;position:relative}
 .custom-card__top{display:flex;align-items:center;justify-content:space-between;width:100%;gap:8px}
-.custom-card__kicker{white-space:nowrap;font-family:var(--f-hand);font-size:19px;line-height:1;color:var(--terracotta-cta);
+.custom-card__kicker{white-space:nowrap;font-family:var(--f-hand);font-size:19px;line-height:1;color:var(--terracotta-cta-h);
   background:var(--paper);padding:4px 12px 5px;border-radius:999px;transform:rotate(-3deg);box-shadow:0 2px 8px rgba(120,78,48,.1)}
 .custom-card__yarn{position:relative;width:50px;height:50px;flex:none;border-radius:50%;background:rgba(255,253,249,.75);
   display:grid;place-items:center;color:var(--terracotta-cta);margin-right:10px}

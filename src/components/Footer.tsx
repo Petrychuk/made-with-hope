@@ -61,11 +61,11 @@ export function Footer({ locale, d, contacts: c, legal }: { locale: Locale; d: D
 function FooterBackground() {
   const common = { alt: "", sizes: "100vw", quality: 75 };
   const { props: { srcSet: wide } } = getImageProps({ ...common, src: meadowWide });
-  const { props: { srcSet: tall, ...img } } = getImageProps({ ...common, src: meadowTall });
+  const { props: { srcSet: tall, sizes, ...img } } = getImageProps({ ...common, src: meadowTall });
   return (
     <picture className="footer__bg" aria-hidden="true">
-      <source media="(min-width: 768px)" srcSet={wide} />
-      <source media="(max-width: 767px)" srcSet={tall} />
+      <source media="(min-width: 768px)" srcSet={wide} sizes={sizes} />
+      <source media="(max-width: 767px)" srcSet={tall} sizes={sizes} />
       {/* eslint-disable-next-line jsx-a11y/alt-text */}
       <img {...img} loading="lazy" decoding="async" />
     </picture>

@@ -63,7 +63,7 @@ export function Achievements({ d, slides }: { d: Dict; slides: Achievement[] }) 
 
             <div className="ach__slides" aria-live="polite">
               {slides.map((s, k) => (
-                <article
+                <div
                   className={`ach__slide${k === i ? " is-active" : ""}`}
                   key={k}
                   role="group"
@@ -86,7 +86,7 @@ export function Achievements({ d, slides }: { d: Dict; slides: Achievement[] }) 
                       {s.note} <Heart variant="small" size={16} />
                     </p>
                   )}
-                </article>
+                </div>
               ))}
             </div>
 
@@ -116,7 +116,7 @@ export function Achievements({ d, slides }: { d: Dict; slides: Achievement[] }) 
                   aria-current={k === i ? "true" : undefined}
                   onClick={() => go(k)}
                 >
-                  <Placeholder tone="sun" image={s.photo} decorative sizes="96px" />
+                  <Placeholder as="span" tone="sun" image={s.photo} decorative sizes="96px" />
                 </button>
               ))}
             </div>

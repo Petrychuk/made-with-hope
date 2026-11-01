@@ -1,8 +1,9 @@
 import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 // Self-hosted fonts (npm @fontsource-variable/*): no request to Google Fonts at build or runtime.
-import "@fontsource-variable/lora";
-import "@fontsource-variable/nunito";
+import "@fontsource-variable/lora"; // logo only
+import "@fontsource-variable/source-serif-4"; // headings (Latin + Cyrillic)
+import "@fontsource-variable/inter"; // body & UI
 import "@fontsource-variable/caveat";
 import { isLocale, locales } from "@/i18n/config";
 import { getDictionary } from "@/i18n/dictionaries";

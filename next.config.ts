@@ -7,6 +7,8 @@ const nextConfig: NextConfig = {
     remotePatterns: [{ protocol: "https", hostname: "cdn.sanity.io", pathname: "/images/**" }],
   },
   poweredByHeader: false,
+  // Always put <title>/<meta>/<link> in <head> (not streamed into <body>) — valid HTML for every client and validator
+  htmlLimitedBots: /.*/,
   // The project root is this folder, even if there is another package-lock.json higher up
   // (e.g. C:\Users\<name>\package-lock.json). Removes the "multiple lockfiles" warning.
   outputFileTracingRoot: __dirname,

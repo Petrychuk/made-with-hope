@@ -31,7 +31,6 @@ export function PaintingsGallery({ items, chips, labels, allHref }: { items: Pai
     const el = track.current;
     if (!el) return;
     el.scrollLeft = 0;
-    update();
     const ro = new ResizeObserver(update);
     ro.observe(el);
     return () => ro.disconnect();
@@ -54,7 +53,7 @@ export function PaintingsGallery({ items, chips, labels, allHref }: { items: Pai
               <ul className="pt-track" ref={track} onScroll={update} tabIndex={0} aria-label={labels.list}>
                 {rest.map((p, i) => (
                   <li key={p.id}>
-                    <PaintingCard item={p} label={labels.ph} sizes="(max-width: 767px) 60vw, 190px" openLabel={labels.open} onOpen={show(i + 1)} />
+                    <PaintingCard item={p} label={labels.ph} sizes="(max-width: 767px) 60vw, 150px" openLabel={labels.open} onOpen={show(i + 1)} />
                   </li>
                 ))}
               </ul>

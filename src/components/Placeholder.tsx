@@ -14,32 +14,35 @@ type Props = {
   sizes?: string;
   priority?: boolean;
   fit?: "cover" | "contain";
+  /** use "span" inside a <button> or <a> (a <div> is invalid there) */
+  as?: "div" | "span";
 };
 
-export function Placeholder({ tone, label, image, alt, className = "", decorative, sizes, priority, fit = "cover", }: Props) {
+export function Placeholder({ tone, label, image, alt, className = "", decorative, sizes, priority, fit = "cover", as: Tag = "div" }: Props) {
   if (image) {
     return (
-      <div className={`ph ph--photo ${className}`}>
+      <Tag className={`ph ph--photo ${className}`}>
         <Image
           src={image.url}
           alt={decorative ? "" : alt ?? image.alt ?? label ?? ""}
           fill
           sizes={sizes ?? "(max-width: 767px) 100vw, 50vw"}
           priority={priority}
+          fetchPriority={priority ? "high" : undefined}
           placeholder={image.lqip ? "blur" : "empty"}
           blurDataURL={image.lqip}
           style={{ objectFit: fit, ...(image.focus ? { objectPosition: image.focus } : {}) }}
         />
-      </div>
+      </Tag>
     );
   }
   const a11y = decorative || !label ? { "aria-hidden": true as const } : { role: "img", "aria-label": label };
   return (
-    <div className={`ph ph--${tone} ${className}`} {...a11y}>
+    <Tag className={`ph ph--${tone} ${className}`} {...a11y}>
       <span className="ph__cap">
         <Icon name="camera" />
         {label && <span>{label}</span>}
       </span>
-    </div>
+    </Tag>
   );
 }
