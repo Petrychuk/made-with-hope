@@ -79,7 +79,7 @@ export function PaintingsGallery({ items, chips, labels, allHref }: { items: Pai
           {chips.map((c) => (
             <button key={c.key} type="button" className="pt-chip" aria-pressed={cat === c.key} onClick={() => setCat(c.key)}>
               {c.icon === "heart" ? <Heart variant="small" size={20} className="" />
-                : (KNOWN_ICONS as readonly string[]).includes(c.icon ?? "") ? <Icon name={c.icon as IconName} /> : null}
+                : <Icon name={(KNOWN_ICONS as readonly string[]).includes(c.icon ?? "") ? (c.icon as IconName) : "flower"} />}
               <span>{c.label}</span>
             </button>
           ))}

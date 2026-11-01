@@ -10,7 +10,7 @@ const productFields = `
 export const productsQuery = `*[_type == "product" && defined(slug.current)] | order(_createdAt desc){${productFields}}`;
 export const productQuery = `*[_type == "product" && slug.current == $slug][0]{${productFields}}`;
 
-const topicFields = `{ "key": slug.current, title, icon, order }`;
+const topicFields = `{ "key": coalesce(slug.current, _id), title, icon, order }`;
 
 export const paintingsQuery = `*[_type == "painting" && defined(image.asset) && show != false] | order(_createdAt desc){
   "id": _id, title, technique, year, forSale,
