@@ -67,7 +67,7 @@ export default async function PostPage({ params }: Props) {
             <div className={`post__body${isPoem ? " is-poem" : ""}`} lang="uk">{post.body.uk}</div>
           )}
 
-          <p className="post__sign hand">— Галина <Heart variant="small" size={20} /></p>
+          <p className="post__sign hand">— {d["pt.sign"]} <Heart variant="small" size={20} /></p>
         </div>
       </article>
 

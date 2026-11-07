@@ -27,11 +27,10 @@ export function Footer({ locale, d, contacts: c, legal }: { locale: Locale; d: D
             </span>
           </Link>
           <nav className="footer__nav" aria-label="Footer">
-            <Link href={base}>{d["nav.home"]}</Link>
             <Link href={`${base}#story`}>{d["nav.story"]}</Link>
             <Link href={`${base}#handmade`}>{d["nav.handmade"]}</Link>
             <Link href={`${base}/journal`}>{d["nav.journal"]}</Link>
-            <Link href={`${base}#support`}>{d["nav.support"]}</Link>
+            <Link href={`${base}/paintings`}>{d["nav.paintings"]}</Link>
             <LangSwitch locale={locale} />
           </nav>
           <div className="socials">
@@ -42,12 +41,11 @@ export function Footer({ locale, d, contacts: c, legal }: { locale: Locale; d: D
           </div>
         </div>
         <div className="footer__mid">
-          <div>
-            <p>© 2026 {d.brand}. {d["ft.rights"]}</p>
-            <p className="footer__made">{d["ft.made"]}</p>
-          </div>
-          <p className="footer__hand" aria-hidden="true">{d["ft.hand"]}</p>
           <LegalLinks docs={legal} locale={locale} closeLabel={d.close} updatedLabel={d["lg.updated"]} />
+          <p className="footer__hand" aria-hidden="true">{d["ft.hand"]}</p>
+          <div className="footer__copy">
+            <p>© 2026 {d.brand}. {d["ft.rights"]}</p>
+          </div>
         </div>
       </div>
     </footer>
